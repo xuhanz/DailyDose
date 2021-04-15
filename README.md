@@ -1,2 +1,10 @@
 # DailyDose
-Daily Dose is a journaling Android app that allow users to record small entries to jot down their thoughts and feelings in the moment. If they are doing some activities, they can rate it on a 1-10 scale. The data can be used to display trends in the user’s mood, and how different events and activities influence them.
+Daily Dose will be a journaling app for Android that emphasizes ease-of-use; entries are meant to be small to so users can quickly jot down their thoughts and feelings in the moment, and can be rated on a 1-10 scale; data can be used to display trends in the user’s mood, and how different events and activities influence them.
+
+## Repository Layout
+Most parts TBD<br>
+Reports directory for weekly progress reports
+
+## Resources
+Android Studio Setup Guide: https://courses.cs.washington.edu/courses/cse340/21sp/docs/android.html<br>
+AnyChart Android Charts: https://www.anychart.com/technical-integrations/samples/android-charts/
