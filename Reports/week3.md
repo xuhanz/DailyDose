@@ -20,6 +20,7 @@ Discussed the UI and functionality in a more specific way (with our low-fidelity
 ## Plans and goals for next week
 - Environment setup (Android studio & probably emulator)
 - Get used to the technologies
+- Begin coding; first task to implement most likely the entry and tags
 
 ## Member Reports:
 #### Matt:
@@ -34,7 +35,7 @@ Living document cleaned up and original proposal included<br>
 Some uncertainty regarding incorporating features mentioned in original proposal, most notably the daily questionnaires - cut for now<br>
 3. Plans and goals for next week:<br>
 Set up development environment (Android Studio)<br>
-Start coding!<br>
+Start coding! First order of business is the entry and tags page<br>
 
 #### Sherry:
 1. Plans and goals last week:<br>
@@ -48,7 +49,7 @@ Build a prototype to reach an agreement on the UI<br>
 No issue at the moment
 3. Plans and goals for next week:<br>
 Setup Android studio and learn the basic mechanism of it<br>
-Start experimenting with the interface<br>
+Start experimenting with the interface; focus on the entry page<br>
 
 
 #### Ester:
@@ -69,4 +70,3 @@ I did not have any problems or misunderstandings this week, however, I was trave
 3. Plans and goals for next week:<br>
 This coming week, I will reinstall and hopefully fix my Android Studio (I have been having issues with it crashing). <br>
 I also plan to attend our group meetings and come to a consensus on what other technologies (if any) we need to use..
-
