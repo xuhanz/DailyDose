@@ -30,4 +30,36 @@
 		android:layout_margin="@dimen/fab_margin"
 		app:srcCompat="@android:drawable/ic_dialog_email" />
 
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/constraintLayout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<SeekBar
+			android:id="@+id/seekBar"
+			style="@style/Widget.AppCompat.SeekBar.Discrete"
+			android:layout_width="match_parent"
+			android:layout_height="140dp"
+			android:max="10"
+			android:progress="3"
+			android:thumbTint="#9E1C1C"
+			android:tickMarkTint="#851414"
+			android:tooltipText="1"
+			tools:layout_editor_absoluteX="0dp"
+			tools:layout_editor_absoluteY="107dp" />
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+	<com.google.android.material.textfield.TextInputEditText
+		android:layout_width="306dp"
+		android:layout_height="131dp"
+		android:hint="hint"
+		app:layout_anchor="@+id/constraintLayout"
+		app:layout_anchorGravity="center" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
