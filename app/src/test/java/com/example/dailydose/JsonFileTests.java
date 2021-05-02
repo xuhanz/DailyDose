@@ -21,14 +21,13 @@ public class JsonFileTests {
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
         entries.add(entry2);
-        // trivial comment
-        JsonUtils.writeJson(entries);
+        JsonUtils.writeEntries(entries);
         assertEquals(4, 2 + 2);
     }
 
     @Test
     public void fileReadTest() throws JSONException {
         List<Entry> result = JsonUtils.getEntries();
-        assertTrue(true);
+        assertEquals(2, result.size());
     }
 }

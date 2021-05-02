@@ -24,13 +24,13 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public class JsonUtils {
-    public static void writeJson(List<Entry> entries) throws JSONException {
-       /* OutputStream out = new FileOutputStream("Entries.json");
-        JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
-        System.out.println(writer);
-        writer.setIndent("  ");
-        writeEntry(writer, entry);
-        writer.close(); */
+    /**
+     * Writes List of Entries to "Entries.json"
+     * USE: Write all entries to "Entries.json" MAKE SURE LIST
+     * CONTAINS ALL! Will overwrite "Entries.json"
+     * @param entries
+     */
+    public static void writeEntries(List<Entry> entries) {
         JSONArray entryArr = new JSONArray();
         for (Entry e : entries) {
             JSONObject entryDetails = new JSONObject();
@@ -50,59 +50,14 @@ public class JsonUtils {
 
     }
 
-
-    /*public static void writeEntry(JsonWriter writer, Entry entry) throws IOException {
-        writer.beginObject();
-        writer.name("id");
-        writer.value(entry.getId());
-        writer.name("content");
-        writer.value(entry.getContent());
-        if (entry.getTags() != null) {
-            writer.name("tags");
-            writeTagsArray(writer, entry.getTags());
-        } else {
-            writer.name("tags");
-            writer.nullValue();
-        }
-        writer.name("rating");
-        writer.value(entry.getRating());
-        writer.endObject();
-    }
-
-
-    public static void writeTagsArray(JsonWriter writer, List<String> tags) throws IOException {
-        writer.beginArray();
-        for (String tag : tags) {
-            writer.value(tag);
-        }
-        writer.endArray();
-    }
-*/
-  /*  static String getJsonFromAssets(Context context) {
-        String jsonString;
-        try {
-            InputStream is = context.getAssets().open("Entries.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-
-            jsonString = new String(buffer, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return jsonString;
-    }
-*/
-
+    /**
+     * Get all Entries from "Entries.json"
+     * USE: Make sure to keep list and only manipulate the part of it
+     * you need to edit or delete if you plan to write back to "Entries.json".
+     * Can only add all back at once agaon
+     * @return All Entry objects in "Entries.json"
+     */
     public static List<Entry> getEntries()  {
-       /* String jsonFileContents = getJsonFromAssets(context);
-        Gson gson = new Gson();
-        Type listEntryType = new TypeToken<List<Entry>>(){}.getType();
-        List<Entry> entries = gson.fromJson(jsonFileContents, listEntryType);
-        return entries;*/
         JSONParser parser = new JSONParser();
         try (FileReader reader = new FileReader("Entries.json")) {
             Object obj = parser.parse(reader);
@@ -110,11 +65,7 @@ public class JsonUtils {
             JSONArray entryArr = (JSONArray) obj;
             List<Entry> result = new ArrayList<>();
             entryArr.forEach(o -> {
-                try {
-                    result.add(parseEntry((JSONObject)o));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                result.add(parseEntry((JSONObject)o));
             });
             return result;
         } catch (FileNotFoundException e) {
@@ -129,7 +80,12 @@ public class JsonUtils {
         }
     }
 
-    private static Entry parseEntry(JSONObject entryObject) throws JSONException {
+    /**
+     * Parses JSON Object back into an Entry
+     * @param entryObject JSON Object from file
+     * @return Entry that entryObject represented
+     */
+    private static Entry parseEntry(JSONObject entryObject) {
         Long l = (long) entryObject.get("id");
         return new Entry((String) entryObject.get("content"), (double) entryObject.get("rating"),
                 l.intValue() , (List<String>) entryObject.get("tags"));
