@@ -21,6 +21,7 @@ public class JsonFileTests {
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
         entries.add(entry2);
+        // trivial comment
         JsonUtils.writeJson(entries);
         assertEquals(4, 2 + 2);
     }
