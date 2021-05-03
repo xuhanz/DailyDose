@@ -24,13 +24,15 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public class JsonUtils {
+    private static boolean emptyFile = true;
     /**
      * Writes List of Entries to "Entries.json"
      * USE: Write all entries to "Entries.json" MAKE SURE LIST
      * CONTAINS ALL! Will overwrite "Entries.json"
-     * @param entries
+     * @param entries the entries to write
+     * @return Whether or not the write succeeded
      */
-    public static void writeEntries(List<Entry> entries) {
+    public static boolean writeEntries(List<Entry> entries) {
         JSONArray entryArr = new JSONArray();
         for (Entry e : entries) {
             JSONObject entryDetails = new JSONObject();
@@ -41,11 +43,21 @@ public class JsonUtils {
             entryArr.add(entryDetails);
         }
 
+        String jsonStr;
+        if (entryArr.isEmpty()) {
+            jsonStr = "";
+            emptyFile = true;
+        } else {
+            jsonStr = entryArr.toJSONString();
+            emptyFile = false;
+        }
         try (FileWriter writer = new FileWriter("Entries.json")) {
-            writer.write(entryArr.toJSONString());
+            writer.write(jsonStr);
             writer.flush();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
 
     }
@@ -59,11 +71,11 @@ public class JsonUtils {
      */
     public static List<Entry> getEntries()  {
         JSONParser parser = new JSONParser();
+        List<Entry> result = new ArrayList<>();
         try (FileReader reader = new FileReader("Entries.json")) {
             Object obj = parser.parse(reader);
 
             JSONArray entryArr = (JSONArray) obj;
-            List<Entry> result = new ArrayList<>();
             entryArr.forEach(o -> {
                 result.add(parseEntry((JSONObject)o));
             });
@@ -75,8 +87,8 @@ public class JsonUtils {
             e.printStackTrace();
             return null;
         } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
+            //expected behavior for empty file
+            return result;
         }
     }
 

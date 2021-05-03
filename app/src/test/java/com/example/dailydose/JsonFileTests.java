@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class JsonFileTests {
     @Test
-    public void fileReadWriteTest() throws JSONException {
+    public void fileWriteReadTest() {
         List<String> tags = new ArrayList<>();
         tags.add("Store");
         tags.add("Shopping");
@@ -21,13 +21,20 @@ public class JsonFileTests {
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
         entries.add(entry2);
-        JsonUtils.writeEntries(entries);
-        assertEquals(4, 2 + 2);
+        assertTrue(JsonUtils.writeEntries(entries));
+
+        List<Entry> result = JsonUtils.getEntries();
+        assertEquals(2, result.size());
+        assertTrue(result.contains(new Entry("Video Games", 8, 2, tags)));
+        assertTrue(result.contains(new Entry("Went to the store today", 9.5, 1, tags)));
     }
 
     @Test
-    public void fileReadTest() throws JSONException {
+    public void fileWriteReadEmptyTest() {
+        List<Entry> entries = new ArrayList<>();
+        assertTrue(JsonUtils.writeEntries(entries));
+
         List<Entry> result = JsonUtils.getEntries();
-        assertEquals(2, result.size());
+        assertTrue(result.isEmpty());
     }
 }

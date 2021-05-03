@@ -97,4 +97,20 @@ public class Entry {
                 ", tags=" + tags +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Entry entry = (Entry) o;
+        return Double.compare(entry.rating, rating) == 0 &&
+                id == entry.id &&
+                Objects.equals(content, entry.content) &&
+                Objects.equals(tags, entry.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(content, rating, id, tags);
+    }
 }
