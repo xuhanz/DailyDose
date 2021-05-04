@@ -4,30 +4,162 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="#FCF8DF"
 	tools:context=".MainActivity">
 
-	<com.google.android.material.appbar.AppBarLayout
+	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:theme="@style/Theme.DailyDose.AppBarOverlay">
+		android:layout_height="match_parent">
 
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
-			android:layout_height="?attr/actionBarSize"
-			android:background="?attr/colorPrimary"
+			android:layout_height="78dp"
+			android:background="#FFE897"
+			app:layout_constraintBottom_toTopOf="@+id/textView"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintVertical_bias="0.0"
 			app:popupTheme="@style/Theme.DailyDose.PopupOverlay" />
+
+		<TextView
+			android:id="@+id/textView2"
+			android:layout_width="209dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="40dp"
+			android:layout_marginBottom="78dp"
+			android:fontFamily="cursive"
+			android:text="@string/app_name"
+			android:textAlignment="center"
+			android:textSize="42sp"
+			android:textStyle="bold"
+			app:layout_constraintBottom_toTopOf="parent"
+			app:layout_constraintEnd_toEndOf="@+id/toolbar"
+			app:layout_constraintStart_toStartOf="@+id/toolbar"
+			app:layout_constraintTop_toTopOf="@+id/toolbar"
+			app:layout_constraintVertical_bias="0.135" />
+
+		<TextView
+			android:id="@+id/textView"
+			android:layout_width="385dp"
+			android:layout_height="87dp"
+			android:layout_marginStart="24dp"
+			android:layout_marginTop="60dp"
+			android:layout_marginEnd="24dp"
+			android:fontFamily="cursive"
+			android:text="@string/textView"
+			android:textSize="30sp"
+			app:layout_constraintBottom_toTopOf="@+id/seekBar2"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.433"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@id/toolbar" />
+
+		<SeekBar
+			android:id="@+id/seekBar2"
+			style="@style/Widget.AppCompat.SeekBar.Discrete"
+			android:layout_width="match_parent"
+			android:layout_height="90dp"
+			android:layout_marginStart="24dp"
+			android:layout_marginEnd="24dp"
+			android:clickable="true"
+			android:indeterminateTint="#FFEB3B"
+			android:max="10"
+			android:progress="1"
+			android:progressTint="#80FF9800"
+			android:thumbTint="#80FF5722"
+			app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+		<EditText
+			android:id="@+id/editTextTextMultiLine"
+			android:layout_width="370dp"
+			android:layout_height="273dp"
+			android:layout_marginStart="80dp"
+			android:layout_marginTop="16dp"
+			android:layout_marginEnd="80dp"
+			android:layout_marginBottom="8dp"
+			android:autofillHints="@string/editTextTextMultiLine"
+			android:ems="10"
+			android:fontFamily="cursive"
+			android:gravity="start|top"
+			android:hint="@string/editTextTextMultiLine"
+			android:inputType="textMultiLine"
+			app:layout_constraintBottom_toTopOf="@+id/continue_button"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.504"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
+
+		<Button
+			android:id="@+id/continue_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="330dp"
+			android:layout_marginTop="44dp"
+			android:layout_marginEnd="33dp"
+			android:layout_marginBottom="16dp"
+			android:backgroundTint="#FFE897"
+			android:fontFamily="cursive"
+			android:text="@string/continue_button"
+			android:textColor="#000000"
+			android:textStyle="bold"
+			app:iconTint="#000000"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="1.0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine"
+			app:strokeColor="#000000" />
+
+		<Button
+			android:id="@+id/discard_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="33dp"
+			android:layout_marginTop="44dp"
+			android:layout_marginEnd="300dp"
+			android:layout_marginBottom="16dp"
+			android:backgroundTint="#FFE897"
+			android:fontFamily="cursive"
+			android:text="@string/discard_button"
+			android:textColor="#000000"
+			android:textStyle="bold"
+			app:iconTint="#BDBDBD"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine"
+			app:layout_constraintVertical_bias="0.613" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appBarLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="#FCF8DF"
+		android:theme="@style/Theme.DailyDose.AppBarOverlay">
 
 	</com.google.android.material.appbar.AppBarLayout>
 
-	<include layout="@layout/content_main" />
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/constraintLayout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
 
-	<com.google.android.material.floatingactionbutton.FloatingActionButton
-		android:id="@+id/fab"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom|end"
-		android:layout_margin="@dimen/fab_margin"
-		app:srcCompat="@android:drawable/ic_dialog_email" />
+		<com.google.android.material.textfield.TextInputLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
