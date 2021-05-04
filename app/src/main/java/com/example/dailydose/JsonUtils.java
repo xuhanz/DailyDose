@@ -103,4 +103,18 @@ public class JsonUtils {
                 l.intValue() , (List<String>) entryObject.get("tags"));
     }
 
+
+    /**
+     * Gets a set of all tags used in all entries
+     * @return set of Strings of all tags used (empty if no entries or tags)
+     */
+    private static Set<String> getAllTags() {
+        List<Entry> entries = getEntries();  // get entries
+        Set<String> tags = new HashSet<>();  // new set of tags
+        if (entries == null) { return tags; }  // if no entries, return empty set
+        for (Entry entry : entries) {  // iterate through entries to add tags
+            tags.addAll(entry.getTags());
+        }
+        return tags;
+    }
 }
