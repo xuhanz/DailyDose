@@ -15,6 +15,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class JsonFileTests {
+    private String testFile = "TestFile.json";
+
     @Test
     public void fileWriteReadTest() {
         List<String> tags = new ArrayList<>();
@@ -25,9 +27,9 @@ public class JsonFileTests {
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
         entries.add(entry2);
-        assertTrue(JsonUtils.writeEntries(entries));
+        assertTrue(JsonUtils.writeEntries(entries, testFile));
 
-        List<Entry> result = JsonUtils.getEntries();
+        List<Entry> result = JsonUtils.getEntries(testFile);
         assertEquals(2, result.size());
         assertTrue(result.contains(new Entry("Video Games", 8, 2, tags)));
         assertTrue(result.contains(new Entry("Went to the store today", 9.5, 1, tags)));
@@ -36,9 +38,9 @@ public class JsonFileTests {
     @Test
     public void fileWriteReadEmptyTest() {
         List<Entry> entries = new ArrayList<>();
-        assertTrue(JsonUtils.writeEntries(entries));
+        assertTrue(JsonUtils.writeEntries(entries, testFile));
 
-        List<Entry> result = JsonUtils.getEntries();
+        List<Entry> result = JsonUtils.getEntries(testFile);
         assertTrue(result.isEmpty());
     }
 
@@ -52,9 +54,9 @@ public class JsonFileTests {
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
         entries.add(entry2);
-        JsonUtils.writeEntries(entries);
+        JsonUtils.writeEntries(entries, testFile);
 
-        Set<String> result = JsonUtils.getAllTags();
+        Set<String> result = JsonUtils.getAllTags(testFile);
         assertArrayEquals(tags.toArray(), result.toArray());
     }
 
@@ -66,9 +68,9 @@ public class JsonFileTests {
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
         entries.add(entry2);
-        JsonUtils.writeEntries(entries);
+        JsonUtils.writeEntries(entries, testFile);
 
-        Set<String> result = JsonUtils.getAllTags();
+        Set<String> result = JsonUtils.getAllTags(testFile);
         assertTrue(result.isEmpty());
     }
 
@@ -80,10 +82,10 @@ public class JsonFileTests {
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
         entries.add(entry2);
-        JsonUtils.writeEntries(entries);
+        JsonUtils.writeEntries(entries, testFile);
 
-        assertTrue(JsonUtils.delete(1));
-        List<Entry> result = JsonUtils.getEntries();
+        assertTrue(JsonUtils.delete(1, testFile));
+        List<Entry> result = JsonUtils.getEntries(testFile);
         assertEquals(result.size(), 1);
         assertEquals(result.get(0), entry2);
     }
@@ -96,9 +98,9 @@ public class JsonFileTests {
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
         entries.add(entry2);
-        JsonUtils.writeEntries(entries);
+        JsonUtils.writeEntries(entries, testFile);
 
-        assertFalse(JsonUtils.delete(34));
+        assertFalse(JsonUtils.delete(34, testFile));
     }
 
     @Test
@@ -109,9 +111,9 @@ public class JsonFileTests {
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
         entries.add(entry2);
-        JsonUtils.writeEntries(entries);
+        JsonUtils.writeEntries(entries, testFile);
 
-        assertEquals(entry, JsonUtils.get(1));
+        assertEquals(entry, JsonUtils.get(1, testFile));
     }
 
     @Test
@@ -122,9 +124,9 @@ public class JsonFileTests {
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
         entries.add(entry2);
-        JsonUtils.writeEntries(entries);
+        JsonUtils.writeEntries(entries, testFile);
 
-        assertEquals(null, JsonUtils.get(122));
+        assertEquals(null, JsonUtils.get(122, testFile));
     }
 
     @Test
@@ -135,9 +137,9 @@ public class JsonFileTests {
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
         entries.add(entry2);
-        JsonUtils.writeEntries(entries);
-        boolean existingID = JsonUtils.writeEntry(entry2);
-        List<Entry> result = JsonUtils.getEntries();
+        JsonUtils.writeEntries(entries, testFile);
+        boolean existingID = JsonUtils.writeEntry(entry2, testFile);
+        List<Entry> result = JsonUtils.getEntries(testFile);
         assertEquals(2, result.size());
         assertTrue(result.contains(new Entry("Video Games", 8, 2, tags)));
         assertTrue(result.contains(new Entry("Went to the store today", 9.5, 1, tags)));
@@ -154,9 +156,9 @@ public class JsonFileTests {
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
         entries.add(entry2);
-        JsonUtils.writeEntries(entries);
-        boolean existingID = JsonUtils.writeEntry(entry3);
-        List<Entry> result = JsonUtils.getEntries();
+        JsonUtils.writeEntries(entries, testFile);
+        boolean existingID = JsonUtils.writeEntry(entry3, testFile);
+        List<Entry> result = JsonUtils.getEntries(testFile);
         assertEquals(3, result.size());
         assertTrue(result.contains(new Entry("Video Games", 8, 2, tags)));
         assertTrue(result.contains(new Entry("Went to the store today", 9.5, 1, tags)));
@@ -171,12 +173,12 @@ public class JsonFileTests {
         Entry entry = new Entry("Went to the store today", 9.5, 1, tags);
         List<Entry> entries = new ArrayList<>();
         entries.add(entry);
-        JsonUtils.writeEntries(entries);
+        JsonUtils.writeEntries(entries, testFile);
 
-        Entry entry2 = JsonUtils.get(1);
+        Entry entry2 = JsonUtils.get(1, testFile);
         entry2.setRating(10);
-        JsonUtils.writeEntry(entry2);
-        List<Entry> result = JsonUtils.getEntries();
+        JsonUtils.writeEntry(entry2, testFile);
+        List<Entry> result = JsonUtils.getEntries(testFile);
         assertEquals(result.size(), 1);
         assertTrue(result.contains(new Entry("Went to the store today", 10, 1, tags)));
     }
