@@ -172,4 +172,5 @@ public class JsonUtils {
         return new Entry((String) entryObject.get("content"), (double) entryObject.get("rating"),
                 l.intValue() , (List<String>) entryObject.get("tags"));
     }
+
 }
