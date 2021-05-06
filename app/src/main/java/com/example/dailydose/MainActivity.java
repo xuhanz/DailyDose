@@ -1,5 +1,8 @@
 package com.example.dailydose;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,8 +15,14 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.*;
+import android.view.View.OnClickListener;
 
 public class MainActivity extends AppCompatActivity {
+
+	// Get reference to the continue button from xml
+	// Field that will store our buttons
+	private final Button continue_button = (Button) findViewById(R.id.continue_button);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,17 +30,34 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
-		/*
-		FloatingActionButton fab = findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
+
+		// Set an onClickListener to allow the continue button to trigger the tagging interface
+		// activity
+		continue_button.setOnClickListener(new OnClickListener() {
+
+			/**
+			 * The onClick method is triggered when continue button is clicked.
+			 *
+			 * @param v The view that is clicked, which is the continue_button
+			 */
 			@Override
-			public void onClick(View view) {
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
+			public void onClick(View v) {
+				Context context = MainActivity.this;
+
+				// This is the class that we want to start (and open) when the button is clicked.
+				Class destinationActivity = TagInterface.class;
+
+				/*
+				 * We create the Intent that will start the Activity we specified above in
+				 * the destinationActivity variable. The constructor for an Intent also requires a
+				 * context, which we stored in the variable named "context".
+				 */
+				Intent tagIntent = new Intent(context, destinationActivity);
+
+				startActivity(tagIntent);
 			}
 		});
 
-		 */
 	}
 
 	@Override
