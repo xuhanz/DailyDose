@@ -24,15 +24,16 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public class JsonUtils {
-    private static boolean emptyFile = true;
+
     /**
-     * Writes List of Entries to "Entries.json"
+     * Writes List of Entries to FILENAME
      * USE: Write all entries to "Entries.json" MAKE SURE LIST
      * CONTAINS ALL! Will overwrite "Entries.json"
      * @param entries the entries to write
+     * @param fileName the file to write the entries to
      * @return Whether or not the write succeeded
      */
-    public static boolean writeEntries(List<Entry> entries) {
+    public static boolean writeEntries(List<Entry> entries, String fileName) {
         JSONArray entryArr = new JSONArray();
         for (Entry e : entries) {
             JSONObject entryDetails = new JSONObject();
@@ -46,12 +47,10 @@ public class JsonUtils {
         String jsonStr;
         if (entryArr.isEmpty()) {
             jsonStr = "";
-            emptyFile = true;
         } else {
             jsonStr = entryArr.toJSONString();
-            emptyFile = false;
         }
-        try (FileWriter writer = new FileWriter("Entries.json")) {
+        try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(jsonStr);
             writer.flush();
             return true;
@@ -63,16 +62,14 @@ public class JsonUtils {
     }
 
     /**
-     * Get all Entries from "Entries.json"
-     * USE: Make sure to keep list and only manipulate the part of it
-     * you need to edit or delete if you plan to write back to "Entries.json".
-     * Can only add all back at once agaon
-     * @return All Entry objects in "Entries.json"
+     * Get all Entries from fileName
+     * @param fileName the file to get all entries from
+     * @return All Entry objects in fileName
      */
-    public static List<Entry> getEntries()  {
+    public static List<Entry> getEntries(String fileName)  {
         JSONParser parser = new JSONParser();
         List<Entry> result = new ArrayList<>();
-        try (FileReader reader = new FileReader("Entries.json")) {
+        try (FileReader reader = new FileReader(fileName)) {
             Object obj = parser.parse(reader);
 
             JSONArray entryArr = (JSONArray) obj;
@@ -93,6 +90,79 @@ public class JsonUtils {
     }
 
     /**
+     * Get all of the tags that are currently in the fileName
+     * @param fileName file to get all tags from
+     * @return A Set of strings representing all tags in the data
+     */
+    public static Set<String> getAllTags(String fileName) {
+        Set<String> result = new HashSet<>();
+        List<Entry> entries = getEntries(fileName);
+        for (Entry e: entries) {
+            for (String tag: e.getTags()) {
+                result.add(tag);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Delete entry with the given id from fileName
+     * @param id the id of the entry to delete
+     * @param fileName the file to delete id from
+     * @return True if deleted, false if that id is not in the file
+     */
+    public static boolean delete(int id, String fileName) {
+        List<Entry> entries = getEntries(fileName);
+        boolean found = false;
+        int position = -1;
+        for (int i = 0; i < entries.size(); i++) {
+            if (entries.get(i).getId() == id) {
+                found = true;
+                position = i;
+            }
+        }
+
+        if (found) {
+            entries.remove(position);
+        }
+        writeEntries(entries, fileName);
+        return found;
+    }
+
+    /**
+     * Get a particular entry by id
+     * USE: to EDIT an ENTRY call GET(id) then change what needs changed,
+     * and finally call WRITEENTRY(entry)
+     * @param id the entry to retrieve
+     * @param fileName the file to get id from
+     * @return the entry the id represents, or null if the
+     * id does not exist
+     */
+    public static Entry get(int id, String fileName) {
+        List<Entry> entries = getEntries(fileName);
+        for (int i = 0; i < entries.size(); i++) {
+            if (entries.get(i).getId() == id) {
+                return entries.get(i);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Add an entry to fileName, returns whether it is replacing an existing entry
+     * @param entry entry to write
+     * @param fileName file to write entry to
+     * @return true if replacing existing entry by same id, false if new entry
+     */
+    public static boolean writeEntry(Entry entry, String fileName) {
+        boolean result = delete(entry.getId(), fileName);
+        List<Entry> entries = getEntries(fileName);
+        entries.add(entry);
+        writeEntries(entries, fileName);
+        return result;
+    }
+
+    /**
      * Parses JSON Object back into an Entry
      * @param entryObject JSON Object from file
      * @return Entry that entryObject represented
@@ -103,18 +173,4 @@ public class JsonUtils {
                 l.intValue() , (List<String>) entryObject.get("tags"));
     }
 
-
-    /**
-     * Gets a set of all tags used in all entries
-     * @return set of Strings of all tags used (empty if no entries or tags)
-     */
-    private static Set<String> getAllTags() {
-        List<Entry> entries = getEntries();  // get entries
-        Set<String> tags = new HashSet<>();  // new set of tags
-        if (entries == null) { return tags; }  // if no entries, return empty set
-        for (Entry entry : entries) {  // iterate through entries to add tags
-            tags.addAll(entry.getTags());
-        }
-        return tags;
-    }
 }
