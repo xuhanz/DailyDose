@@ -8,7 +8,7 @@ public class TagAnalysis {
 	 * @param filename the file to pull entries from
 	 * @return Double of average rating; returns 0 if there are no entries or none with tag
 	 */
-	public double getAvgRating(String tag, String filename) {
+	public static double getAvgRating(String tag, String filename) {
 
 		double rating = 0;
 		int entriesWithTag = 0;
