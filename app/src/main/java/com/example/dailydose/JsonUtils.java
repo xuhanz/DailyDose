@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.*;
 import java.lang.reflect.Type;
+import java.net.URISyntaxException;
+import java.security.AllPermission;
 import java.util.*;
 
 public class JsonUtils {
@@ -33,7 +35,7 @@ public class JsonUtils {
      * @param fileName the file to write the entries to
      * @return Whether or not the write succeeded
      */
-    public static boolean writeEntries(List<Entry> entries, String fileName) {
+    public static boolean writeEntries(List<Entry> entries, String fileName, Context context) {
         JSONArray entryArr = new JSONArray();
         for (Entry e : entries) {
             JSONObject entryDetails = new JSONObject();
@@ -50,9 +52,10 @@ public class JsonUtils {
         } else {
             jsonStr = entryArr.toJSONString();
         }
-        try (FileWriter writer = new FileWriter(fileName)) {
+        try (OutputStreamWriter writer = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE))) {
             writer.write(jsonStr);
-            writer.flush();
+            //writer.flush();
+            writer.close();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,10 +69,10 @@ public class JsonUtils {
      * @param fileName the file to get all entries from
      * @return All Entry objects in fileName
      */
-    public static List<Entry> getEntries(String fileName)  {
+    public static List<Entry> getEntries(String fileName, Context context)  {
         JSONParser parser = new JSONParser();
         List<Entry> result = new ArrayList<>();
-        try (FileReader reader = new FileReader(fileName)) {
+        try (InputStreamReader reader = new InputStreamReader(context.openFileInput(fileName))) {
             Object obj = parser.parse(reader);
 
             JSONArray entryArr = (JSONArray) obj;
@@ -94,9 +97,9 @@ public class JsonUtils {
      * @param fileName file to get all tags from
      * @return A Set of strings representing all tags in the data
      */
-    public static Set<String> getAllTags(String fileName) {
+    public static Set<String> getAllTags(String fileName, Context context) {
         Set<String> result = new HashSet<>();
-        List<Entry> entries = getEntries(fileName);
+        List<Entry> entries = getEntries(fileName, context);
         for (Entry e: entries) {
             for (String tag: e.getTags()) {
                 result.add(tag);
@@ -111,8 +114,8 @@ public class JsonUtils {
      * @param fileName the file to delete id from
      * @return True if deleted, false if that id is not in the file
      */
-    public static boolean delete(int id, String fileName) {
-        List<Entry> entries = getEntries(fileName);
+    public static boolean delete(int id, String fileName, Context context) {
+        List<Entry> entries = getEntries(fileName, context);
         boolean found = false;
         int position = -1;
         for (int i = 0; i < entries.size(); i++) {
@@ -125,7 +128,7 @@ public class JsonUtils {
         if (found) {
             entries.remove(position);
         }
-        writeEntries(entries, fileName);
+        writeEntries(entries, fileName, context);
         return found;
     }
 
@@ -138,8 +141,8 @@ public class JsonUtils {
      * @return the entry the id represents, or null if the
      * id does not exist
      */
-    public static Entry get(int id, String fileName) {
-        List<Entry> entries = getEntries(fileName);
+    public static Entry get(int id, String fileName, Context context) {
+        List<Entry> entries = getEntries(fileName, context);
         for (int i = 0; i < entries.size(); i++) {
             if (entries.get(i).getId() == id) {
                 return entries.get(i);
@@ -154,11 +157,11 @@ public class JsonUtils {
      * @param fileName file to write entry to
      * @return true if replacing existing entry by same id, false if new entry
      */
-    public static boolean writeEntry(Entry entry, String fileName) {
-        boolean result = delete(entry.getId(), fileName);
-        List<Entry> entries = getEntries(fileName);
+    public static boolean writeEntry(Entry entry, String fileName, Context context) {
+        boolean result = delete(entry.getId(), fileName, context);
+        List<Entry> entries = getEntries(fileName, context);
         entries.add(entry);
-        writeEntries(entries, fileName);
+        writeEntries(entries, fileName, context);
         return result;
     }
 

@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
 	@Override
@@ -50,6 +53,17 @@ public class MainActivity extends AppCompatActivity {
 
 		//noinspection SimplifiableIfStatement
 		if (id == R.id.action_settings) {
+			/*List<Entry> entries = new ArrayList<>();
+			entries.add(new Entry("went to the store", 5.5, 1, new ArrayList<>()));
+			entries.add(new Entry("Swimming", 9.0, 2, new ArrayList<>()));
+			entries.add(new Entry("Had fun playing video games. Now I am eating a burger and some fries.", 9.0, 2, new ArrayList<>()));
+			JsonUtils.writeEntries(entries, "TestFile.json", this);
+			Entry edited = JsonUtils.get(1, "TestFile.json", this);
+			edited.setRating(11.0);
+			JsonUtils.writeEntry(edited, "TestFile.json", this);
+*/
+			List<Entry> debug = JsonUtils.getEntries("TestFile.json", this);
+			setContentView(new EntryLogView(this, debug, 3));
 			return true;
 		}
 
