@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.Editable;
 import android.view.View;
 
 import android.view.Menu;
@@ -53,8 +54,26 @@ public class MainActivity extends AppCompatActivity {
 				 * context, which we stored in the variable named "context".
 				 */
 				Intent tagIntent = new Intent(context, destinationActivity);
+				EditText entry = findViewById(R.id.entry_text);
+				Editable entry_text = entry.getText();
+				tagIntent.putExtra("entry_text", entry_text);
+
+				SeekBar slider = findViewById(R.id.seekBar);
+				int rating = slider.getProgress();
+				tagIntent.putExtra("entry_rating", rating);
 
 				startActivity(tagIntent);
+			}
+		});
+
+		Button discard_btn = (Button) findViewById(R.id.discard_button);
+		discard_btn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				SeekBar slider = findViewById(R.id.seekBar);
+				slider.setProgress(1);
+				EditText entry_text = findViewById(R.id.entry_text);
+				entry_text.clearComposingText();
 			}
 		});
 

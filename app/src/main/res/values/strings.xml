@@ -15,4 +15,9 @@
 	<string name="discard_button">DISCARD</string>
 	<string name="second_instruction">Do you feel like tagging this entry?</string>
 	<string name="submit_button">SUBMIT</string>
+	<string name="default_tag_1">Sports</string>
+	<string name="default_tag_2">Food</string>
+	<string name="default_tag_3">Study</string>
+	<string name="customize_button">Add</string>
+	<string name="add_tag_button">Add New Tag</string>
 </resources>

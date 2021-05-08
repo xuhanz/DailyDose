@@ -48,8 +48,10 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar2"
+        app:layout_constraintVertical_bias="0.123" />
 
     <Button
         android:id="@+id/submit_button"
@@ -69,5 +71,74 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="349dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="184dp"
+        android:clickable="true"
+        android:contentDescription="@string/add_tag_button"
+        app:backgroundTint="@color/yellow_02"
+        app:layout_constraintBottom_toTopOf="@+id/submit_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="326dp"
+        android:layout_height="213dp"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="350dp"
+        app:chipSpacingHorizontal="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/submit_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instruction_2"
+        app:layout_constraintVertical_bias="0.0">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/default_tag_1"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_tag_1"
+            android:textSize="36sp"
+            app:chipBackgroundColor="@color/yellow_02"
+            tools:layout_editor_absoluteX="54dp"
+            tools:layout_editor_absoluteY="205dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/default_tag_2"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_tag_2"
+            android:textSize="24sp"
+            app:chipBackgroundColor="@color/yellow_02"
+            tools:layout_editor_absoluteX="133dp"
+            tools:layout_editor_absoluteY="205dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/default_tag_3"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_tag_3"
+            android:textSize="24sp"
+            app:chipBackgroundColor="@color/yellow_02"
+            tools:layout_editor_absoluteX="211dp"
+            tools:layout_editor_absoluteY="205dp" />
+
+    </com.google.android.material.chip.ChipGroup>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
