@@ -2,16 +2,15 @@ package com.example.dailydose;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
-
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
-		/*
-		FloatingActionButton fab = findViewById(R.id.fab);
+
+		/*FloatingActionButton fab = findViewById(R.id.fab);
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -33,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
 						.setAction("Action", null).show();
 			}
 		});
-
+		/*
 		 */
+
+
 	}
 
 	@Override
@@ -56,7 +57,16 @@ public class MainActivity extends AppCompatActivity {
 			/*List<Entry> entries = new ArrayList<>();
 			entries.add(new Entry("went to the store", 5.5, 1, new ArrayList<>()));
 			entries.add(new Entry("Swimming", 9.0, 2, new ArrayList<>()));
-			entries.add(new Entry("Had fun playing video games. Now I am eating a burger and some fries.", 9.0, 2, new ArrayList<>()));
+			entries.add(new Entry("Had fun playing video games. Now I am eating a burger and some fries.", 9.0, 3, new ArrayList<>()));
+			entries.add(new Entry("went to the store", 5.5, 4, new ArrayList<>()));
+			entries.add(new Entry("Swimming", 9.0, 5, new ArrayList<>()));
+			entries.add(new Entry("Had fun playing video games. Now I am eating a burger and some fries.", 9.0, 6, new ArrayList<>()));
+			entries.add(new Entry("went to the store", 5.5, 7, new ArrayList<>()));
+			entries.add(new Entry("Swimming", 9.0, 8, new ArrayList<>()));
+			entries.add(new Entry("Had fun playing video games. Now I am eating a burger and some fries.", 9.0, 9, new ArrayList<>()));
+			entries.add(new Entry("went to the store", 5.5, 10, new ArrayList<>()));
+			entries.add(new Entry("Swimming", 9.0, 11, new ArrayList<>()));
+			entries.add(new Entry("Had fun playing video games. Now I am eating a burger and some fries.", 9.0, 12, new ArrayList<>()));
 			JsonUtils.writeEntries(entries, "TestFile.json", this);
 			Entry edited = JsonUtils.get(1, "TestFile.json", this);
 			edited.setRating(11.0);
@@ -64,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
 */
 			List<Entry> debug = JsonUtils.getEntries("TestFile.json", this);
 			setContentView(new EntryLogView(this, debug, 3));
+			Toolbar toolbar = findViewById(R.id.toolbar);
+			setSupportActionBar(toolbar);
+			return true;
+		} else if (id == R.id.action_main) {
+			setContentView(R.layout.activity_main);
+			Toolbar toolbar = findViewById(R.id.toolbar);
+			setSupportActionBar(toolbar);
 			return true;
 		}
 

@@ -9,6 +9,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
@@ -31,6 +32,7 @@ public class EntryLogView extends ScrollView {
      * @param entries        A list of entries to put in the view.
      * @param vMargin       The base vertical margin. Passed by the activity.
      */
+
     public EntryLogView(Context context, List<Entry> entries, int vMargin) {
         super(context);
 
@@ -39,6 +41,7 @@ public class EntryLogView extends ScrollView {
         addView(container);                         // add it to Part2View
         container.setId(0); // set its ID to 0. This lets us refer to it later
         container.setBackgroundColor(0XFFE897);
+        this.setBackgroundColor(0XFFE897);
 
 
         for (int i = 0; i < entries.size(); i++) {
@@ -57,6 +60,7 @@ public class EntryLogView extends ScrollView {
             content.setTextSize(20);
             content.setTextAlignment(TEXT_ALIGNMENT_CENTER);
             Button deleteButton = new Button(context);
+            deleteButton.setBackgroundColor(0XFFE897);
             deleteButton.setText("DELETE");
             deleteButton.setMinimumWidth(100);
             deleteButton.setOnClickListener(new OnClickListener() {
@@ -67,15 +71,15 @@ public class EntryLogView extends ScrollView {
                     invalidate();
                 }
             });
-            Button editButton = new Button(context);
-            editButton.setText("EDIT");
-            editButton.setMinimumWidth(100);
+            //Button editButton = new Button(context);
+            //editButton.setText("EDIT");
+            //editButton.setMinimumWidth(100);
 
 
             entryLayout.addView(rating);
             entryLayout.addView(content);
             entryLayout.addView(deleteButton);
-            entryLayout.addView(editButton);
+           // entryLayout.addView(editButton);
 
             container.addView(entryLayout);
 
