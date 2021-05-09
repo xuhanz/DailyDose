@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
 	// Get reference to the continue button from xml
 	// Field that will store our buttons
-	private final Button continue_button = (Button) findViewById(R.id.continue_button);
+	//private final Button continue_button = (Button) findViewById(R.id.continue_button);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 		Toolbar toolbar = findViewById(R.id.header);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
+		Button continue_button = (Button) findViewById(R.id.continue_button);
 
 
 		// Set an onClickListener to allow the continue button to trigger the tagging interface
