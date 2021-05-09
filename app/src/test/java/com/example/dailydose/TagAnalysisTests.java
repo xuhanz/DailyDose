@@ -2,8 +2,10 @@ package com.example.dailydose;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -109,5 +111,107 @@ public class TagAnalysisTests {
 		entries.add(entry);
 
 		assertEquals(new ArrayList<>(), TagAnalysis.filterEntriesByTag(entries, "Store"));
+	}
+
+	@Test
+	public void GetSingleTagTest() {
+		List<String> tags = new ArrayList<>();
+		tags.add("Gaming");
+		Entry entry = new Entry("Video Games", 10, 1, tags);
+		List<Entry> entries = new ArrayList<>();
+		entries.add(entry);
+
+		Set<String> correctEntries = new HashSet<>();
+		correctEntries.add("Gaming");
+
+		assertEquals(correctEntries, TagAnalysis.getTagsFromEntries(entries));
+	}
+
+	@Test
+	public void GetMultipleTagTest() {
+		List<String> tags = new ArrayList<>();
+		List<String> tags2 = new ArrayList<>();
+		List<String> tags3 = new ArrayList<>();
+		tags.add("Store");
+		tags.add("Shopping");
+		Entry entry = new Entry("Went to the store today", 9.5, 1, tags);
+		tags2.add("Shopping");
+		Entry entry2 = new Entry("Shopped online", 7.5, 2, tags2);
+		List<Entry> entries = new ArrayList<>();
+		tags3.add("Gaming");
+		Entry entry3 = new Entry("Video Games", 10, 3, tags3);
+		entries.add(entry);
+		entries.add(entry2);
+		entries.add(entry3);
+
+		Set<String> correctEntries = new HashSet<>();
+		correctEntries.add("Gaming");
+		correctEntries.add("Store");
+		correctEntries.add("Shopping");
+
+		assertEquals(correctEntries, TagAnalysis.getTagsFromEntries(entries));
+	}
+
+	@Test
+	public void NoEntriesGetTagTest() {
+		List<Entry> entries = new ArrayList<>();
+
+		assertEquals(new HashSet<>(), TagAnalysis.getTagsFromEntries(entries));
+	}
+
+	@Test
+	public void NullGetTagTest() {
+		assertEquals(new HashSet<>(), TagAnalysis.getTagsFromEntries(null));
+	}
+
+	@Test
+	public void GetSingleTagAvgTest() {
+		List<String> tags = new ArrayList<>();
+		tags.add("Gaming");
+		Entry entry = new Entry("Video Games", 10, 1, tags);
+		List<Entry> entries = new ArrayList<>();
+		entries.add(entry);
+
+		Dictionary<String, Double> correctEntries = new Hashtable<>();
+		correctEntries.put("Gaming", 10.0);
+
+		assertEquals(correctEntries, TagAnalysis.getAllTagAvg(entries));
+	}
+
+	@Test
+	public void GetMultipleTagAvgTest() {
+		List<String> tags = new ArrayList<>();
+		List<String> tags2 = new ArrayList<>();
+		List<String> tags3 = new ArrayList<>();
+		tags.add("Store");
+		tags.add("Shopping");
+		Entry entry = new Entry("Went to the store today", 9.5, 1, tags);
+		tags2.add("Shopping");
+		Entry entry2 = new Entry("Shopped online", 7.5, 2, tags2);
+		List<Entry> entries = new ArrayList<>();
+		tags3.add("Gaming");
+		Entry entry3 = new Entry("Video Games", 10, 3, tags3);
+		entries.add(entry);
+		entries.add(entry2);
+		entries.add(entry3);
+
+		Dictionary<String, Double> correctEntries = new Hashtable<>();
+		correctEntries.put("Gaming", 10.0);
+		correctEntries.put("Store", 9.5);
+		correctEntries.put("Shopping", 8.5);
+
+		assertEquals(correctEntries, TagAnalysis.getAllTagAvg(entries));
+	}
+
+	@Test
+	public void NoEntriesGetTagAvgTest() {
+		List<Entry> entries = new ArrayList<>();
+
+		assertEquals(new Hashtable<>(), TagAnalysis.getAllTagAvg(entries));
+	}
+
+	@Test
+	public void NullGetTagAvgTest() {
+		assertEquals(new Hashtable<>(), TagAnalysis.getAllTagAvg(null));
 	}
 }

@@ -37,4 +37,38 @@ public class TagAnalysis {
 		}
 		return rating / entries.size();
 	}
+
+	/**
+	 * Gets a set of all tags used by given entries
+	 * @param entries the entries to get tags from
+	 * @return Set of tags found in given entries
+	 */
+	public static Set<String> getTagsFromEntries(List<Entry> entries) {
+		Set<String> tags = new HashSet<>();
+
+		if (entries == null) { return tags; }
+		for (Entry e: entries) {
+			for (String tag: e.getTags()) {
+				tags.add(tag);
+			}
+		}
+		return tags;
+	}
+
+	/**
+	 * Calculate the average rating of each tag in the given list of entries
+	 * @param entries the entries to get the average tag ratings of
+	 * @return Dictionary of tags to average rating; empty dictionary if entries null or empty
+	 */
+	public static Dictionary<String, Double> getAllTagAvg(List<Entry> entries) {
+		Dictionary<String, Double> tagRatings = new Hashtable<>();
+		// if tags or entries do not exist, immediately exit
+		if (entries == null) { return tagRatings; }
+		Set<String> tags = getTagsFromEntries(entries);
+		for (String tag : tags) {  // iterate through entries
+			double avgRating = getAvgRating(filterEntriesByTag(entries, tag));
+			tagRatings.put(tag, avgRating);
+		}
+		return tagRatings;
+	}
 }
