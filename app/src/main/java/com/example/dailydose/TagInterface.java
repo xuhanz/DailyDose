@@ -39,9 +39,9 @@ public class TagInterface extends AppCompatActivity {
                     }
                 }
 
-                int id = JsonUtils.getEntries("TestFile.json").size() + 1;
+                int id = JsonUtils.getEntries("TestFile.json", getApplicationContext()).size() + 1;
                 Entry new_entry = new Entry(entry_text, entry_rating, id, tagList);
-                JsonUtils.writeEntry(new_entry, "TestFile.json");
+                JsonUtils.writeEntry(new_entry, "TestFile.json", getApplicationContext());
 
             }
 
