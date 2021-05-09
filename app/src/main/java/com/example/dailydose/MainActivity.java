@@ -5,9 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -19,6 +16,8 @@ import android.view.MenuItem;
 import android.widget.*;
 import android.view.View.OnClickListener;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
 	// Get reference to the continue button from xml
@@ -29,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		Toolbar toolbar = findViewById(R.id.toolbar);
+		Toolbar toolbar = findViewById(R.id.header);
 		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
 		// Set an onClickListener to allow the continue button to trigger the tagging interface
 		// activity
@@ -95,6 +96,15 @@ public class MainActivity extends AppCompatActivity {
 
 		//noinspection SimplifiableIfStatement
 		if (id == R.id.action_settings) {
+			List<Entry> entries = JsonUtils.getEntries("TestFile.json", this);
+			setContentView(new EntryLogView(this, entries, 3));
+			Toolbar toolbar = findViewById(R.id.header);
+			setSupportActionBar(toolbar);
+			return true;
+		} else if (id == R.id.action_main) {
+			setContentView(R.layout.activity_main);
+			Toolbar toolbar = findViewById(R.id.header);
+			setSupportActionBar(toolbar);
 			return true;
 		}
 
