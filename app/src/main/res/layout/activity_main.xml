@@ -26,14 +26,14 @@
 
 		<TextView
 			android:id="@+id/textView2"
-			android:layout_width="209dp"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="40dp"
+			android:layout_marginTop="38dp"
 			android:layout_marginBottom="78dp"
 			android:fontFamily="cursive"
 			android:text="@string/app_name"
 			android:textAlignment="center"
-			android:textSize="42sp"
+			android:textSize="45sp"
 			android:textStyle="bold"
 			app:layout_constraintBottom_toTopOf="parent"
 			app:layout_constraintEnd_toEndOf="@+id/header"
@@ -46,19 +46,19 @@
 			android:layout_width="385dp"
 			android:layout_height="87dp"
 			android:layout_marginStart="24dp"
-			android:layout_marginTop="60dp"
+			android:layout_marginTop="70dp"
 			android:layout_marginEnd="24dp"
 			android:fontFamily="cursive"
 			android:text="@string/textView"
 			android:textSize="30sp"
-			app:layout_constraintBottom_toTopOf="@+id/seekBar2"
+			app:layout_constraintBottom_toTopOf="@+id/seekBar"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.433"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="@id/header" />
 
 		<SeekBar
-			android:id="@+id/seekBar2"
+			android:id="@+id/seekBar"
 			style="@style/Widget.AppCompat.SeekBar.Discrete"
 			android:layout_width="match_parent"
 			android:layout_height="90dp"
@@ -69,15 +69,15 @@
 			android:max="10"
 			android:progress="1"
 			android:progressTint="#80FF9800"
-			android:thumbTint="#80FF5722"
-			app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
+			android:thumbTint="#CCFF5722"
+			app:layout_constraintBottom_toTopOf="@+id/entry_text"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.0"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 		<EditText
-			android:id="@+id/editTextTextMultiLine"
+			android:id="@+id/entry_text"
 			android:layout_width="370dp"
 			android:layout_height="273dp"
 			android:layout_marginStart="80dp"
@@ -94,7 +94,7 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.504"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
+			app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
 		<Button
 			android:id="@+id/continue_button"
@@ -114,7 +114,7 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="1.0"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine"
+			app:layout_constraintTop_toBottomOf="@+id/entry_text"
 			app:strokeColor="#000000" />
 
 		<Button
@@ -135,7 +135,7 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.0"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine"
+			app:layout_constraintTop_toBottomOf="@+id/entry_text"
 			app:layout_constraintVertical_bias="0.613" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
