@@ -10,7 +10,14 @@
 	<string name="hello_first_fragment">Hello first fragment</string>
 	<string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 	<string name="continue_button">CONTINUE</string>
-	<string name="editTextTextMultiLine">Type to start an diary...</string>
-	<string name="textView">Create an entry...</string>
+	<string name="editTextTextMultiLine">Type to start your diary…</string>
+	<string name="textView">Time to jot down an entry…</string>
 	<string name="discard_button">DISCARD</string>
+	<string name="second_instruction">Do you feel like tagging this entry?</string>
+	<string name="submit_button">SUBMIT</string>
+	<string name="default_tag_1">Sports</string>
+	<string name="default_tag_2">Food</string>
+	<string name="default_tag_3">Study</string>
+	<string name="customize_button">Add</string>
+	<string name="add_tag_button">Add New Tag</string>
 </resources>
