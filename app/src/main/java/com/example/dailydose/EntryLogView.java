@@ -2,6 +2,7 @@ package com.example.dailydose;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -36,8 +37,11 @@ public class EntryLogView extends ScrollView {
     public EntryLogView(Context context, List<Entry> entries, int vMargin) {
         super(context);
 
-        LinearLayout container = findViewById(R.id.entry_container); // create the parent container for the images
-        addView(container);                         // add it to Part2View
+       //LinearLayout container = findViewById(R.id.entry_container); // create the parent container for the images
+        //addView(container);
+        // add it to Part2View
+        this.addView(LayoutInflater.from(context).inflate(R.layout.activity_entry_log, null));
+        LinearLayout container = findViewById(R.id.entry_container);
         container.setId(0); // set its ID to 0. This lets us refer to it later
         container.setBackgroundColor(0XFFE897);
         this.setBackgroundColor(0XFFE897);

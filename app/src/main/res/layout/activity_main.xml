@@ -12,7 +12,7 @@
 		android:layout_height="match_parent">
 
 		<androidx.appcompat.widget.Toolbar
-			android:id="@+id/toolbar"
+			android:id="@+id/header"
 			android:layout_width="match_parent"
 			android:layout_height="78dp"
 			android:background="#FFE897"
@@ -36,9 +36,9 @@
 			android:textSize="42sp"
 			android:textStyle="bold"
 			app:layout_constraintBottom_toTopOf="parent"
-			app:layout_constraintEnd_toEndOf="@+id/toolbar"
-			app:layout_constraintStart_toStartOf="@+id/toolbar"
-			app:layout_constraintTop_toTopOf="@+id/toolbar"
+			app:layout_constraintEnd_toEndOf="@+id/header"
+			app:layout_constraintStart_toStartOf="@+id/header"
+			app:layout_constraintTop_toTopOf="@+id/header"
 			app:layout_constraintVertical_bias="0.135" />
 
 		<TextView
@@ -55,7 +55,7 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.433"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="@id/toolbar" />
+			app:layout_constraintTop_toTopOf="@id/header" />
 
 		<SeekBar
 			android:id="@+id/seekBar2"
