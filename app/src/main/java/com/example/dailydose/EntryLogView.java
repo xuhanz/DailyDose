@@ -36,8 +36,7 @@ public class EntryLogView extends ScrollView {
     public EntryLogView(Context context, List<Entry> entries, int vMargin) {
         super(context);
 
-        LinearLayout container = new LinearLayout(context); // create the parent container for the images
-        container.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout container = findViewById(R.id.entry_container); // create the parent container for the images
         addView(container);                         // add it to Part2View
         container.setId(0); // set its ID to 0. This lets us refer to it later
         container.setBackgroundColor(0XFFE897);
