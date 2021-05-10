@@ -43,27 +43,21 @@ public class EntryLogView extends ScrollView {
         this.addView(LayoutInflater.from(context).inflate(R.layout.activity_entry_log, null));
         LinearLayout container = findViewById(R.id.entry_container);
         container.setId(0); // set its ID to 0. This lets us refer to it later
-        container.setBackgroundColor(0XFFE897);
-        this.setBackgroundColor(0XFFE897);
 
 
         for (int i = 0; i < entries.size(); i++) {
             Entry entry = entries.get(i);    // The Entry
             LinearLayout entryLayout = new LinearLayout(context);
             entryLayout.setOrientation(LinearLayout.VERTICAL);
-            entryLayout.setBackgroundColor(0xFDFD96);
             TextView rating = new TextView(context);
-            rating.setTextColor(Color.parseColor("green"));
+            rating.setTextColor(Color.parseColor("purple"));
             rating.setTextSize(30);
-            rating.setBackgroundColor(0XFDFD96);
             rating.setText("" + entry.getRating());
             TextView content = new TextView(context);
-            content.setBackgroundColor(0XFDFD96);
             content.setText(entry.getContent());
             content.setTextSize(20);
             content.setTextAlignment(TEXT_ALIGNMENT_CENTER);
             Button deleteButton = new Button(context);
-            deleteButton.setBackgroundColor(0XFFE897);
             deleteButton.setText("DELETE");
             deleteButton.setMinimumWidth(100);
             deleteButton.setOnClickListener(new OnClickListener() {

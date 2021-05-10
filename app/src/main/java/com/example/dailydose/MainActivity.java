@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Toolbar toolbar = findViewById(R.id.header);
+
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 		Button continue_button = (Button) findViewById(R.id.continue_button);
-
-
 		// Set an onClickListener to allow the continue button to trigger the tagging interface
 		// activity
 		continue_button.setOnClickListener(new OnClickListener() {
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 				Intent tagIntent = new Intent(context, destinationActivity);
 				EditText entry = findViewById(R.id.entry_text);
 				Editable entry_text = entry.getText();
-				tagIntent.putExtra("entry_text", entry_text);
+				tagIntent.putExtra("entry_text", entry_text.toString());
 
 				SeekBar slider = findViewById(R.id.seekBar);
 				int rating = slider.getProgress();

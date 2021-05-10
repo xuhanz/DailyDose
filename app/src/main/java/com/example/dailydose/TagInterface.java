@@ -21,6 +21,8 @@ public class TagInterface extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tag_interface);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         List<String> tagList = new ArrayList<>();
 
 
@@ -44,6 +46,8 @@ public class TagInterface extends AppCompatActivity {
                 int id = JsonUtils.getEntries("TestFile.json", getApplicationContext()).size() + 1;
                 Entry new_entry = new Entry(entry_text, entry_rating, id, tagList);
                 JsonUtils.writeEntry(new_entry, "TestFile.json", getApplicationContext());
+
+
 
                 Context context = TagInterface.this;
                 Class destinationActivity = MainActivity.class;
