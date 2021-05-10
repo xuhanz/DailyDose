@@ -12,4 +12,9 @@
 		android:orderInCategory="100"
 		android:title="Entry Creation"
 		app:showAsAction="never" />
+	<item
+		android:id="@+id/action_avg"
+		android:orderInCategory="100"
+		android:title="AVG rating"
+		app:showAsAction="never" />
 </menu>

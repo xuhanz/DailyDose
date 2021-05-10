@@ -107,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
 			Toolbar toolbar = findViewById(R.id.header);
 			setSupportActionBar(toolbar);
 			return true;
+		} else if (id == R.id.action_avg){
+			setContentView(R.layout.avg_rating_analysis);
+			Toolbar toolbar = findViewById(R.id.header);
+			setSupportActionBar(toolbar);
+			return true;
 		}
 
 		return super.onOptionsItemSelected(item);
