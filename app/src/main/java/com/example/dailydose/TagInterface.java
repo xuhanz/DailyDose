@@ -1,6 +1,7 @@
 package com.example.dailydose;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,9 +23,9 @@ public class TagInterface extends AppCompatActivity {
         setContentView(R.layout.activity_tag_interface);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().hide();
 
         List<String> tagList = new ArrayList<>();
-
 
         String entry_text = getIntent().getStringExtra("entry_text");
         int entry_rating = getIntent().getIntExtra("entry_rating", 0);
@@ -46,8 +47,6 @@ public class TagInterface extends AppCompatActivity {
                 int id = JsonUtils.getEntries("TestFile.json", getApplicationContext()).size() + 1;
                 Entry new_entry = new Entry(entry_text, entry_rating, id, tagList);
                 JsonUtils.writeEntry(new_entry, "TestFile.json", getApplicationContext());
-
-
 
                 Context context = TagInterface.this;
                 Class destinationActivity = MainActivity.class;

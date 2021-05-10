@@ -24,6 +24,14 @@
 	<string name="default_tag_1">Sports</string>
 	<string name="default_tag_2">Food</string>
 	<string name="default_tag_3">Study</string>
+	<string name="default_tag_4">Shopping</string>
+	<string name="default_tag_5">Exercise</string>
+	<string name="default_tag_6">Sleep</string>
+	<string name="default_tag_7">Games</string>
+	<string name="default_tag_8">Work</string>
+	<string name="default_tag_9">Movies</string>
+
+
 	<string name="customize_button">Add</string>
 	<string name="add_tag_button">Add New Tag</string>
 </resources>

@@ -51,7 +51,7 @@ public class EntryLogView extends ScrollView {
             entryLayout.setOrientation(LinearLayout.VERTICAL);
             TextView rating = new TextView(context);
             rating.setTextColor(Color.parseColor("purple"));
-            rating.setTextSize(30);
+            rating.setTextSize(20);
             rating.setText("" + entry.getRating());
             TextView content = new TextView(context);
             content.setText(entry.getContent());
