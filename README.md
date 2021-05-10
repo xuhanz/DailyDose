@@ -5,6 +5,12 @@ Daily Dose will be a journaling app for Android that emphasizes ease-of-use; ent
 Most parts TBD<br>
 Reports directory for weekly progress reports
 
+## Build/TEST Instructions
+PLACEHOLDER<br>
+
+## Run Instructions
+PLACEHOLDER<br>
+
 ## Resources
 Android Studio Setup Guide: https://courses.cs.washington.edu/courses/cse340/21sp/docs/android.html<br>
 AnyChart Android Charts: https://www.anychart.com/technical-integrations/samples/android-charts/
