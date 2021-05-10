@@ -82,6 +82,7 @@
         android:layout_marginBottom="184dp"
         android:clickable="true"
         android:contentDescription="@string/add_tag_button"
+        android:visibility="invisible"
         app:backgroundTint="@color/yellow_02"
         app:layout_constraintBottom_toTopOf="@+id/submit_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +101,7 @@
         app:chipSpacingHorizontal="32dp"
         app:layout_constraintBottom_toTopOf="@+id/submit_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instruction_2"
         app:layout_constraintVertical_bias="0.0">
@@ -135,8 +136,75 @@
             android:text="@string/default_tag_3"
             android:textSize="24sp"
             app:chipBackgroundColor="@color/yellow_02"
+            tools:layout_editor_absoluteX="133dp"
+            tools:layout_editor_absoluteY="205dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/default_tag_4"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_tag_4"
+            android:textSize="24sp"
+            app:chipBackgroundColor="@color/yellow_02"
+            tools:layout_editor_absoluteX="133dp"
+            tools:layout_editor_absoluteY="205dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/default_tag_5"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_tag_5"
+            android:textSize="24sp"
+            app:chipBackgroundColor="@color/yellow_02"
+            tools:layout_editor_absoluteX="133dp"
+            tools:layout_editor_absoluteY="205dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/default_tag_6"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_tag_6"
+            android:textSize="24sp"
+            app:chipBackgroundColor="@color/yellow_02"
             tools:layout_editor_absoluteX="211dp"
             tools:layout_editor_absoluteY="205dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/default_tag_7"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_tag_7"
+            android:textSize="24sp"
+            app:chipBackgroundColor="@color/yellow_02"
+            tools:layout_editor_absoluteX="211dp"
+            tools:layout_editor_absoluteY="205dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/default_tag_8"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_tag_8"
+            android:textSize="24sp"
+            app:chipBackgroundColor="@color/yellow_02"
+            tools:layout_editor_absoluteX="211dp"
+            tools:layout_editor_absoluteY="205dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/default_tag_9"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_tag_9"
+            android:textSize="24sp"
+            app:chipBackgroundColor="@color/yellow_02"
+            tools:layout_editor_absoluteX="211dp"
+            tools:layout_editor_absoluteY="205dp" />
+
 
     </com.google.android.material.chip.ChipGroup>
 

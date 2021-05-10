@@ -115,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
 			Toolbar toolbar = findViewById(R.id.header);
 			setSupportActionBar(toolbar);
+			getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 			return true;
 			// entry creation option
 		} else if (id == R.id.action_main) {
@@ -126,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
 			Toolbar toolbar = findViewById(R.id.header);
 			setSupportActionBar(toolbar);
+			getSupportActionBar().setDisplayShowTitleEnabled(false);
 			return true;
 		}
 
