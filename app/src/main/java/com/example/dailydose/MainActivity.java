@@ -119,20 +119,16 @@ public class MainActivity extends AppCompatActivity {
 			return true;
 			// entry creation option
 		} else if (id == R.id.action_main) {
-
 			Context context = MainActivity.this;
 			Class destinationActivity = MainActivity.class;
 			Intent mainIntent = new Intent(context, destinationActivity);
 			startActivity(mainIntent);
-
-			Toolbar toolbar = findViewById(R.id.header);
-			setSupportActionBar(toolbar);
-			getSupportActionBar().setDisplayShowTitleEnabled(false);
 			return true;
 		} else if (id == R.id.action_avg){
-			setContentView(R.layout.avg_rating_analysis);
-			Toolbar toolbar = findViewById(R.id.header);
-			setSupportActionBar(toolbar);
+			Context context = MainActivity.this;
+			Class destinationActivity = AvgBarGraph.class;
+			Intent mainIntent = new Intent(context, destinationActivity);
+			startActivity(mainIntent);
 			return true;
 		}
 

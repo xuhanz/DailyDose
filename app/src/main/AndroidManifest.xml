@@ -32,7 +32,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AvgBarGraph"></activity>
+            android:name=".AvgBarGraph"
+            android:theme="@style/Theme.DailyDose.NoActionBar"></activity>
     </application>
 
 </manifest>
