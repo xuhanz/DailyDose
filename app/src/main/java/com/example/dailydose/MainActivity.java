@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 				SeekBar slider = findViewById(R.id.seekBar);
 				slider.setProgress(1);
 				EditText entry_text = findViewById(R.id.entry_text);
-				entry_text.clearComposingText();
+				entry_text.setText("");
 			}
 		});
 
