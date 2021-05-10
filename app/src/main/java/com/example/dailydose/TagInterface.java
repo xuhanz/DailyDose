@@ -2,6 +2,8 @@ package com.example.dailydose;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,8 @@ public class TagInterface extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tag_interface);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         List<String> tagList = new ArrayList<>();
 
@@ -43,6 +47,12 @@ public class TagInterface extends AppCompatActivity {
                 Entry new_entry = new Entry(entry_text, entry_rating, id, tagList);
                 JsonUtils.writeEntry(new_entry, "TestFile.json", getApplicationContext());
 
+
+
+                Context context = TagInterface.this;
+                Class destinationActivity = MainActivity.class;
+                Intent mainIntent = new Intent(context, destinationActivity);
+                startActivity(mainIntent);
             }
 
         });
