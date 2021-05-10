@@ -1,7 +1,6 @@
 package com.example.dailydose;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -129,6 +128,11 @@ public class MainActivity extends AppCompatActivity {
 			Toolbar toolbar = findViewById(R.id.header);
 			setSupportActionBar(toolbar);
 			getSupportActionBar().setDisplayShowTitleEnabled(false);
+			return true;
+		} else if (id == R.id.action_avg){
+			setContentView(R.layout.avg_rating_analysis);
+			Toolbar toolbar = findViewById(R.id.header);
+			setSupportActionBar(toolbar);
 			return true;
 		}
 
