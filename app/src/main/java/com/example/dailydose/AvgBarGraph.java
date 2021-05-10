@@ -28,6 +28,8 @@ public class AvgBarGraph extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.avg_rating_analysis);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         AnyChartView anyChartView = findViewById(R.id.any_chart_avg);
         anyChartView.setProgressBar(findViewById(R.id.progress_bar));
 
@@ -52,7 +54,7 @@ public class AvgBarGraph extends AppCompatActivity {
                 .format("{%Value}{groupsSeparator: }");
 
         cartesian.animation(true);
-        cartesian.title("Top 10 Cosmetic Products by Revenue");
+        cartesian.title("Average Rating of Tags");
 
         cartesian.yScale().minimum(0d);
 
@@ -61,8 +63,8 @@ public class AvgBarGraph extends AppCompatActivity {
         cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
         cartesian.interactivity().hoverMode(HoverMode.BY_X);
 
-        cartesian.xAxis(0).title("tag");
-        cartesian.yAxis(0).title("rating");
+        cartesian.xAxis(0).title("Tag");
+        cartesian.yAxis(0).title("Rating");
 
         anyChartView.setChart(cartesian);
     }
