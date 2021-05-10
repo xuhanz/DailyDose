@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/header"
+            android:id="@+id/header_avg"
             android:layout_width="match_parent"
             android:layout_height="78dp"
             android:layout_marginBottom="653dp"
@@ -34,10 +34,10 @@
             android:textAlignment="center"
             android:textSize="45sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/header"
-            app:layout_constraintEnd_toEndOf="@id/header"
-            app:layout_constraintStart_toStartOf="@+id/header"
-            app:layout_constraintTop_toTopOf="@+id/header"
+            app:layout_constraintBottom_toBottomOf="@+id/header_avg"
+            app:layout_constraintEnd_toEndOf="@id/header_avg"
+            app:layout_constraintStart_toStartOf="@+id/header_avg"
+            app:layout_constraintTop_toTopOf="@+id/header_avg"
             app:layout_constraintVertical_bias="0.0" />
 
         <com.anychart.AnyChartView
