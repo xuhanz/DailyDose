@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.*;
 import android.view.View.OnClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Toolbar toolbar = findViewById(R.id.header);
+
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 		Button continue_button = (Button) findViewById(R.id.continue_button);
-
-
 		// Set an onClickListener to allow the continue button to trigger the tagging interface
 		// activity
 		continue_button.setOnClickListener(new OnClickListener() {
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 				Intent tagIntent = new Intent(context, destinationActivity);
 				EditText entry = findViewById(R.id.entry_text);
 				Editable entry_text = entry.getText();
-				tagIntent.putExtra("entry_text", entry_text);
+				tagIntent.putExtra("entry_text", entry_text.toString());
 
 				SeekBar slider = findViewById(R.id.seekBar);
 				int rating = slider.getProgress();
@@ -94,17 +95,39 @@ public class MainActivity extends AppCompatActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 
+
 		//noinspection SimplifiableIfStatement
+		// entry log option
 		if (id == R.id.action_settings) {
-			List<Entry> entries = JsonUtils.getEntries("TestFile.json", this);
-			setContentView(new EntryLogView(this, entries, 3));
+			List<Entry> debug = JsonUtils.getEntries("TestFile.json", this);
+
+			if (debug == null) {
+				debug = new ArrayList<>();
+				List<Entry> entries = new ArrayList<>();
+				entries.add(new Entry("went to the store", 5, 1000, new ArrayList<>()));
+				JsonUtils.writeEntries(entries, "TestFile.json", this);
+				JsonUtils.delete(1000, "TestFile.json", this);
+
+			}
+
+			setContentView(new EntryLogView(this, debug, 3));
+
 			Toolbar toolbar = findViewById(R.id.header);
 			setSupportActionBar(toolbar);
+			getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 			return true;
+			// entry creation option
 		} else if (id == R.id.action_main) {
-			setContentView(R.layout.activity_main);
+
+			Context context = MainActivity.this;
+			Class destinationActivity = MainActivity.class;
+			Intent mainIntent = new Intent(context, destinationActivity);
+			startActivity(mainIntent);
+
 			Toolbar toolbar = findViewById(R.id.header);
 			setSupportActionBar(toolbar);
+			getSupportActionBar().setDisplayShowTitleEnabled(false);
 			return true;
 		} else if (id == R.id.action_avg){
 			setContentView(R.layout.avg_rating_analysis);

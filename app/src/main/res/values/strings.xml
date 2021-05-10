@@ -1,30 +1,37 @@
 <resources>
-    <string name="app_name">Daily Dose</string>
-    <string name="action_settings">Entry Log</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+	<string name="app_name">Daily Dose</string>
+	<string name="action_settings">Entry Log</string>
+	<!-- Strings used for fragments for navigation -->
+	<string name="first_fragment_label">First Fragment</string>
+	<string name="second_fragment_label">Second Fragment</string>
+	<string name="next">Next</string>
+	<string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="continue_button">CONTINUE</string>
-    <string name="editTextTextMultiLine">Type to start your diary…</string>
-    <string name="textView">Time to jot down an entry…</string>
-    <string name="discard_button">DISCARD</string>
+	<string name="hello_first_fragment">Hello first fragment</string>
+	<string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+	<string name="continue_button">CONTINUE</string>
+	<string name="editTextTextMultiLine">Type to start your diary…</string>
+	<string name="textView">Time to jot down an entry…</string>
+	<string name="discard_button">DISCARD</string>
     <string name="title_activity_entry_log">Entry_log</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
-    <string name="second_instruction">Do you feel like tagging this entry?</string>
-    <string name="submit_button">SUBMIT</string>
-    <string name="default_tag_1">Sports</string>
-    <string name="default_tag_2">Food</string>
-    <string name="default_tag_3">Study</string>
-    <string name="customize_button">Add</string>
-    <string name="add_tag_button">Add New Tag</string>
-    <string name="title_activity_avg_analysis">AvgAnalysis</string>
+	<string name="second_instruction">Do you feel like tagging this entry?</string>
+	<string name="submit_button">SUBMIT</string>
+	<string name="default_tag_1">Sports</string>
+	<string name="default_tag_2">Food</string>
+	<string name="default_tag_3">Study</string>
+	<string name="default_tag_4">Shopping</string>
+	<string name="default_tag_5">Exercise</string>
+	<string name="default_tag_6">Sleep</string>
+	<string name="default_tag_7">Games</string>
+	<string name="default_tag_8">Work</string>
+	<string name="default_tag_9">Movies</string>
+
+
+	<string name="customize_button">Add</string>
+	<string name="add_tag_button">Add New Tag</string>
 </resources>
