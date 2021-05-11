@@ -109,6 +109,21 @@ public class JsonUtils {
     }
 
     /**
+     * Get highest id currently in filename
+     * @param fileName file to get highest ID from
+     * @param context context
+     * @return highest id currently in the file, 0 if empty
+     */
+    public static int getHighestID(String fileName, Context context) {
+        int result = 0;
+        List<Entry> entries = getEntries(fileName, context);
+        for (Entry e: entries) {
+            result = Math.max(e.getId(), result);
+        }
+        return result;
+    }
+
+    /**
      * Delete entry with the given id from fileName
      * @param id the id of the entry to delete
      * @param fileName the file to delete id from
