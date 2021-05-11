@@ -5,13 +5,13 @@ Daily Dose will be a journaling app for Android that emphasizes ease-of-use; ent
 Reports directory: For weekly progress reports<br>
 gradle/wrapper directory: Automatically generated gradle files<br>
 app directory: Source Code<br>
-    -> build.gradle - Gradle dependencies and configuration<br>
-       src directory: Source Code<br>
-           -> test directory: JUnit tests<br>
-              main directory: Source Code<br>
-                  -> assets directory: JSON data files<br>
-                     res directory: App Resources (xml files, string/color constants, etc)<br>
-                     java directory: Java files (Backend utilities, App Activity files, Custom views)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-> app/build.gradle - Gradle dependencies and configuration<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app/src directory: Source Code<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> app/src/test directory: JUnit tests<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app/src/main directory: Source Code<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> app/src/main/assets directory: JSON data files<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app/src/main/res directory: App Resources (xml files, string/color constants, etc)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app/src/main/java directory: Java files (Backend utilities, App Activity files, Custom views)<br>
   
 
 ## Build/Test Instructions
