@@ -2,8 +2,17 @@
 Daily Dose will be a journaling app for Android that emphasizes ease-of-use; entries are meant to be small to so users can quickly jot down their thoughts and feelings in the moment, and can be rated on a 1-10 scale; data can be used to display trends in the user’s mood, and how different events and activities influence them.
 
 ## Repository Layout
-Most parts TBD<br>
-Reports directory for weekly progress reports
+Reports directory: For weekly progress reports<br>
+gradle/wrapper directory: Automatically generated gradle files<br>
+app directory: Source Code<br>
+    -> build.gradle - Gradle dependencies and configuration<br>
+       src directory: Source Code<br>
+           -> test directory: JUnit tests<br>
+              main directory: Source Code<br>
+                  -> assets directory: JSON data files<br>
+                     res directory: App Resources (xml files, string/color constants, etc)<br>
+                     java directory: Java files (Backend utilities, App Activity files, Custom views)<br>
+  
 
 ## Build/Test Instructions
 Travis CI automatically runs and tests the build upon commit to this repo.To build manually, open Android Studio with this repo cloned and press the "Sync Project with Gradle Files" button.<br>
