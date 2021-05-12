@@ -19,6 +19,7 @@ app directory: Source Code<br>
 
 ## Build/Test Instructions
 Travis CI automatically runs and tests the build upon commit to this repo.To build manually, open Android Studio with this repo cloned and press the "Sync Project with Gradle Files" button.<br>
+Gradle should build after synchronization. If not, click on the elephant icon in the right top of screen to trigger the gradle build or run "gradlew build check" from terminal (might be a little bit different on Windows and Mac).<br>
 Gradle automatically runs all JUnit tests every time there is a build.
 
 ## Run Instructions
