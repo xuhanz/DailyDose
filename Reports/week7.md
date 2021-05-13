@@ -31,16 +31,15 @@ Begin working on user and developer documentation<br>
 
 #### Sherry:
 1. Plans and goals last week:<br>
-Continue to familiarize myself with Android Studio<br>
-Start experimenting with the interface; focus on the entry view<br>
-2. Current progress and issues:<br>
-Entry creation UI mostly done, pair programming works really well<br>
-Fix the broken build due to local files also included in the version control (take us tons of hours to finally fix it and we should definitely be more careful what to include in the version control) <br>
-Work on Travis CI and finally get it work by overwriting the default gradle build in Travis<br>
-I’m still not sure about the data flow within the application, so when issues come up I’ll shamelessly ask Hunter :)
-3. Plans and goals for next week:<br>
 Move to the interaction between frontend and backend and continue finishing up the rest of UI<br>
 Find out if we can test our front end automatically instead of dummy runs manually<br>
+2. Current progress and issues:<br>
+Add the average ratings page and its full functionality including the xml at frontend and data processing & figure generating at backend. Add dependencies to gradle accordingly<br>
+Pair-programmed with Ester and Hunter on debugging the behavior and use case for the beta release, got known bugs fixed, and make current buttons communicate with backend and/or context properly<br>
+I have no idea how context and intent works in Android. Thanks to pair-programming Ester handles that part for me. I'll try to have a better understanding by continuing exploring tutorials on this part.
+3. Plans and goals for next week:<br>
+Implement the custom tags feature on tagging interface.<br>
+Add date feature (whether read from system or from user input) and refactor our json file and utility class to better prepare for the tag analysis page.
 
 
 #### Ester:
