@@ -1,9 +1,13 @@
 package com.example.dailydose;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -15,6 +19,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class EntryLogView extends ScrollView {
@@ -34,6 +39,7 @@ public class EntryLogView extends ScrollView {
      * @param vMargin       The base vertical margin. Passed by the activity.
      */
 
+    @SuppressLint("ResourceType")
     public EntryLogView(Context context, List<Entry> entries, int vMargin) {
         super(context);
 
@@ -44,6 +50,12 @@ public class EntryLogView extends ScrollView {
         LinearLayout container = findViewById(R.id.entry_container);
         container.setId(0); // set its ID to 0. This lets us refer to it later
 
+        entries.sort(new Comparator<Entry>() {
+            @Override
+            public int compare(Entry t1, Entry t2) {
+                return t1.getId() - t2.getId();
+            }
+        });
 
         for (int i = 0; i < entries.size(); i++) {
             Entry entry = entries.get(i);    // The Entry
@@ -59,7 +71,9 @@ public class EntryLogView extends ScrollView {
             content.setTextAlignment(TEXT_ALIGNMENT_CENTER);
             Button deleteButton = new Button(context);
             deleteButton.setText("DELETE");
-            deleteButton.setMinimumWidth(100);
+            deleteButton.setMinimumWidth(70);
+            //ConstraintLayout buttons = new ConstraintLayout(context);
+
             deleteButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -68,17 +82,47 @@ public class EntryLogView extends ScrollView {
                     invalidate();
                 }
             });
-            //Button editButton = new Button(context);
-            //editButton.setText("EDIT");
-            //editButton.setMinimumWidth(100);
 
+            Button editButton = new Button(context);
+            editButton.setText("EDIT");
+            editButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Class destinationActivity = MainActivity.class;
+                    Intent editIntent = new Intent(context, destinationActivity);
+                    editIntent.putExtra("rating", entry.getRating());
+                    editIntent.putExtra("text", entry.getContent());
+                    editIntent.putExtra("id", entry.getId());
+                    context.startActivity(editIntent);
+                }
+            });
+
+            //ConstraintSet constraints = new ConstraintSet();
+            //deleteButton.setId(i);
+            //editButton.setId(i+1);
+            //buttons.setId(View.generateViewId());
 
             entryLayout.addView(rating);
             entryLayout.addView(content);
             entryLayout.addView(deleteButton);
-           // entryLayout.addView(editButton);
-
+            entryLayout.addView(editButton);
+            //entryLayout.addView(buttons);
             container.addView(entryLayout);
+
+            //constraints.connect(deleteButton.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
+            //constraints.connect(deleteButton.getId(), ConstraintSet.RIGHT, editButton.getId(), ConstraintSet.LEFT, 0);
+            //constraints.connect(editButton.getId(), ConstraintSet.LEFT, deleteButton.getId(), ConstraintSet.RIGHT, 0);
+            //constraints.connect(deleteButton.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
+
+            //constraints.connect(deleteButton.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
+            //constraints.connect(deleteButton.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+            //constraints.connect(editButton.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
+            //constraints.connect(editButton.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+
+            //constraints.addToHorizontalChain(deleteButton.getId(), ConstraintSet.PARENT_ID, editButton.getId());
+            //constraints.addToHorizontalChain(editButton.getId(), deleteButton.getId(), ConstraintSet.PARENT_ID);
+            //constraints.applyTo(buttons);
+
 
 
         }
