@@ -18,6 +18,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import com.anychart.core.annotations.Line;
+import com.anychart.scales.Linear;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -36,27 +39,26 @@ public class EntryLogView extends ScrollView {
      *
      * @param context       The context passed from our active activity.
      * @param entries        A list of entries to put in the view.
-     * @param vMargin       The base vertical margin. Passed by the activity.
      */
 
-    @SuppressLint("ResourceType")
-    public EntryLogView(Context context, List<Entry> entries, int vMargin) {
+    public EntryLogView(Context context, List<Entry> entries) {
+
         super(context);
 
-       //LinearLayout container = findViewById(R.id.entry_container); // create the parent container for the images
-        //addView(container);
         // add it to Part2View
-        this.addView(LayoutInflater.from(context).inflate(R.layout.activity_entry_log, null));
-        LinearLayout container = findViewById(R.id.entry_container);
-        container.setId(0); // set its ID to 0. This lets us refer to it later
-
+        LinearLayout scrollView_container = new LinearLayout(context);
+        scrollView_container.setOrientation(LinearLayout.VERTICAL);
+  
+        // To ensure that entries are in the order they were created
+        // even after editing
         entries.sort(new Comparator<Entry>() {
             @Override
             public int compare(Entry t1, Entry t2) {
                 return t1.getId() - t2.getId();
             }
         });
-
+        
+        // Add each entry to the view
         for (int i = 0; i < entries.size(); i++) {
             Entry entry = entries.get(i);    // The Entry
             LinearLayout entryLayout = new LinearLayout(context);
@@ -72,13 +74,12 @@ public class EntryLogView extends ScrollView {
             Button deleteButton = new Button(context);
             deleteButton.setText("DELETE");
             deleteButton.setMinimumWidth(70);
-            //ConstraintLayout buttons = new ConstraintLayout(context);
 
             deleteButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     JsonUtils.delete(entry.getId(), "TestFile.json", context);
-                    container.removeView(entryLayout);
+                    scrollView_container.removeView(entryLayout);
                     invalidate();
                 }
             });
@@ -97,38 +98,20 @@ public class EntryLogView extends ScrollView {
                 }
             });
 
-            //ConstraintSet constraints = new ConstraintSet();
-            //deleteButton.setId(i);
-            //editButton.setId(i+1);
-            //buttons.setId(View.generateViewId());
-
+            // add all of the entry components to the entry layout
             entryLayout.addView(rating);
             entryLayout.addView(content);
             entryLayout.addView(deleteButton);
             entryLayout.addView(editButton);
-            //entryLayout.addView(buttons);
-            container.addView(entryLayout);
 
-            //constraints.connect(deleteButton.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
-            //constraints.connect(deleteButton.getId(), ConstraintSet.RIGHT, editButton.getId(), ConstraintSet.LEFT, 0);
-            //constraints.connect(editButton.getId(), ConstraintSet.LEFT, deleteButton.getId(), ConstraintSet.RIGHT, 0);
-            //constraints.connect(deleteButton.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
-
-            //constraints.connect(deleteButton.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
-            //constraints.connect(deleteButton.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
-            //constraints.connect(editButton.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
-            //constraints.connect(editButton.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
-
-            //constraints.addToHorizontalChain(deleteButton.getId(), ConstraintSet.PARENT_ID, editButton.getId());
-            //constraints.addToHorizontalChain(editButton.getId(), deleteButton.getId(), ConstraintSet.PARENT_ID);
-            //constraints.applyTo(buttons);
-
-
-
+            // add the entry to the outer linear layour
+            scrollView_container.addView(entryLayout);
         }
+      // add the linear layout containing all entrie view objects to a scrollview (this)
+        addView(scrollView_container);
     }
 
     public EntryLogView(Context context) {
-        this(context, Collections.emptyList(), 0);
+        this(context, Collections.emptyList());
     }
 }

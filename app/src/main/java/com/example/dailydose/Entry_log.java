@@ -1,8 +1,12 @@
 package com.example.dailydose;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +17,6 @@ import java.util.List;
 
 public class Entry_log extends AppCompatActivity {
 
-    private TextView mTextView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -29,37 +32,40 @@ public class Entry_log extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
         //noinspection SimplifiableIfStatement
+        // entry log option
         if (id == R.id.action_settings) {
-			List<Entry> entries = new ArrayList<>();
-			entries.add(new Entry("went to the store", 5.5, 1, new ArrayList<>()));
-			entries.add(new Entry("Swimming", 9.0, 2, new ArrayList<>()));
-			entries.add(new Entry("Had fun playing video games. Now I am eating a burger and some fries.", 9.0, 3, new ArrayList<>()));
-			entries.add(new Entry("went to the store", 5.5, 4, new ArrayList<>()));
-			entries.add(new Entry("Swimming", 9.0, 5, new ArrayList<>()));
-			entries.add(new Entry("Had fun playing video games. Now I am eating a burger and some fries.", 9.0, 6, new ArrayList<>()));
-			entries.add(new Entry("went to the store", 5.5, 7, new ArrayList<>()));
-			entries.add(new Entry("Swimming", 9.0, 8, new ArrayList<>()));
-			entries.add(new Entry("Had fun playing video games. Now I am eating a burger and some fries.", 9.0, 9, new ArrayList<>()));
-			entries.add(new Entry("went to the store", 5.5, 10, new ArrayList<>()));
-			entries.add(new Entry("Swimming", 9.0, 11, new ArrayList<>()));
-			entries.add(new Entry("Had fun playing video games. Now I am eating a burger and some fries.", 9.0, 12, new ArrayList<>()));
-			JsonUtils.writeEntries(entries, "TestFile.json", this);
-			Entry edited = JsonUtils.get(1, "TestFile.json", this);
-			edited.setRating(11.0);
-			JsonUtils.writeEntry(edited, "TestFile.json", this);
             List<Entry> debug = JsonUtils.getEntries("TestFile.json", this);
-            setContentView(new EntryLogView(this, debug, 3));
-            Toolbar toolbar = findViewById(R.id.header);
-            setSupportActionBar(toolbar);
+
+            if (debug == null) {
+                debug = new ArrayList<>();
+                List<Entry> entries = new ArrayList<>();
+                entries.add(new Entry("went to the store", 5, 1000, new ArrayList<>()));
+                JsonUtils.writeEntries(entries, "TestFile.json", this);
+                JsonUtils.delete(1000, "TestFile.json", this);
+
+            }
+
+            Context context = Entry_log.this;
+            Class destinationActivity = Entry_log.class;
+            Intent logIntent = new Intent(context, destinationActivity);
+            startActivity(logIntent);
             return true;
+            // entry creation option
         } else if (id == R.id.action_main) {
-            setContentView(R.layout.activity_main);
-            Toolbar toolbar = findViewById(R.id.header);
-            setSupportActionBar(toolbar);
+            Context context = Entry_log.this;
+            Class destinationActivity = MainActivity.class;
+            Intent mainIntent = new Intent(context, destinationActivity);
+            startActivity(mainIntent);
+            return true;
+        } else if (id == R.id.action_avg){
+            Context context = Entry_log.this;
+            Class destinationActivity = AvgBarGraph.class;
+            Intent mainIntent = new Intent(context, destinationActivity);
+            startActivity(mainIntent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -67,6 +73,14 @@ public class Entry_log extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_entry_log);
+
+        setSupportActionBar(findViewById(R.id.header_log));
+
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        LinearLayout container = findViewById(R.id.scrollView_container);
+        container.addView(new EntryLogView(this, JsonUtils.getEntries("TestFile.json", getApplicationContext())));
+
     }
 }

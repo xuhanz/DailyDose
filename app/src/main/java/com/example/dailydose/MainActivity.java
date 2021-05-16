@@ -122,11 +122,14 @@ public class MainActivity extends AppCompatActivity {
 
 			}
 
-			setContentView(new EntryLogView(this, debug, 3));
+			Context context = MainActivity.this;
+			Class destinationActivity = Entry_log.class;
+			Intent logIntent = new Intent(context, destinationActivity);
+			startActivity(logIntent);
 
-			Toolbar toolbar = findViewById(R.id.header);
-			setSupportActionBar(toolbar);
-			getSupportActionBar().setDisplayShowTitleEnabled(false);
+			//Toolbar toolbar = findViewById(R.id.header);
+			//setSupportActionBar(toolbar);
+			//getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 			return true;
 			// entry creation option
