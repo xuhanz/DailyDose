@@ -175,6 +175,15 @@ public class JsonUtils {
     public static boolean writeEntry(Entry entry, String fileName, Context context) {
         boolean result = delete(entry.getId(), fileName, context);
         List<Entry> entries = getEntries(fileName, context);
+        // If the database file doesn't exist, create it
+        if (entries == null) {
+            entries = new ArrayList<>();
+            List<Entry> fakeData = new ArrayList<>();
+            fakeData.add(new Entry("went to the store", 5, 1000, new ArrayList<>()));
+            JsonUtils.writeEntries(fakeData, "TestFile.json", context);
+            JsonUtils.delete(1000, "TestFile.json", context);
+
+        }
         entries.add(entry);
         writeEntries(entries, fileName, context);
         return result;
