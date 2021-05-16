@@ -44,11 +44,7 @@ public class AvgBarGraph extends AppCompatActivity {
         List<Entry> result = JsonUtils.getEntries("TestFile.json", getApplicationContext());
 
         if (result == null) {
-            result = new ArrayList<>();
-            List<Entry> entries = new ArrayList<>();
-            entries.add(new Entry("went to the store", 5, 1000, new ArrayList<>()));
-            JsonUtils.writeEntries(entries, "TestFile.json", this);
-            JsonUtils.delete(1000, "TestFile.json", this);
+            result = JsonUtils.createDataFile(this, "TestFile.json");
         }
 
         Map<String, Double> avgRating = (Map<String, Double>) TagAnalysis.getAllTagAvg(result);

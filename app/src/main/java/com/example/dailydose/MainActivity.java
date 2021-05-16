@@ -114,12 +114,7 @@ public class MainActivity extends AppCompatActivity {
 			List<Entry> debug = JsonUtils.getEntries("TestFile.json", this);
 
 			if (debug == null) {
-				debug = new ArrayList<>();
-				List<Entry> entries = new ArrayList<>();
-				entries.add(new Entry("went to the store", 5, 1000, new ArrayList<>()));
-				JsonUtils.writeEntries(entries, "TestFile.json", this);
-				JsonUtils.delete(1000, "TestFile.json", this);
-
+				debug = JsonUtils.createDataFile(this, "TestFile.json");
 			}
 
 			Context context = MainActivity.this;
