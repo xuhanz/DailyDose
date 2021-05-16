@@ -1,6 +1,7 @@
 package com.example.dailydose;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import com.anychart.core.annotations.Line;
+import com.anychart.scales.Linear;
+
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class EntryLogView extends ScrollView {
@@ -31,19 +36,20 @@ public class EntryLogView extends ScrollView {
      *
      * @param context       The context passed from our active activity.
      * @param entries        A list of entries to put in the view.
-     * @param vMargin       The base vertical margin. Passed by the activity.
      */
 
-    public EntryLogView(Context context, List<Entry> entries, int vMargin) {
+    public EntryLogView(Context context, List<Entry> entries) {
         super(context);
 
-       //LinearLayout container = findViewById(R.id.entry_container); // create the parent container for the images
-        //addView(container);
         // add it to Part2View
-        this.addView(LayoutInflater.from(context).inflate(R.layout.activity_entry_log, null));
-        LinearLayout container = findViewById(R.id.entry_container);
-        container.setId(0); // set its ID to 0. This lets us refer to it later
-
+        LinearLayout scrollView_container = new LinearLayout(context);
+        scrollView_container.setOrientation(LinearLayout.VERTICAL);
+        entries.sort(new Comparator<Entry>() {
+            @Override
+            public int compare(Entry t1, Entry t2) {
+                return t1.getId() - t2.getId();
+            }
+        });
 
         for (int i = 0; i < entries.size(); i++) {
             Entry entry = entries.get(i);    // The Entry
@@ -64,27 +70,36 @@ public class EntryLogView extends ScrollView {
                 @Override
                 public void onClick(View view) {
                     JsonUtils.delete(entry.getId(), "TestFile.json", context);
-                    container.removeView(entryLayout);
+                    scrollView_container.removeView(entryLayout);
                     invalidate();
                 }
             });
-            //Button editButton = new Button(context);
-            //editButton.setText("EDIT");
-            //editButton.setMinimumWidth(100);
 
+            Button editButton = new Button(context);
+            editButton.setText("EDIT");
+            editButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Class destinationActivity = MainActivity.class;
+                    Intent editIntent = new Intent(context, destinationActivity);
+                    editIntent.putExtra("rating", entry.getRating());
+                    editIntent.putExtra("text", entry.getContent());
+                    editIntent.putExtra("id", entry.getId());
+                    context.startActivity(editIntent);
+                }
+            });
 
             entryLayout.addView(rating);
             entryLayout.addView(content);
             entryLayout.addView(deleteButton);
-           // entryLayout.addView(editButton);
+            entryLayout.addView(editButton);
 
-            container.addView(entryLayout);
-
-
+            scrollView_container.addView(entryLayout);
         }
+        addView(scrollView_container);
     }
 
     public EntryLogView(Context context) {
-        this(context, Collections.emptyList(), 0);
+        this(context, Collections.emptyList());
     }
 }

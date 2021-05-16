@@ -113,11 +113,15 @@ public class AvgBarGraph extends AppCompatActivity {
 
             }
 
-            setContentView(new EntryLogView(this, debug, 3));
+            //setContentView(new EntryLogView(this, debug, 3));
+            Context context = AvgBarGraph.this;
+            Class destinationActivity = Entry_log.class;
+            Intent logIntent = new Intent(context, destinationActivity);
+            startActivity(logIntent);
 
-            Toolbar toolbar = findViewById(R.id.header);
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            //Toolbar toolbar = findViewById(R.id.header);
+            //setSupportActionBar(toolbar);
+            //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
             return true;
             // entry creation option
@@ -134,7 +138,6 @@ public class AvgBarGraph extends AppCompatActivity {
             startActivity(mainIntent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

@@ -12,14 +12,15 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/header"
+            android:id="@+id/header_log"
             android:layout_width="match_parent"
             android:layout_height="78dp"
-            android:layout_marginBottom="653dp"
 
             android:background="#FFE897"
-            app:layout_constraintBottom_toBottomOf="parent"
+
+
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/Theme.DailyDose.PopupOverlay" />
@@ -36,22 +37,21 @@
             android:textSize="42sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/header"
-            app:layout_constraintStart_toStartOf="@+id/header"
-            app:layout_constraintTop_toTopOf="@+id/header"
+            app:layout_constraintEnd_toEndOf="@+id/header_log"
+            app:layout_constraintStart_toStartOf="@+id/header_log"
+            app:layout_constraintTop_toTopOf="@+id/header_log"
             app:layout_constraintVertical_bias="0.135" />
 
         <LinearLayout
-            android:id="@+id/entry_container"
+            android:id="@+id/scrollView_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/header">
+            app:layout_constraintTop_toBottomOf="@id/header_log" />
 
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
