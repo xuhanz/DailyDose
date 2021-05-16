@@ -2,6 +2,7 @@ package com.example.dailydose;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Dictionary;
 import java.util.Set;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ public class TagAnalysisTests {
 		List<String> tags = new ArrayList<>();
 		List<Entry> entries = new ArrayList<>();
 		tags.add("Gaming");
-		Entry entry = new Entry("Video Games", 10, 1, tags);
+		Entry entry = new Entry("Video Games", 10, 1, tags, "");
 		entries.add(entry);
 
 		assertEquals(10, TagAnalysis.getAvgRating(entries), 0.0);
@@ -31,9 +32,9 @@ public class TagAnalysisTests {
 		List<String> tags2 = new ArrayList<>();
 		tags.add("Store");
 		tags.add("Shopping");
-		Entry entry = new Entry("Went to the store today", 9.5, 1, tags);
+		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		tags2.add("Shopping");
-		Entry entry2 = new Entry("Shopped online", 7.5, 2, tags2);
+		Entry entry2 = new Entry("Shopped online", 7.5, 2, tags2, "");
 		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 		entries.add(entry2);
@@ -57,7 +58,7 @@ public class TagAnalysisTests {
 	public void SingleTagFilterTest() {
 		List<String> tags = new ArrayList<>();
 		tags.add("Gaming");
-		Entry entry = new Entry("Video Games", 10, 1, tags);
+		Entry entry = new Entry("Video Games", 10, 1, tags, "");
 		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 
@@ -73,9 +74,9 @@ public class TagAnalysisTests {
 		List<String> tags2 = new ArrayList<>();
 		tags.add("Store");
 		tags.add("Shopping");
-		Entry entry = new Entry("Went to the store today", 9.5, 1, tags);
+		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		tags2.add("Shopping");
-		Entry entry2 = new Entry("Shopped online", 7.5, 2, tags2);
+		Entry entry2 = new Entry("Shopped online", 7.5, 2, tags2, "");
 		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 		entries.add(entry2);
@@ -106,7 +107,7 @@ public class TagAnalysisTests {
 	public void NoneWithTagFilterTest() {
 		List<String> tags = new ArrayList<>();
 		tags.add("Gaming");
-		Entry entry = new Entry("Video Games", 10, 1, tags);
+		Entry entry = new Entry("Video Games", 10, 1, tags, "");
 		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 
@@ -117,7 +118,7 @@ public class TagAnalysisTests {
 	public void GetSingleTagTest() {
 		List<String> tags = new ArrayList<>();
 		tags.add("Gaming");
-		Entry entry = new Entry("Video Games", 10, 1, tags);
+		Entry entry = new Entry("Video Games", 10, 1, tags, "");
 		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 
@@ -134,12 +135,12 @@ public class TagAnalysisTests {
 		List<String> tags3 = new ArrayList<>();
 		tags.add("Store");
 		tags.add("Shopping");
-		Entry entry = new Entry("Went to the store today", 9.5, 1, tags);
+		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		tags2.add("Shopping");
-		Entry entry2 = new Entry("Shopped online", 7.5, 2, tags2);
+		Entry entry2 = new Entry("Shopped online", 7.5, 2, tags2, "");
 		List<Entry> entries = new ArrayList<>();
 		tags3.add("Gaming");
-		Entry entry3 = new Entry("Video Games", 10, 3, tags3);
+		Entry entry3 = new Entry("Video Games", 10, 3, tags3, "");
 		entries.add(entry);
 		entries.add(entry2);
 		entries.add(entry3);
@@ -168,7 +169,7 @@ public class TagAnalysisTests {
 	public void GetSingleTagAvgTest() {
 		List<String> tags = new ArrayList<>();
 		tags.add("Gaming");
-		Entry entry = new Entry("Video Games", 10, 1, tags);
+		Entry entry = new Entry("Video Games", 10, 1, tags, "");
 		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 
@@ -185,12 +186,12 @@ public class TagAnalysisTests {
 		List<String> tags3 = new ArrayList<>();
 		tags.add("Store");
 		tags.add("Shopping");
-		Entry entry = new Entry("Went to the store today", 9.5, 1, tags);
+		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		tags2.add("Shopping");
-		Entry entry2 = new Entry("Shopped online", 7.5, 2, tags2);
+		Entry entry2 = new Entry("Shopped online", 7.5, 2, tags2, "");
 		List<Entry> entries = new ArrayList<>();
 		tags3.add("Gaming");
-		Entry entry3 = new Entry("Video Games", 10, 3, tags3);
+		Entry entry3 = new Entry("Video Games", 10, 3, tags3, "");
 		entries.add(entry);
 		entries.add(entry2);
 		entries.add(entry3);
