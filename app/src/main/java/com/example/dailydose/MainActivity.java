@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.text.Editable;
+import android.text.format.DateFormat;
 import android.view.View;
 
 import android.view.Menu;
@@ -15,12 +16,16 @@ import android.view.MenuItem;
 import android.widget.*;
 import android.view.View.OnClickListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
 	private int id = 0;
+	private String date;
 	// Get reference to the continue button from xml
 	// Field that will store our buttons
 	//private final Button continue_button = (Button) findViewById(R.id.continue_button);
@@ -43,10 +48,13 @@ public class MainActivity extends AppCompatActivity {
 			EditText entry_text = findViewById(R.id.entry_text);
 			entry_text.setText(getIntent().getStringExtra("text"));
 			id = getIntent().getIntExtra("id", 0);
+			date = getIntent().getStringExtra("date");
 			// Else, denote with id 0 (which is impossible) to indicate this is new and
 			// needs an id assigned to it
 		} else {
 			id = 0;
+			SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+			date = df.format(new Date());
 		}
 
 		// Continue button
@@ -81,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 				SeekBar slider = findViewById(R.id.seekBar);
 				int rating = slider.getProgress();
 				tagIntent.putExtra("entry_rating", rating);
-
+				tagIntent.putExtra("entry_date", date);
 				startActivity(tagIntent);
 			}
 		});

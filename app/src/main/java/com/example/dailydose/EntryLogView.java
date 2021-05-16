@@ -21,6 +21,9 @@ import androidx.constraintlayout.widget.ConstraintSet;
 //import com.anychart.core.annotations.Line;
 //import com.anychart.scales.Linear;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -62,11 +65,22 @@ public class EntryLogView extends ScrollView {
             Entry entry = entries.get(i);    // The Entry
             LinearLayout entryLayout = new LinearLayout(context);
             entryLayout.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout dateRating = new LinearLayout(context);
             // The rating
             TextView rating = new TextView(context);
             rating.setTextColor(Color.parseColor("purple"));
             rating.setTextSize(20);
             rating.setText("" + entry.getRating());
+            // The date
+            TextView date = new TextView(context);
+            date.setTextColor(Color.parseColor("purple"));
+            date.setTextSize(20);
+            date.setText("          " + entry.getDate());
+            // Putting them together
+            dateRating.addView(rating);
+            dateRating.addView(date);
+            dateRating.setGravity(Gravity.LEFT);
+
             // The entry's text
             TextView content = new TextView(context);
             content.setText(entry.getContent());
@@ -100,12 +114,14 @@ public class EntryLogView extends ScrollView {
                     editIntent.putExtra("rating", entry.getRating());
                     editIntent.putExtra("text", entry.getContent());
                     editIntent.putExtra("id", entry.getId());
+                    editIntent.putExtra("date", entry.getDate());
                     context.startActivity(editIntent);
                 }
             });
 
             // add all of the entry components to the entry layout
-            entryLayout.addView(rating);
+            //entryLayout.addView(rating);
+            entryLayout.addView(dateRating);
             entryLayout.addView(content);
             entryLayout.addView(deleteButton);
             entryLayout.addView(editButton);
