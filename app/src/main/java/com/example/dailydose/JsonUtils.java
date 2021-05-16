@@ -117,6 +117,10 @@ public class JsonUtils {
     public static int getHighestID(String fileName, Context context) {
         int result = 0;
         List<Entry> entries = getEntries(fileName, context);
+        // If the database file doesn't exist, create it
+        if (entries == null) {
+            entries = createDataFile(context, fileName);
+        }
         for (Entry e: entries) {
             result = Math.max(e.getId(), result);
         }
@@ -189,6 +193,21 @@ public class JsonUtils {
         Long l = (long) entryObject.get("id");
         return new Entry((String) entryObject.get("content"), (double) entryObject.get("rating"),
                 l.intValue() , (List<String>) entryObject.get("tags"));
+    }
+
+    /**
+     * Helper method to instantiate the database file "fileName" if
+     * it is being used for the first time
+     * @param context
+     * @param fileName - file to create
+     * @return empty list of entries
+     */
+    public static List<Entry> createDataFile (Context context, String fileName) {
+        List<Entry> fakeData = new ArrayList<>();
+        fakeData.add(new Entry("went to the store", 5, 1000, new ArrayList<>()));
+        JsonUtils.writeEntries(fakeData, fileName, context);
+        JsonUtils.delete(1000, fileName, context);
+        return new ArrayList<>();
     }
 
 }

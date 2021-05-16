@@ -125,12 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
 			// if the database file has not been created, create it
 			if (debug == null) {
-				debug = new ArrayList<>();
-				List<Entry> entries = new ArrayList<>();
-				entries.add(new Entry("went to the store", 5, 1000, new ArrayList<>()));
-				JsonUtils.writeEntries(entries, "TestFile.json", this);
-				JsonUtils.delete(1000, "TestFile.json", this);
-
+				debug = JsonUtils.createDataFile(this, "TestFile.json");
 			}
 
 			// switch to the entry log screen

@@ -50,11 +50,7 @@ public class AvgBarGraph extends AppCompatActivity {
 
         // If the database file hasnt been created yet, create it, and make the entry list empty
         if (result == null) {
-            result = new ArrayList<>();
-            List<Entry> entries = new ArrayList<>();
-            entries.add(new Entry("went to the store", 5, 1000, new ArrayList<>()));
-            JsonUtils.writeEntries(entries, "TestFile.json", this);
-            JsonUtils.delete(1000, "TestFile.json", this);
+            result = JsonUtils.createDataFile(this, "TestFile.json");
         }
 
         // Get the avg rating of each tag
