@@ -104,8 +104,6 @@ public class EntryLogView extends ScrollView {
             entryLayout.addView(deleteButton);
             entryLayout.addView(editButton);
 
-            container.addView(entryLayout);
-
             // add the entry to the outer linear layour
             scrollView_container.addView(entryLayout);
         }
