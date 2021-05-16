@@ -73,7 +73,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/add_tag_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="349dp"
@@ -82,7 +82,6 @@
         android:layout_marginBottom="184dp"
         android:clickable="true"
         android:contentDescription="@string/add_tag_button"
-        android:visibility="invisible"
         app:backgroundTint="@color/yellow_02"
         app:layout_constraintBottom_toTopOf="@+id/submit_button"
         app:layout_constraintEnd_toEndOf="parent"
