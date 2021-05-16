@@ -31,18 +31,24 @@ public class AvgBarGraph extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Set the view to be the avg_rating_analysis xml file
         setContentView(R.layout.avg_rating_analysis);
 
+        // Set the support action bar to be the one defined in the xml file,
+        // includes menu
         setSupportActionBar(findViewById(R.id.header_avg));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        //Get the anyChartView and Progress bar from the xml file
         AnyChartView anyChartView = findViewById(R.id.any_chart_avg);
         anyChartView.setProgressBar(findViewById(R.id.progress_bar));
 
         Cartesian cartesian = AnyChart.column();
 
+        // get the Entries currently in the database
         List<Entry> result = JsonUtils.getEntries("TestFile.json", getApplicationContext());
 
+        // If the database file hasnt been created yet, create it, and make the entry list empty
         if (result == null) {
             result = new ArrayList<>();
             List<Entry> entries = new ArrayList<>();
@@ -51,13 +57,18 @@ public class AvgBarGraph extends AppCompatActivity {
             JsonUtils.delete(1000, "TestFile.json", this);
         }
 
+        // Get the avg rating of each tag
         Map<String, Double> avgRating = (Map<String, Double>) TagAnalysis.getAllTagAvg(result);
 
+        // Convert the tags and their average ratings to DataEntry objects and put them in
+        // a list to be used to create the graph
         List<DataEntry> data = new ArrayList<>();
         for(Map.Entry<String,Double> e: avgRating.entrySet()) {
             data.add(new ValueDataEntry(e.getKey(), e.getValue()));
         }
 
+
+        // Set up the Graph
         Column column = cartesian.column(data);
 
         column.tooltip()
@@ -84,6 +95,7 @@ public class AvgBarGraph extends AppCompatActivity {
         anyChartView.setChart(cartesian);
     }
 
+    // Inflates options menu from menu_main xml file
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -91,6 +103,7 @@ public class AvgBarGraph extends AppCompatActivity {
         return true;
     }
 
+    // Sets up onClick listeners for each option in the menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -102,8 +115,11 @@ public class AvgBarGraph extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         // entry log option
         if (id == R.id.action_settings) {
+
+            // Get the entries in the database
             List<Entry> debug = JsonUtils.getEntries("TestFile.json", this);
 
+            // If the database  file has not been created, create it and use empty list
             if (debug == null) {
                 debug = new ArrayList<>();
                 List<Entry> entries = new ArrayList<>();
@@ -113,25 +129,24 @@ public class AvgBarGraph extends AppCompatActivity {
 
             }
 
-            //setContentView(new EntryLogView(this, debug, 3));
+            // Change to the entry log activity screen
             Context context = AvgBarGraph.this;
             Class destinationActivity = Entry_log.class;
             Intent logIntent = new Intent(context, destinationActivity);
             startActivity(logIntent);
-
-            //Toolbar toolbar = findViewById(R.id.header);
-            //setSupportActionBar(toolbar);
-            //getSupportActionBar().setDisplayShowTitleEnabled(false);
-
             return true;
+
             // entry creation option
         } else if (id == R.id.action_main) {
+            // Change to the entry creation activity screen
             Context context = AvgBarGraph.this;
             Class destinationActivity = MainActivity.class;
             Intent mainIntent = new Intent(context, destinationActivity);
             startActivity(mainIntent);
             return true;
+            //Rating analysis option
         } else if (id == R.id.action_avg){
+            // change to the rating analysis screen
             Context context = AvgBarGraph.this;
             Class destinationActivity = AvgBarGraph.class;
             Intent mainIntent = new Intent(context, destinationActivity);
