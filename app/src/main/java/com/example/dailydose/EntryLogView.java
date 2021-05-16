@@ -18,8 +18,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
-import com.anychart.core.annotations.Line;
-import com.anychart.scales.Linear;
+//import com.anychart.core.annotations.Line;
+//import com.anychart.scales.Linear;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -45,7 +45,6 @@ public class EntryLogView extends ScrollView {
 
         super(context);
 
-        // add it to Part2View
         LinearLayout scrollView_container = new LinearLayout(context);
         scrollView_container.setOrientation(LinearLayout.VERTICAL);
   
@@ -63,19 +62,24 @@ public class EntryLogView extends ScrollView {
             Entry entry = entries.get(i);    // The Entry
             LinearLayout entryLayout = new LinearLayout(context);
             entryLayout.setOrientation(LinearLayout.VERTICAL);
+            // The rating
             TextView rating = new TextView(context);
             rating.setTextColor(Color.parseColor("purple"));
             rating.setTextSize(20);
             rating.setText("" + entry.getRating());
+            // The entry's text
             TextView content = new TextView(context);
             content.setText(entry.getContent());
             content.setTextSize(20);
             content.setTextAlignment(TEXT_ALIGNMENT_CENTER);
+            // Delete Button
             Button deleteButton = new Button(context);
             deleteButton.setText("DELETE");
             deleteButton.setMinimumWidth(70);
 
             deleteButton.setOnClickListener(new OnClickListener() {
+                // Set the delete button to remove this entry from the list and delete it from
+                // The database
                 @Override
                 public void onClick(View view) {
                     JsonUtils.delete(entry.getId(), "TestFile.json", context);
@@ -83,10 +87,12 @@ public class EntryLogView extends ScrollView {
                     invalidate();
                 }
             });
-
+            // Edit Button
             Button editButton = new Button(context);
             editButton.setText("EDIT");
             editButton.setOnClickListener(new OnClickListener() {
+                // Set the edit button to send the current entry info back to the
+                // entry creation activity and switch to that view
                 @Override
                 public void onClick(View view) {
                     Class destinationActivity = MainActivity.class;
@@ -104,7 +110,7 @@ public class EntryLogView extends ScrollView {
             entryLayout.addView(deleteButton);
             entryLayout.addView(editButton);
 
-            // add the entry to the outer linear layour
+            // add the entry to the outer linear layout
             scrollView_container.addView(entryLayout);
         }
       // add the linear layout containing all entrie view objects to a scrollview (this)
@@ -114,4 +120,5 @@ public class EntryLogView extends ScrollView {
     public EntryLogView(Context context) {
         this(context, Collections.emptyList());
     }
+
 }

@@ -28,22 +28,28 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// Set the current screen to be the entry creation activity screen
 		setContentView(R.layout.activity_main);
 		Toolbar toolbar = findViewById(R.id.header);
-
+		// Set the top bar to be the toolbar with the menu inside
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+		// if this is an edit and the info should be filled in, then there will be
+		// "extras" in the intent. fill in the info
 		if(getIntent().hasExtra("rating")) {
 			SeekBar slider = findViewById(R.id.seekBar);
 			slider.setProgress((int)getIntent().getDoubleExtra("rating", 1));
 			EditText entry_text = findViewById(R.id.entry_text);
 			entry_text.setText(getIntent().getStringExtra("text"));
 			id = getIntent().getIntExtra("id", 0);
+			// Else, denote with id 0 (which is impossible) to indicate this is new and
+			// needs an id assigned to it
 		} else {
 			id = 0;
 		}
 
+		// Continue button
 		Button continue_button = (Button) findViewById(R.id.continue_button);
 		// Set an onClickListener to allow the continue button to trigger the tagging interface
 		// activity
@@ -80,8 +86,11 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
+		// Discard Button
 		Button discard_btn = (Button) findViewById(R.id.discard_button);
 		discard_btn.setOnClickListener(new OnClickListener() {
+			// Set the discard button to clear the text box and put the rating slider back to its
+			// default position of 1
 			@Override
 			public void onClick(View view) {
 				SeekBar slider = findViewById(R.id.seekBar);
@@ -111,8 +120,10 @@ public class MainActivity extends AppCompatActivity {
 		//noinspection SimplifiableIfStatement
 		// entry log option
 		if (id == R.id.action_settings) {
+			// Get the entries currently in the database
 			List<Entry> debug = JsonUtils.getEntries("TestFile.json", this);
 
+			// if the database file has not been created, create it
 			if (debug == null) {
 				debug = new ArrayList<>();
 				List<Entry> entries = new ArrayList<>();
@@ -122,24 +133,26 @@ public class MainActivity extends AppCompatActivity {
 
 			}
 
+			// switch to the entry log screen
 			Context context = MainActivity.this;
 			Class destinationActivity = Entry_log.class;
 			Intent logIntent = new Intent(context, destinationActivity);
 			startActivity(logIntent);
 
-			//Toolbar toolbar = findViewById(R.id.header);
-			//setSupportActionBar(toolbar);
-			//getSupportActionBar().setDisplayShowTitleEnabled(false);
-
 			return true;
 			// entry creation option
 		} else if (id == R.id.action_main) {
+			// Switch to the entry creation screen
 			Context context = MainActivity.this;
 			Class destinationActivity = MainActivity.class;
 			Intent mainIntent = new Intent(context, destinationActivity);
 			startActivity(mainIntent);
 			return true;
+
+			// Tag analysis option
 		} else if (id == R.id.action_avg){
+
+			// Switch to the Tag analysis graph screen
 			Context context = MainActivity.this;
 			Class destinationActivity = AvgBarGraph.class;
 			Intent mainIntent = new Intent(context, destinationActivity);

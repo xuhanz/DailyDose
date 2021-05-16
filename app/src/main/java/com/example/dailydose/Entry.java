@@ -5,10 +5,10 @@ import java.util.*;
 // The Daily Dose app. An Entry is made up of a string representing its
 // "content", a double "rating", an int "id" and a List of String "tags"
 public class Entry {
-    public String content;
-    public double rating;
-    public int id;
-    public List<String> tags;
+    private String content;
+    private double rating;
+    private int id;
+    private List<String> tags;
 
     /**
      * Constructor
