@@ -21,6 +21,7 @@ import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
@@ -117,14 +118,9 @@ public class AvgBarGraph extends AppCompatActivity {
 
             // If the database  file has not been created, create it and use empty list
             if (debug == null) {
-                debug = new ArrayList<>();
-                List<Entry> entries = new ArrayList<>();
-                entries.add(new Entry("went to the store", 5, 1000, new ArrayList<>()));
-                JsonUtils.writeEntries(entries, "TestFile.json", this);
-                JsonUtils.delete(1000, "TestFile.json", this);
+                debug = JsonUtils.createDataFile(this, "TestFile.json");
 
             }
-
             // Change to the entry log activity screen
             Context context = AvgBarGraph.this;
             Class destinationActivity = Entry_log.class;

@@ -9,6 +9,7 @@ public class Entry {
     private double rating;
     private int id;
     private List<String> tags;
+    private final String date;
 
     /**
      * Constructor
@@ -16,12 +17,14 @@ public class Entry {
      * @param rating - The "mood" rating
      * @param id - The unique id number
      * @param tags - The list of tags on this Entry
+     * @param date - The date that entry was created
      * **/
-    public Entry(String content, double rating, int id, List<String> tags) {
+    public Entry(String content, double rating, int id, List<String> tags, String date) {
         this.content = content;
         this.rating = rating;
         this.id = id;
         this.tags = tags;
+        this.date = date;
     }
 
     /**
@@ -88,6 +91,14 @@ public class Entry {
         return tags;
     }
 
+    /**
+     * Getter for date field
+     * @return date field
+     */
+    public String getDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
         return "Entry{" +
@@ -95,6 +106,7 @@ public class Entry {
                 ", rating=" + rating +
                 ", id=" + id +
                 ", tags=" + tags +
+                ", date=" + date +
                 '}';
     }
 
@@ -106,11 +118,12 @@ public class Entry {
         return Double.compare(entry.rating, rating) == 0 &&
                 id == entry.id &&
                 Objects.equals(content, entry.content) &&
-                Objects.equals(tags, entry.tags);
+                Objects.equals(tags, entry.tags) &&
+                Objects.equals(date, entry.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(content, rating, id, tags);
+        return Objects.hash(content, rating, id, tags, date);
     }
 }

@@ -43,6 +43,7 @@ public class JsonUtils {
             entryDetails.put("content", e.getContent());
             entryDetails.put("tags", e.getTags());
             entryDetails.put("rating", e.getRating());
+            entryDetails.put("date", e.getDate());
             entryArr.add(entryDetails);
         }
 
@@ -192,7 +193,7 @@ public class JsonUtils {
     private static Entry parseEntry(JSONObject entryObject) {
         Long l = (long) entryObject.get("id");
         return new Entry((String) entryObject.get("content"), (double) entryObject.get("rating"),
-                l.intValue() , (List<String>) entryObject.get("tags"));
+                l.intValue() , (List<String>) entryObject.get("tags"), (String)entryObject.get("date"));
     }
 
     /**
@@ -204,7 +205,7 @@ public class JsonUtils {
      */
     public static List<Entry> createDataFile (Context context, String fileName) {
         List<Entry> fakeData = new ArrayList<>();
-        fakeData.add(new Entry("went to the store", 5, 1000, new ArrayList<>()));
+        fakeData.add(new Entry("went to the store", 5, 1000, new ArrayList<>(), new Date().toString()));
         JsonUtils.writeEntries(fakeData, fileName, context);
         JsonUtils.delete(1000, fileName, context);
         return new ArrayList<>();
