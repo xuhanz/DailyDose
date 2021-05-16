@@ -108,6 +108,26 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
+		// Progress Bar
+		SeekBar ratingBar = findViewById(R.id.seekBar);
+		ratingBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+				TextView progress = findViewById(R.id.textView3);
+				progress.setText("" + i);
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				return;
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				return;
+			}
+		});
+
 	}
 
 	@Override
