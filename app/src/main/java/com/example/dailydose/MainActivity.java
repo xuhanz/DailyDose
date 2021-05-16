@@ -20,6 +20,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+	private int id = 0;
 	// Get reference to the continue button from xml
 	// Field that will store our buttons
 	//private final Button continue_button = (Button) findViewById(R.id.continue_button);
@@ -32,6 +33,16 @@ public class MainActivity extends AppCompatActivity {
 
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+		if(getIntent().hasExtra("rating")) {
+			SeekBar slider = findViewById(R.id.seekBar);
+			slider.setProgress((int)getIntent().getDoubleExtra("rating", 1));
+			EditText entry_text = findViewById(R.id.entry_text);
+			entry_text.setText(getIntent().getStringExtra("text"));
+			id = getIntent().getIntExtra("id", 0);
+		} else {
+			id = 0;
+		}
 
 		Button continue_button = (Button) findViewById(R.id.continue_button);
 		// Set an onClickListener to allow the continue button to trigger the tagging interface
@@ -59,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 				EditText entry = findViewById(R.id.entry_text);
 				Editable entry_text = entry.getText();
 				tagIntent.putExtra("entry_text", entry_text.toString());
+				tagIntent.putExtra("id", id);
 
 				SeekBar slider = findViewById(R.id.seekBar);
 				int rating = slider.getProgress();
