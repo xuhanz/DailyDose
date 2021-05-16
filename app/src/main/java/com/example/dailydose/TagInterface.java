@@ -29,6 +29,8 @@ public class TagInterface extends AppCompatActivity {
 
         String entry_text = getIntent().getStringExtra("entry_text");
         int entry_rating = getIntent().getIntExtra("entry_rating", 0);
+        int entry_id = getIntent().getIntExtra("id", 0);
+
 
         Button submit_btn = (Button) findViewById(R.id.submit_button);
         submit_btn.setOnClickListener(new View.OnClickListener() {
@@ -43,8 +45,13 @@ public class TagInterface extends AppCompatActivity {
                         tagList.add((String) chip.getText());
                     }
                 }
+                int id;
+                if (entry_id == 0) { // creating a new entry
+                    id = JsonUtils.getHighestID("TestFile.json", getApplicationContext()) + 1;
+                } else { // editing existing entries
+                    id = entry_id;
+                }
 
-                int id = JsonUtils.getEntries("TestFile.json", getApplicationContext()).size() + 1;
                 Entry new_entry = new Entry(entry_text, entry_rating, id, tagList);
                 JsonUtils.writeEntry(new_entry, "TestFile.json", getApplicationContext());
 
