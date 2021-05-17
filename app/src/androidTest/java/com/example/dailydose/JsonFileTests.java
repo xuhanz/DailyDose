@@ -189,5 +189,27 @@ public class JsonFileTests {
         assertTrue(result.contains(new Entry("Went to the store today", 10, 1, tags, "")));
     }
 
+    @Test
+    public void getHighestIdTest() {
+        List<String> tags = new ArrayList<>();
+        tags.add("fun");
+        Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
+        Entry entry2 = new Entry("Video Games", 8, 2, tags, "");
+        Entry entry3 = new Entry("Going Swimming", 5, 3, tags, "");
+        List<Entry> entries = new ArrayList<>();
+        entries.add(entry);
+        entries.add(entry2);
+        JsonUtils.writeEntries(entries, testFile, context);
+        JsonUtils.writeEntry(entry3, testFile, context);
+        int result = JsonUtils.getHighestID(testFile, context);
+        assertEquals(3, result);
+    }
+
+    @Test
+    public void getHighestIdTestEmpty() {
+        JsonUtils.createDataFile(context, testFile);
+        int result = JsonUtils.getHighestID(testFile, context);
+    }
+
 
 }
