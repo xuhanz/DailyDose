@@ -105,13 +105,10 @@ public class TagInterface extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String tag = String.valueOf(taskEditText.getText());
                         ChipGroup tags = findViewById(R.id.chipGroup);
-                        Chip newTag = new Chip(TagInterface.this);
+                        Chip newTag = (Chip) getLayoutInflater().inflate(R.layout.chip_layout, tags, false);
                         //newTag.setCloseIconVisible(true);
                         newTag.setText(tag);
                         newTag.setChipBackgroundColorResource(R.color.yellow_02);
-                        newTag.setCheckable(true);
-                        newTag.setCheckedIconVisible(false);
-                        newTag.setClickable(true);
                         tags.addView(newTag);
                     }
                 })
