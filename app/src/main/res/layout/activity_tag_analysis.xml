@@ -40,6 +40,51 @@
             app:layout_constraintTop_toTopOf="@+id/header_tag"
             app:layout_constraintVertical_bias="0.0" />
 
+        <LinearLayout
+            android:id="@+id/date_selection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_tag">
+
+            <Button
+                android:id="@+id/button_start_date"
+                android:backgroundTint="#FFE897"
+                android:fontFamily="cursive"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:iconTint="#BDBDBD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Start Date" />
+
+            <Button
+                android:id="@+id/button_end_date"
+                android:backgroundTint="#FFE897"
+                android:fontFamily="cursive"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:iconTint="#BDBDBD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="End Date" />
+
+            <Button
+                android:id="@+id/button_go"
+                android:backgroundTint="#FFE897"
+                android:fontFamily="cursive"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:iconTint="#BDBDBD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Go" />
+        </LinearLayout>
+
         <Spinner
             android:id="@+id/tag_spinner"
             android:layout_width="match_parent"

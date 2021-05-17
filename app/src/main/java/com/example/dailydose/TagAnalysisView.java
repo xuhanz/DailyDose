@@ -71,7 +71,6 @@ public class TagAnalysisView extends AppCompatActivity {
             result = JsonUtils.createDataFile(this, "TestFile.json");
         }
 
-
     }
 
     // Inflates options menu from menu_main xml file

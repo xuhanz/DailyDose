@@ -49,7 +49,7 @@ public class AvgBarGraph extends AppCompatActivity {
         // get the Entries currently in the database
         List<Entry> result = JsonUtils.getEntries("TestFile.json", getApplicationContext());
 
-        // If the database file hasnt been created yet, create it, and make the entry list empty
+        // If the database file hasn't been created yet, create it, and make the entry list empty
         if (result == null) {
             result = JsonUtils.createDataFile(this, "TestFile.json");
         }
