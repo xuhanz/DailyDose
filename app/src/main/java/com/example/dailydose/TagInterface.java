@@ -3,20 +3,26 @@ package com.example.dailydose;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class TagInterface extends AppCompatActivity {
 
@@ -77,6 +83,41 @@ public class TagInterface extends AppCompatActivity {
             }
 
         });
+
+        // add custom tag button
+        FloatingActionButton addTagButton = findViewById(R.id.add_tag_button);
+        addTagButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAddTagDialog(TagInterface.this);
+            }
+        });
+    }
+
+    private void showAddTagDialog(Context c) {
+        final EditText taskEditText = new EditText(c);
+        AlertDialog dialog = new AlertDialog.Builder(c)
+                .setTitle("Add a new tag")
+                .setMessage("What do you want to add?")
+                .setView(taskEditText)
+                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String tag = String.valueOf(taskEditText.getText());
+                        ChipGroup tags = findViewById(R.id.chipGroup);
+                        Chip newTag = new Chip(TagInterface.this);
+                        //newTag.setCloseIconVisible(true);
+                        newTag.setText(tag);
+                        newTag.setChipBackgroundColorResource(R.color.yellow_02);
+                        newTag.setCheckable(true);
+                        newTag.setCheckedIconVisible(false);
+                        newTag.setClickable(true);
+                        tags.addView(newTag);
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+        dialog.show();
     }
 
 
