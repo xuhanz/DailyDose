@@ -100,10 +100,22 @@ public class JsonUtils {
      */
     public static Set<String> getAllTags(String fileName, Context context) {
         Set<String> result = new HashSet<>();
+        Set<String> default_tags = new HashSet<>();
+        default_tags.add("Sports");
+        default_tags.add("Food");
+        default_tags.add("Movies");
+        default_tags.add("Sleep");
+        default_tags.add("Shopping");
+        default_tags.add("Study");
+        default_tags.add("Work");
+        default_tags.add("Games");
+        default_tags.add("Exercise");
         List<Entry> entries = getEntries(fileName, context);
         for (Entry e: entries) {
             for (String tag: e.getTags()) {
-                result.add(tag);
+                if (!default_tags.contains(tag)) {
+                    result.add(tag);
+                }
             }
         }
         return result;
