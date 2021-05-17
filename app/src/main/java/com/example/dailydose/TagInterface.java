@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.zip.Inflater;
 
 public class TagInterface extends AppCompatActivity {
@@ -36,7 +37,7 @@ public class TagInterface extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().hide();
 
-        List<String> tagList = new ArrayList<>();
+        List<String> selected_tagList = new ArrayList<>();
 
         // Get the state from the entry creation page
         String entry_text = getIntent().getStringExtra("entry_text");
@@ -45,8 +46,6 @@ public class TagInterface extends AppCompatActivity {
 
 
         String entry_date = getIntent().getStringExtra("entry_date");
-
-
         // Submit button
         Button submit_btn = (Button) findViewById(R.id.submit_button);
 
@@ -60,7 +59,7 @@ public class TagInterface extends AppCompatActivity {
                 for (int i = 0; i < tags.getChildCount();i++){
                     Chip chip = (Chip)tags.getChildAt(i);
                     if (chip.isChecked()){
-                        tagList.add((String) chip.getText());
+                        selected_tagList.add((String) chip.getText());
                     }
                 }
                 int id;
@@ -71,7 +70,7 @@ public class TagInterface extends AppCompatActivity {
                 }
 
                 // Make an entry based on passed in state + selected tags
-                Entry new_entry = new Entry(entry_text, entry_rating, id, tagList, entry_date);
+                Entry new_entry = new Entry(entry_text, entry_rating, id, selected_tagList, entry_date);
                 // Write the entry
                 JsonUtils.writeEntry(new_entry, "TestFile.json", getApplicationContext());
 
@@ -92,6 +91,17 @@ public class TagInterface extends AppCompatActivity {
                 showAddTagDialog(TagInterface.this);
             }
         });
+
+        // generating chips
+        ChipGroup tags = findViewById(R.id.chipGroup);
+        Set<String> tagList = JsonUtils.getAllTags("TestFile.json", this);
+        for (String tag : tagList) {
+            Chip newTag = (Chip) getLayoutInflater().inflate(R.layout.chip_layout, tags, false);
+            newTag.setText(tag);
+            newTag.setChipBackgroundColorResource(R.color.yellow_02);
+            tags.addView(newTag);
+        }
+
     }
 
     private void showAddTagDialog(Context c) {
@@ -106,7 +116,6 @@ public class TagInterface extends AppCompatActivity {
                         String tag = String.valueOf(taskEditText.getText());
                         ChipGroup tags = findViewById(R.id.chipGroup);
                         Chip newTag = (Chip) getLayoutInflater().inflate(R.layout.chip_layout, tags, false);
-                        //newTag.setCloseIconVisible(true);
                         newTag.setText(tag);
                         newTag.setChipBackgroundColorResource(R.color.yellow_02);
                         tags.addView(newTag);
