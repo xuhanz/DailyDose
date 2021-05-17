@@ -149,6 +149,23 @@
 			app:layout_constraintTop_toBottomOf="@+id/entry_text"
 			app:layout_constraintVertical_bias="0.613" />
 
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:backgroundTint="#FFE897"
+			android:fontFamily="cursive"
+			android:onClick="showDatePickerDialog"
+			android:text="@string/pick_date"
+			android:textColor="#000000"
+			android:textStyle="bold"
+			app:iconTint="#BDBDBD"
+			app:layout_constraintBottom_toTopOf="@+id/discard_button"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.498"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/entry_text"
+			app:layout_constraintVertical_bias="0.078" />
+
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
 	<com.google.android.material.appbar.AppBarLayout
