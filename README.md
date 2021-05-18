@@ -5,6 +5,8 @@ Daily Dose will be a journaling app for Android that emphasizes ease-of-use; ent
 Creation and deletion of journal entries is fully functional, as is viewing a log of past journal entries. The user can tag the entries they create with a static list of included tags as of now, in the future we plan to let them add more to that list. The user can also discard a journal entry before continuing to the tagging page if they no longer wish to make one. Another use that is currently functional is checking trends on how each tag affects mood. As of now, it is one bar graph representing average rating of tags, something we plan to expand on in further releases.
 
 ## Repository Layout
+UserManual.md : App description and instructions on how to run and use our app.
+DeveloperGuidelines.md: Guidelines for developers on how to navigate and contribute to this repository and our app.
 Reports directory: For weekly progress reports<br>
 gradle/wrapper directory: Automatically generated gradle files<br>
 app directory: Source Code<br>
