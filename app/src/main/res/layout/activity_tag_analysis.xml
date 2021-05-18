@@ -86,6 +86,7 @@
                 android:textColor="#000000"
                 android:textStyle="bold"
                 app:iconTint="#BDBDBD" />
+
         </LinearLayout>
 
         <Spinner

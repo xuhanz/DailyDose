@@ -1,5 +1,6 @@
 package com.example.dailydose;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -10,6 +11,7 @@ import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,11 +28,15 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
-import com.anychart.core.cartesian.series.Column;
+import com.anychart.core.cartesian.series.Line;
 import com.anychart.enums.Anchor;
 import com.anychart.enums.HoverMode;
+import com.anychart.enums.MarkerType;
 import com.anychart.enums.Position;
+import com.anychart.data.Mapping;
+import com.anychart.data.Set;
 import com.anychart.enums.TooltipPositionMode;
+import com.anychart.graphics.vector.Stroke;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -39,10 +45,13 @@ import java.util.Date;
 import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 
 public class TagAnalysisView extends AppCompatActivity {
+
+    /*
+        local variables carrying the data through
+     */
 
     private static boolean startOrEnd = true;
     private static int startY = Calendar.YEAR;
@@ -51,6 +60,7 @@ public class TagAnalysisView extends AppCompatActivity {
     private static int endY = Calendar.YEAR;
     private static int endM = Calendar.MONTH;
     private static int endD = Calendar.DATE;
+    private static String tag = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +73,7 @@ public class TagAnalysisView extends AppCompatActivity {
         setSupportActionBar(findViewById(R.id.header_tag));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        // initializing the buttons and their listeners to pop up calendars
         Button startDateBtn = (Button) findViewById(R.id.button_start_date);
         Button endDateBtn = (Button) findViewById(R.id.button_end_date);
 
@@ -82,9 +93,9 @@ public class TagAnalysisView extends AppCompatActivity {
             }
         });
 
-        Set<String> tags = JsonUtils.getAllUsedTags("TestFile.json", this);
-        String[] tags_arr = new String[tags.size()];
-        tags_arr = tags.toArray(tags_arr);
+        // read all used tags in our entries and generate a dropdown list (Spinner widget)
+        String[] tags_arr = new String[JsonUtils.getAllUsedTags("TestFile.json", this).size()];
+        tags_arr = JsonUtils.getAllUsedTags("TestFile.json", this).toArray(tags_arr);
 
         Spinner dropdown = (Spinner) findViewById(R.id.tag_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -94,12 +105,17 @@ public class TagAnalysisView extends AppCompatActivity {
         // Apply the adapter to the spinner
         dropdown.setAdapter(adapter);
 
+        /*
+            TODO: call some method from JsonUtils class to filter and sort the entries based on
+             tag, startDate, and endDate.
+        */
+
 
         //Get the anyChartView and Progress bar from the xml file
         AnyChartView anyChartView = findViewById(R.id.any_chart_tag);
         anyChartView.setProgressBar(findViewById(R.id.progress_bar_tag));
 
-        Cartesian cartesian = AnyChart.column();
+        Cartesian cartesian = AnyChart.line();
 
         // get the Entries currently in the database
         List<Entry> result = JsonUtils.getEntries("TestFile.json", getApplicationContext());
@@ -109,6 +125,45 @@ public class TagAnalysisView extends AppCompatActivity {
             result = JsonUtils.createDataFile(this, "TestFile.json");
         }
 
+        cartesian.animation(true);
+
+        cartesian.padding(10d, 20d, 5d, 20d);
+
+        cartesian.crosshair().enabled(true);
+        cartesian.crosshair()
+                .yLabel(true)
+                // TODO ystroke
+                .yStroke((Stroke) null, null, null, (String) null, (String) null);
+
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+
+        tag = dropdown.getSelectedItem().toString();
+
+        cartesian.title("Trend of " + tag + " from ");
+
+        cartesian.yAxis(0).title("Rating");
+        cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
+
+        List<DataEntry> seriesData = new ArrayList<>();
+        // seriesData.add(new ValueDataEntry());
+
+        Line series1 = cartesian.line(seriesData);
+        series1.name(tag);
+        series1.hovered().markers().enabled(true);
+        series1.hovered().markers()
+                .type(MarkerType.CIRCLE)
+                .size(4d);
+        series1.tooltip()
+                .position("right")
+                .anchor(Anchor.LEFT_CENTER)
+                .offsetX(5d)
+                .offsetY(5d);
+
+        cartesian.legend().enabled(true);
+        cartesian.legend().fontSize(13d);
+        cartesian.legend().padding(0d, 0d, 10d, 0d);
+
+        anyChartView.setChart(cartesian);
     }
 
     public static class DatePickerFragment extends DialogFragment
