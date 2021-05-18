@@ -26,17 +26,17 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(AndroidJUnit4.class)
 public class JsonUtilsTests {
-	private String testFile = "TestFile.json";
+	private String testFile = "Entries.json";
 	Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
 	@Test
 	public void fileWriteReadTest() {
+		List<Entry> entries = JsonUtils.createDataFile(context, testFile);
 		List<String> tags = new ArrayList<>();
 		tags.add("Store");
 		tags.add("Shopping");
 		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		Entry entry2 = new Entry("Video Games", 8, 2, tags, "");
-		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 		entries.add(entry2);
 		assertTrue(JsonUtils.writeEntries(entries, testFile, context));
@@ -49,7 +49,7 @@ public class JsonUtilsTests {
 
 	@Test
 	public void fileWriteReadEmptyTest() {
-		List<Entry> entries = new ArrayList<>();
+		List<Entry> entries = JsonUtils.createDataFile(context, testFile);
 		assertTrue(JsonUtils.writeEntries(entries, testFile, context));
 
 		List<Entry> result = JsonUtils.getEntries(testFile, context);
@@ -58,10 +58,10 @@ public class JsonUtilsTests {
 
 	@Test
 	public void getAllTagsEmptyTest() {
+		List<Entry> entries = JsonUtils.createDataFile(context, testFile);
 		List<String> tags = new ArrayList<>();
 		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		Entry entry2 = new Entry("Video Games", 8, 2, tags, "");
-		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 		entries.add(entry2);
 		JsonUtils.writeEntries(entries, testFile, context);
@@ -72,10 +72,10 @@ public class JsonUtilsTests {
 
 	@Test
 	public void deleteTest() {
+		List<Entry> entries = JsonUtils.createDataFile(context, testFile);
 		List<String> tags = new ArrayList<>();
 		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		Entry entry2 = new Entry("Video Games", 8, 2, tags, "");
-		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 		entries.add(entry2);
 		JsonUtils.writeEntries(entries, testFile, context);
@@ -88,10 +88,10 @@ public class JsonUtilsTests {
 
 	@Test
 	public void deleteInvalidIdTest() {
+		List<Entry> entries = JsonUtils.createDataFile(context, testFile);
 		List<String> tags = new ArrayList<>();
 		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		Entry entry2 = new Entry("Video Games", 8, 2, tags, "");
-		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 		entries.add(entry2);
 		JsonUtils.writeEntries(entries, testFile, context);
@@ -101,10 +101,10 @@ public class JsonUtilsTests {
 
 	@Test
 	public void getTest() {
+		List<Entry> entries = JsonUtils.createDataFile(context, testFile);
 		List<String> tags = new ArrayList<>();
 		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		Entry entry2 = new Entry("Video Games", 8, 2, tags, "");
-		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 		entries.add(entry2);
 		JsonUtils.writeEntries(entries, testFile, context);
@@ -114,10 +114,10 @@ public class JsonUtilsTests {
 
 	@Test
 	public void getInvalidIdTest() {
+		List<Entry> entries = JsonUtils.createDataFile(context, testFile);
 		List<String> tags = new ArrayList<>();
 		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		Entry entry2 = new Entry("Video Games", 8, 2, tags, "");
-		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 		entries.add(entry2);
 		JsonUtils.writeEntries(entries, testFile, context);
@@ -127,10 +127,10 @@ public class JsonUtilsTests {
 
 	@Test
 	public void addExistingIdTest() {
+		List<Entry> entries = JsonUtils.createDataFile(context, testFile);
 		List<String> tags = new ArrayList<>();
 		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		Entry entry2 = new Entry("Video Games", 8, 2, tags, "");
-		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 		entries.add(entry2);
 		JsonUtils.writeEntries(entries, testFile, context);
@@ -144,12 +144,12 @@ public class JsonUtilsTests {
 
 	@Test
 	public void addNewIdTest() {
+		List<Entry> entries = JsonUtils.createDataFile(context, testFile);
 		List<String> tags = new ArrayList<>();
 		tags.add("fun");
 		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		Entry entry2 = new Entry("Video Games", 8, 2, tags, "");
 		Entry entry3 = new Entry("Going Swimming", 5, 3, tags, "");
-		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 		entries.add(entry2);
 		JsonUtils.writeEntries(entries, testFile, context);
@@ -164,10 +164,10 @@ public class JsonUtilsTests {
 
 	@Test
 	public void editTest() {
+		List<Entry> entries = JsonUtils.createDataFile(context, testFile);
 		List<String> tags = new ArrayList<>();
 		tags.add("fun");
 		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
-		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 		JsonUtils.writeEntries(entries, testFile, context);
 
@@ -181,10 +181,10 @@ public class JsonUtilsTests {
 
 	@Test
 	public void getHighestIdTest() {
+		List<Entry> entries = JsonUtils.createDataFile(context, testFile);
 		List<String> tags = new ArrayList<>();
 		Entry entry = new Entry("Went to the store today", 9.5, 1, tags, "");
 		Entry entry2 = new Entry("Video Games", 8, 2, tags, "");
-		List<Entry> entries = new ArrayList<>();
 		entries.add(entry);
 		entries.add(entry2);
 		JsonUtils.writeEntries(entries, testFile, context);
@@ -194,7 +194,7 @@ public class JsonUtilsTests {
 
 	@Test
 	public void getNoIDTest() {
-		List<Entry> entries = new ArrayList<>();
+		List<Entry> entries = JsonUtils.createDataFile(context, testFile);
 		JsonUtils.writeEntries(entries, testFile, context);
 
 		assertEquals(0, JsonUtils.getHighestID(testFile, context));
