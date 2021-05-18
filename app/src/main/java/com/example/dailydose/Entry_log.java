@@ -67,6 +67,13 @@ public class Entry_log extends AppCompatActivity {
             Intent mainIntent = new Intent(context, destinationActivity);
             startActivity(mainIntent);
             return true;
+        } else if (id == R.id.action_tag){
+            // Switch to the Tag analysis graph screen
+            Context context = Entry_log.this;
+            Class destinationActivity = TagAnalysisView.class;
+            Intent mainIntent = new Intent(context, destinationActivity);
+            startActivity(mainIntent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

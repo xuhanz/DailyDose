@@ -59,7 +59,8 @@
                 android:text="Start Date"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                app:iconTint="#BDBDBD" />
+                app:iconTint="#BDBDBD"
+                android:onClick="showDatePickerDialog"/>
 
             <Button
                 android:id="@+id/button_end_date"
@@ -71,7 +72,8 @@
                 android:text="End Date"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                app:iconTint="#BDBDBD" />
+                app:iconTint="#BDBDBD"
+                android:onClick="showDatePickerDialog"/>
 
             <Button
                 android:id="@+id/button_go"
