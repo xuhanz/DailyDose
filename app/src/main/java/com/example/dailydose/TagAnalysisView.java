@@ -39,6 +39,7 @@ import com.anychart.enums.TooltipPositionMode;
 import com.anychart.graphics.vector.Stroke;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -105,6 +106,21 @@ public class TagAnalysisView extends AppCompatActivity {
         // Apply the adapter to the spinner
         dropdown.setAdapter(adapter);
 
+        // get the Entries currently in the database
+        List<Entry> result = JsonUtils.getEntries("TestFile.json", getApplicationContext());
+
+        // If the database file hasn't been created yet, create it, and make the entry list empty
+        if (result == null) {
+            result = JsonUtils.createDataFile(this, "TestFile.json");
+        }
+
+        tag = dropdown.getSelectedItem().toString();
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        Date startDate = new Date(startY,startM,startD);
+        Date endDate = new Date(endY,endM,endD);
+        result = TagAnalysis.filterEntriesByTag(result,tag);
+
+
         /*
             TODO: call some method from JsonUtils class to filter and sort the entries based on
              tag, startDate, and endDate.
@@ -116,14 +132,6 @@ public class TagAnalysisView extends AppCompatActivity {
         anyChartView.setProgressBar(findViewById(R.id.progress_bar_tag));
 
         Cartesian cartesian = AnyChart.line();
-
-        // get the Entries currently in the database
-        List<Entry> result = JsonUtils.getEntries("TestFile.json", getApplicationContext());
-
-        // If the database file hasn't been created yet, create it, and make the entry list empty
-        if (result == null) {
-            result = JsonUtils.createDataFile(this, "TestFile.json");
-        }
 
         cartesian.animation(true);
 
@@ -137,9 +145,7 @@ public class TagAnalysisView extends AppCompatActivity {
 
         cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
 
-        tag = dropdown.getSelectedItem().toString();
-
-        cartesian.title("Trend of " + tag + " from ");
+        cartesian.title("Trend of " + tag + " from " + df.format(startDate) + " to " + df.format(endDate));
 
         cartesian.yAxis(0).title("Rating");
         cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
