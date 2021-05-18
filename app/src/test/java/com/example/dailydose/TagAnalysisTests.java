@@ -1,9 +1,13 @@
 package com.example.dailydose;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Dictionary;
+import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -214,5 +218,73 @@ public class TagAnalysisTests {
 	@Test
 	public void NullGetTagAvgTest() {
 		assertEquals(new Hashtable<>(), TagAnalysis.getAllTagAvg(null));
+	}
+
+	@Test
+	public void getAvgRatingByDateTest() {
+		List<Entry> entries = new ArrayList<>();
+		entries.add(new Entry("a", 9.0, 1, new ArrayList<String>(), "05/10/2021"));
+		entries.add(new Entry("a", 9.0, 2, new ArrayList<String>(), "05/11/2021"));
+		entries.add(new Entry("a", 9.0, 3, new ArrayList<String>(), "05/17/2021"));
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2021);
+		cal.set(Calendar.DAY_OF_MONTH,11);
+		cal.set(Calendar.MONTH,4);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE,0);
+		cal.set(Calendar.SECOND,0);
+		cal.set(Calendar.MILLISECOND,0);
+		Date startDate = cal.getTime();
+
+		cal.set(Calendar.YEAR, 2021);
+		cal.set(Calendar.DAY_OF_MONTH,18);
+		cal.set(Calendar.MONTH,4);
+		cal.set(Calendar.HOUR_OF_DAY,23);
+		cal.set(Calendar.MINUTE,59);
+		cal.set(Calendar.SECOND,59);
+		cal.set(Calendar.MILLISECOND,0);
+		Date endDate = cal.getTime();
+
+
+		Map<Date, Double> result = TagAnalysis.getAvgRatingByDate(startDate, endDate, entries);
+		assertEquals(result.keySet().size(), 2);
+	}
+
+	@Test
+	public void getAvgRatingsByDateMultipleOnSameDayTest() {
+		List<Entry> entries = new ArrayList<>();
+		entries.add(new Entry("a", 9.0, 1, new ArrayList<String>(), "05/10/2021"));
+		entries.add(new Entry("a", 9.0, 2, new ArrayList<String>(), "05/11/2021"));
+		entries.add(new Entry("a", 9.0, 3, new ArrayList<String>(), "05/17/2021"));
+		entries.add(new Entry("a", 6.5, 4, new ArrayList<String>(), "05/17/2021"));
+		entries.add(new Entry("a", 6.0, 5, new ArrayList<String>(), "05/17/2021"));
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2021);
+		cal.set(Calendar.DAY_OF_MONTH,11);
+		cal.set(Calendar.MONTH,4);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE,0);
+		cal.set(Calendar.SECOND,0);
+		cal.set(Calendar.MILLISECOND,0);
+		Date startDate = cal.getTime();
+
+		cal.set(Calendar.YEAR, 2021);
+		cal.set(Calendar.DAY_OF_MONTH,18);
+		cal.set(Calendar.MONTH,4);
+		cal.set(Calendar.HOUR_OF_DAY,23);
+		cal.set(Calendar.MINUTE,59);
+		cal.set(Calendar.SECOND,59);
+		cal.set(Calendar.MILLISECOND,0);
+		Date endDate = cal.getTime();
+
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		try {
+			Date testDate = format.parse("5/17/2021");
+			Map<Date, Double> result = TagAnalysis.getAvgRatingByDate(startDate, endDate, entries);
+			assertEquals(result.keySet().size(), 2);
+			assertEquals((double) result.get(testDate), 21.5/3, 0.01);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 }

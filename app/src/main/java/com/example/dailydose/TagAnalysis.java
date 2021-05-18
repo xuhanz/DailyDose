@@ -2,6 +2,8 @@ package com.example.dailydose;
 import android.content.Context;
 
 import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class TagAnalysis {
@@ -70,5 +72,45 @@ public class TagAnalysis {
 			tagRatings.put(tag, avgRating);
 		}
 		return tagRatings;
+	}
+
+	/**
+	 * Get average rating of the Entries on each date between startDate (inclusive) and
+	 * endDate (inclusive)
+	 * @param startDate - the start of the date range (inclusive)
+	 * @param endDate - the end of the date range (inclusive)
+	 * @param entries - the entries to calculate avg ratings over
+	 * @return - A TreeMap mapping Date to average rating on that date, based on passed in
+	 * entries list and start and end dates
+	 */
+	public static Map<Date, Double> getAvgRatingByDate (Date startDate, Date endDate, List<Entry> entries) {
+		Map<Date, Double> result = new TreeMap<>();
+		Map<Date, List<Double>> allRatingsOnDay = new HashMap<>();
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		for (Entry entry: entries) {
+			try {
+				Date entryDate = format.parse(entry.getDate());
+				if ((entryDate.before(endDate) || entryDate.equals(endDate)) &&
+						(entryDate.after(startDate)  || entryDate.equals(startDate))) {
+					if (!result.keySet().contains(entryDate)) {
+						result.put(entryDate, entry.getRating());
+						ArrayList<Double> ratings = new ArrayList<>();
+						ratings.add(entry.getRating());
+						allRatingsOnDay.put(entryDate, ratings);
+					} else {
+						List<Double> ratingsOnDay = allRatingsOnDay.get(entryDate);
+						ratingsOnDay.add(entry.getRating());
+						double sum = 0;
+						for (Double rating: ratingsOnDay) {
+							sum += rating;
+						}
+						result.put(entryDate, sum/ratingsOnDay.size());
+					}
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 }
