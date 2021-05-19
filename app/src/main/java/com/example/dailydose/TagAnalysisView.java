@@ -48,19 +48,15 @@ import java.util.List;
 import java.util.Map;
 
 
-public class TagAnalysisView extends AppCompatActivity {
+public class TagAnalysisView extends AppCompatActivity{
 
     /*
         local variables carrying the data through
      */
 
     private static boolean startOrEnd = true;
-    private static int startY = Calendar.YEAR;
-    private static int startM = Calendar.MONTH;
-    private static int startD = Calendar.DATE;
-    private static int endY = Calendar.YEAR;
-    private static int endM = Calendar.MONTH;
-    private static int endD = Calendar.DATE;
+    private static Date startDate;
+    private static Date endDate;
     private static String tag = "";
 
     @Override
@@ -73,6 +69,9 @@ public class TagAnalysisView extends AppCompatActivity {
         // includes menu
         setSupportActionBar(findViewById(R.id.header_tag));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        startDate = new Date();
+        endDate = new Date();
 
         // initializing the buttons and their listeners to pop up calendars
         Button startDateBtn = (Button) findViewById(R.id.button_start_date);
@@ -95,81 +94,106 @@ public class TagAnalysisView extends AppCompatActivity {
         });
 
         // read all used tags in our entries and generate a dropdown list (Spinner widget)
-        String[] tags_arr = new String[JsonUtils.getAllUsedTags("TestFile.json", this).size()];
-        tags_arr = JsonUtils.getAllUsedTags("TestFile.json", this).toArray(tags_arr);
+        String[] tags_arr = new String[JsonUtils.getAllUsedTags("TestFile.json", TagAnalysisView.this).size()];
+        tags_arr = JsonUtils.getAllUsedTags("TestFile.json", TagAnalysisView.this).toArray(tags_arr);
 
         Spinner dropdown = (Spinner) findViewById(R.id.tag_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, tags_arr);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(TagAnalysisView.this, android.R.layout.simple_list_item_1, tags_arr);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         dropdown.setAdapter(adapter);
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                               @Override
+                                               public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                   tag = parent.getItemAtPosition(position).toString();
+                                               }
 
-        // get the Entries currently in the database
-        List<Entry> result = JsonUtils.getEntries("TestFile.json", getApplicationContext());
+                                               @Override
+                                               public void onNothingSelected(AdapterView<?> parent) {
+                                                    tag = parent.getItemAtPosition(parent.getFirstVisiblePosition()).toString();
+                                                    if(tag == null){
+                                                        tag = "";
+                                                    }
+                                               }
+                                           }
+        );
 
-        // If the database file hasn't been created yet, create it, and make the entry list empty
-        if (result == null) {
-            result = JsonUtils.createDataFile(this, "TestFile.json");
-        }
+        Button renderBtn = (Button) findViewById(R.id.button_go);
+        renderBtn.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View v) {
 
-        tag = dropdown.getSelectedItem().toString();
-        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        Date startDate = new Date(startY,startM,startD);
-        Date endDate = new Date(endY,endM,endD);
-        result = TagAnalysis.filterEntriesByTag(result,tag);
+                                             // get the Entries currently in the database
+                                             List<Entry> result = JsonUtils.getEntries("TestFile.json", getApplicationContext());
+
+                                             // If the database file hasn't been created yet, create it, and make the entry list empty
+                                             if (result == null) {
+                                                 result = JsonUtils.createDataFile(TagAnalysisView.this, "TestFile.json");
+                                             }
+
+                                             // tag = dropdown.getSelectedItem().toString();
+                                             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+                                             result = TagAnalysis.filterEntriesByTag(result,tag);
+
+                                             Map<Date, Double> entries = TagAnalysis.getAvgRatingByDate(startDate, endDate, result);
+
+                                             //Get the anyChartView and Progress bar from the xml file
+                                             AnyChartView anyChartView = findViewById(R.id.any_chart_tag);
+                                             anyChartView.setProgressBar(findViewById(R.id.progress_bar_tag));
+
+                                             Cartesian cartesian = AnyChart.line();
+
+                                             cartesian.animation(true);
+
+                                             cartesian.padding(10d, 20d, 5d, 20d);
+
+                                             cartesian.crosshair().enabled(true);
+                                             cartesian.crosshair()
+                                                     .yLabel(true)
+                                                     // yStroke
+                                                     .yStroke((Stroke) null, null, null, (String) null, (String) null);
+
+                                             cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+
+                                             cartesian.title("Trend of " + tag + " from " + df.format(startDate) + " to " + df.format(endDate));
+
+                                             cartesian.yAxis(0).title("Rating");
+                                             cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
+
+                                             List<DataEntry> seriesData = new ArrayList<>();
+                                             // seriesData.add(new ValueDataEntry());
 
 
-        /*
-            TODO: call some method from JsonUtils class to filter and sort the entries based on
-             tag, startDate, and endDate.
-        */
+                                             Set set = Set.instantiate();
+                                             Mapping seriesMapping = set.mapAs("{ x: 'x', value: 'value' }");
 
+                                             Line series1 = cartesian.line(seriesMapping);
+                                             series1.name(tag);
+                                             series1.hovered().markers().enabled(true);
+                                             series1.hovered().markers()
+                                                     .type(MarkerType.CIRCLE)
+                                                     .size(4d);
+                                             series1.tooltip()
+                                                     .position("right")
+                                                     .anchor(Anchor.LEFT_CENTER)
+                                                     .offsetX(5d)
+                                                     .offsetY(5d);
 
-        //Get the anyChartView and Progress bar from the xml file
-        AnyChartView anyChartView = findViewById(R.id.any_chart_tag);
-        anyChartView.setProgressBar(findViewById(R.id.progress_bar_tag));
+                                             cartesian.legend().enabled(true);
+                                             cartesian.legend().fontSize(13d);
+                                             cartesian.legend().padding(0d, 0d, 10d, 0d);
 
-        Cartesian cartesian = AnyChart.line();
+                                             for(Map.Entry<Date, Double> e: entries.entrySet()) {
+                                                 seriesData.add(new ValueDataEntry(df.format(e.getKey()), e.getValue()));
+                                             }
+                                             set.data(seriesData);
+                                             anyChartView.setChart(cartesian);
+                                         }
+                                     }
+        );
 
-        cartesian.animation(true);
-
-        cartesian.padding(10d, 20d, 5d, 20d);
-
-        cartesian.crosshair().enabled(true);
-        cartesian.crosshair()
-                .yLabel(true)
-                // TODO ystroke
-                .yStroke((Stroke) null, null, null, (String) null, (String) null);
-
-        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
-
-        cartesian.title("Trend of " + tag + " from " + df.format(startDate) + " to " + df.format(endDate));
-
-        cartesian.yAxis(0).title("Rating");
-        cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
-
-        List<DataEntry> seriesData = new ArrayList<>();
-        // seriesData.add(new ValueDataEntry());
-
-        Line series1 = cartesian.line(seriesData);
-        series1.name(tag);
-        series1.hovered().markers().enabled(true);
-        series1.hovered().markers()
-                .type(MarkerType.CIRCLE)
-                .size(4d);
-        series1.tooltip()
-                .position("right")
-                .anchor(Anchor.LEFT_CENTER)
-                .offsetX(5d)
-                .offsetY(5d);
-
-        cartesian.legend().enabled(true);
-        cartesian.legend().fontSize(13d);
-        cartesian.legend().padding(0d, 0d, 10d, 0d);
-
-        anyChartView.setChart(cartesian);
     }
 
     public static class DatePickerFragment extends DialogFragment
@@ -190,16 +214,12 @@ public class TagAnalysisView extends AppCompatActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             // a placeholder method to implement the class
+            // some weird behavior when I read from the calendar
+            year = year - 1900;
             if (startOrEnd) {
-                startY = year;
-                // for some reason the month is 0 based
-                startM = month + 1;
-                startD = dayOfMonth;
+                startDate = new Date(year, month, dayOfMonth);
             } else {
-                endY = year;
-                // for some reason the month is 0 based
-                endM = month + 1;
-                endD = dayOfMonth;
+                endDate = new Date(year, month, dayOfMonth);
             }
         }
     }
