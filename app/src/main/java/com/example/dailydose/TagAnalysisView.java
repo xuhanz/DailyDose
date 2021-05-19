@@ -141,18 +141,29 @@ public class TagAnalysisView extends AppCompatActivity{
                 .yStroke((Stroke) null, null, null, (String) null, (String) null);
 
         cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
-
-        cartesian.title("Trend of " + tag + " from " + df.format(startDate) + " to " + df.format(endDate));
+        tag = dropdown.getSelectedItem().toString();
+        cartesian.title("Trend of " + tag);
 
         cartesian.yAxis(0).title("Rating");
         cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
 
         List<DataEntry> seriesData = new ArrayList<>();
         //seriesData.add(new ValueDataEntry(df.format(new Date()), 10));
+        List<Entry> result = JsonUtils.getEntries("TestFile.json", getApplicationContext());
+        // If the database file hasn't been created yet, create it, and make the entry list empty
+        if (result == null) {
+            result = JsonUtils.createDataFile(TagAnalysisView.this, "TestFile.json");
+        }
+
+        result = TagAnalysis.filterEntriesByTag(result,tag);
+        Map<Date, Double> entries = TagAnalysis.getAvgRatingByDate(new Date(100,1,1), endDate, result);
+        for(Map.Entry<Date, Double> e: entries.entrySet()) {
+            seriesData.add(new ValueDataEntry(df.format(e.getKey()), e.getValue()));
+        }
         Set set = Set.instantiate();
         set.data(seriesData);
 
-        Mapping seriesMapping = set.mapAs("{ x: 'x', value: 'value' }");
+        //Mapping seriesMapping = set.mapAs("{ x: 'x', value: 'value' }");
 
         Line series1 = cartesian.line(seriesData);
 
