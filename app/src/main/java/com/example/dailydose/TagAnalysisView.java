@@ -7,7 +7,9 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -120,6 +122,56 @@ public class TagAnalysisView extends AppCompatActivity{
                                            }
         );
 
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+
+        //Get the anyChartView and Progress bar from the xml file
+        AnyChartView anyChartView = findViewById(R.id.any_chart_tag);
+        anyChartView.setProgressBar(findViewById(R.id.progress_bar_tag));
+
+        Cartesian cartesian = AnyChart.line();
+
+        cartesian.animation(true);
+
+        cartesian.padding(10d, 20d, 5d, 20d);
+
+        cartesian.crosshair().enabled(true);
+        cartesian.crosshair()
+                .yLabel(true)
+                // yStroke
+                .yStroke((Stroke) null, null, null, (String) null, (String) null);
+
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+
+        cartesian.title("Trend of " + tag + " from " + df.format(startDate) + " to " + df.format(endDate));
+
+        cartesian.yAxis(0).title("Rating");
+        cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
+
+        List<DataEntry> seriesData = new ArrayList<>();
+        //seriesData.add(new ValueDataEntry(df.format(new Date()), 10));
+        Set set = Set.instantiate();
+        set.data(seriesData);
+
+        Mapping seriesMapping = set.mapAs("{ x: 'x', value: 'value' }");
+
+        Line series1 = cartesian.line(seriesData);
+
+        series1.name(tag);
+        series1.hovered().markers().enabled(true);
+        series1.hovered().markers()
+                .type(MarkerType.CIRCLE)
+                .size(4d);
+        series1.tooltip()
+                .position("right")
+                .anchor(Anchor.LEFT_CENTER)
+                .offsetX(5d)
+                .offsetY(5d);
+
+        cartesian.legend().enabled(true);
+        cartesian.legend().fontSize(13d);
+        cartesian.legend().padding(0d, 0d, 10d, 0d);
+        anyChartView.setChart(cartesian);
+
         Button renderBtn = (Button) findViewById(R.id.button_go);
         renderBtn.setOnClickListener(new View.OnClickListener() {
                                          @Override
@@ -127,69 +179,22 @@ public class TagAnalysisView extends AppCompatActivity{
 
                                              // get the Entries currently in the database
                                              List<Entry> result = JsonUtils.getEntries("TestFile.json", getApplicationContext());
-
                                              // If the database file hasn't been created yet, create it, and make the entry list empty
                                              if (result == null) {
                                                  result = JsonUtils.createDataFile(TagAnalysisView.this, "TestFile.json");
                                              }
-
                                              // tag = dropdown.getSelectedItem().toString();
-                                             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
                                              result = TagAnalysis.filterEntriesByTag(result,tag);
-
+                                             List<DataEntry> newseriesData = new ArrayList<>();
+                                             //
                                              Map<Date, Double> entries = TagAnalysis.getAvgRatingByDate(startDate, endDate, result);
-
-                                             //Get the anyChartView and Progress bar from the xml file
-                                             AnyChartView anyChartView = findViewById(R.id.any_chart_tag);
-                                             anyChartView.setProgressBar(findViewById(R.id.progress_bar_tag));
-
-                                             Cartesian cartesian = AnyChart.line();
-
-                                             cartesian.animation(true);
-
-                                             cartesian.padding(10d, 20d, 5d, 20d);
-
-                                             cartesian.crosshair().enabled(true);
-                                             cartesian.crosshair()
-                                                     .yLabel(true)
-                                                     // yStroke
-                                                     .yStroke((Stroke) null, null, null, (String) null, (String) null);
-
-                                             cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
-
+                                             for(Map.Entry<Date, Double> e: entries.entrySet()) {
+                                                 newseriesData.add(new ValueDataEntry(df.format(e.getKey()), e.getValue()));
+                                             }
+                                             series1.name(tag);
                                              cartesian.title("Trend of " + tag + " from " + df.format(startDate) + " to " + df.format(endDate));
 
-                                             cartesian.yAxis(0).title("Rating");
-                                             cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
-
-                                             List<DataEntry> seriesData = new ArrayList<>();
-                                             // seriesData.add(new ValueDataEntry());
-
-
-                                             Set set = Set.instantiate();
-                                             Mapping seriesMapping = set.mapAs("{ x: 'x', value: 'value' }");
-
-                                             Line series1 = cartesian.line(seriesMapping);
-                                             series1.name(tag);
-                                             series1.hovered().markers().enabled(true);
-                                             series1.hovered().markers()
-                                                     .type(MarkerType.CIRCLE)
-                                                     .size(4d);
-                                             series1.tooltip()
-                                                     .position("right")
-                                                     .anchor(Anchor.LEFT_CENTER)
-                                                     .offsetX(5d)
-                                                     .offsetY(5d);
-
-                                             cartesian.legend().enabled(true);
-                                             cartesian.legend().fontSize(13d);
-                                             cartesian.legend().padding(0d, 0d, 10d, 0d);
-
-                                             for(Map.Entry<Date, Double> e: entries.entrySet()) {
-                                                 seriesData.add(new ValueDataEntry(df.format(e.getKey()), e.getValue()));
-                                             }
-                                             set.data(seriesData);
-                                             anyChartView.setChart(cartesian);
+                                             series1.data(newseriesData);
                                          }
                                      }
         );
@@ -223,6 +228,7 @@ public class TagAnalysisView extends AppCompatActivity{
             }
         }
     }
+
 
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
