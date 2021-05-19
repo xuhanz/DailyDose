@@ -12,20 +12,20 @@ Daily Dose is a journaling app with an emphasis on ease of use and trend analysi
 8. Click the green "Run" button
 
 # How to use the software
-Key Functionalities:
-Create an entry
-Discard an entry
-Rate an entry
-Tag an entry
-Use existing tags
-Customize new tags
-Submit an entry
-Browse through past entry log 
-Edit past entries
-Delete past entries
-Visualize entry analysis
-Average rating of tags 
-Rating trend over a period of time for selected tag (IP)
+Key Functionalities:<br>
+Create an entry<br>
+Discard an entry<br>
+Rate an entry<br>
+Tag an entry<br>
+Use existing tags<br>
+Customize new tags<br>
+Submit an entry<br>
+Browse through past entry log <br>
+Edit past entries<br>
+Delete past entries<br>
+Visualize entry analysis<br>
+Average rating of tags <br>
+Rating trend over a period of time for selected tag (In Progress)<br>
 
 # Known Bugs
 - In the Average Tag Graph page, there is an extra toolbar that partially covers the menu button. <br>
