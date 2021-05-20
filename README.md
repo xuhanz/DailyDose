@@ -1,6 +1,12 @@
 # DailyDose
 Daily Dose will be a journaling app for Android that emphasizes ease-of-use; entries are meant to be small to so users can quickly jot down their thoughts and feelings in the moment, and can be rated on a 1-10 scale; data can be used to display trends in the user’s mood, and how different events and activities influence them.
 
+# User Manual
+https://github.com/xuhanz/DailyDose/blob/main/UserManual.md
+
+# Developer Manual
+https://github.com/xuhanz/DailyDose/blob/main/DeveloperGuidelines.md
+
 ## Functional Use Cases
 Creation and deletion of journal entries is fully functional, as is viewing a log of past journal entries. The user can tag the entries they create with a static list of included tags as of now, in the future we plan to let them add more to that list. The user can also discard a journal entry before continuing to the tagging page if they no longer wish to make one. Another use that is currently functional is checking trends on how each tag affects mood. As of now, it is one bar graph representing average rating of tags, something we plan to expand on in further releases.
 
