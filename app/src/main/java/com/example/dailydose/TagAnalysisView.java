@@ -82,16 +82,16 @@ public class TagAnalysisView extends AppCompatActivity{
         startDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog(v);
                 startOrEnd = true;
+                showDatePickerDialog(v);
             }
         });
 
         endDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog(v);
                 startOrEnd = false;
+                showDatePickerDialog(v);
             }
         });
 
@@ -303,7 +303,7 @@ public class TagAnalysisView extends AppCompatActivity{
         } else if (id == R.id.action_avg){
             // change to the rating analysis screen
             Context context = TagAnalysisView.this;
-            Class destinationActivity = AvgBarGraph.class;
+            Class destinationActivity = TagAnalysisView.class;
             Intent mainIntent = new Intent(context, destinationActivity);
             startActivity(mainIntent);
             return true;
