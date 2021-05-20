@@ -141,7 +141,12 @@ public class TagAnalysisView extends AppCompatActivity{
                 .yStroke((Stroke) null, null, null, (String) null, (String) null);
 
         cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
-        tag = dropdown.getSelectedItem().toString();
+        // tag = dropdown.getSelectedItem().toString();
+        if(dropdown.getSelectedItem() != null){
+            tag = dropdown.getSelectedItem().toString();
+        } else{
+            tag = "";
+        }
         cartesian.title("Trend of " + tag);
 
         cartesian.yAxis(0).title("Rating");
@@ -159,6 +164,10 @@ public class TagAnalysisView extends AppCompatActivity{
         Map<Date, Double> entries = TagAnalysis.getAvgRatingByDate(new Date(100,1,1), endDate, result);
         for(Map.Entry<Date, Double> e: entries.entrySet()) {
             seriesData.add(new ValueDataEntry(df.format(e.getKey()), e.getValue()));
+        }
+
+        if(tag.equals("")){
+            seriesData.add(new ValueDataEntry(df.format(startDate),0));
         }
         Set set = Set.instantiate();
         set.data(seriesData);
