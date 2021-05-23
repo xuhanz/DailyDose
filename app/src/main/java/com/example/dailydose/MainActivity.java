@@ -175,9 +175,16 @@ public class MainActivity extends AppCompatActivity {
 			// Tag analysis option
 		} else if (id == R.id.action_avg){
 
-			// Switch to the Tag analysis graph screen
+			// Switch to the avg analysis graph screen
 			Context context = MainActivity.this;
 			Class destinationActivity = AvgBarGraph.class;
+			Intent mainIntent = new Intent(context, destinationActivity);
+			startActivity(mainIntent);
+			return true;
+		} else if (id == R.id.action_tag){
+			// Switch to the Tag analysis graph screen
+			Context context = MainActivity.this;
+			Class destinationActivity = TagAnalysisView.class;
 			Intent mainIntent = new Intent(context, destinationActivity);
 			startActivity(mainIntent);
 			return true;

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FCF8DF"
+    tools:context=".TagAnalysisView">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/header_tag"
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:layout_marginBottom="653dp"
+
+            android:background="#FFE897"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/Theme.DailyDose.PopupOverlay" />
+
+        <TextView
+            android:id="@+id/title_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="cursive"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/header_tag"
+            app:layout_constraintEnd_toEndOf="@id/header_tag"
+            app:layout_constraintStart_toStartOf="@+id/header_tag"
+            app:layout_constraintTop_toTopOf="@+id/header_tag"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <LinearLayout
+            android:id="@+id/date_selection"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_tag">
+
+            <Button
+                android:id="@+id/button_start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:backgroundTint="#FFE897"
+                android:fontFamily="cursive"
+                android:text="Start Date"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:iconTint="#BDBDBD"
+                android:onClick="showDatePickerDialog"/>
+
+            <Button
+                android:id="@+id/button_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:backgroundTint="#FFE897"
+                android:fontFamily="cursive"
+                android:text="End Date"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:iconTint="#BDBDBD"
+                android:onClick="showDatePickerDialog"/>
+
+            <Button
+                android:id="@+id/button_go"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#FFE897"
+                android:fontFamily="cursive"
+                android:text="Go"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:iconTint="#BDBDBD" />
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/tag_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toTopOf="@id/any_chart_tag"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/header_tag"
+            app:layout_constraintTop_toBottomOf="@+id/date_selection"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.anychart.AnyChartView
+            android:id="@+id/any_chart_tag"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/header_tag"
+            app:layout_constraintTop_toBottomOf="@+id/tag_spinner" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

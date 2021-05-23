@@ -94,11 +94,11 @@ public class JsonUtils {
     }
 
     /**
-     * Get all of the tags that are currently in the fileName
+     * Get all of the non default tags that are currently used in the fileName
      * @param fileName file to get all tags from
      * @return A Set of strings representing all tags in the data
      */
-    public static Set<String> getAllTags(String fileName, Context context) {
+    public static Set<String> getAllCustomTags(String fileName, Context context) {
         Set<String> result = new HashSet<>();
         Set<String> default_tags = new HashSet<>();
         default_tags.add("Sports");
@@ -116,6 +116,53 @@ public class JsonUtils {
                 if (!default_tags.contains(tag)) {
                     result.add(tag);
                 }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Get all of the tags that are currently used in the fileName plus the default ones even
+     * if the defaults are not used
+     * @param fileName file to get all tags from
+     * @return A Set of strings representing all tags in the data
+     */
+    public static Set<String> getAllPossibleTags(String fileName, Context context) {
+        Set<String> result = new HashSet<>();
+        Set<String> default_tags = new HashSet<>();
+        default_tags.add("Sports");
+        default_tags.add("Food");
+        default_tags.add("Movies");
+        default_tags.add("Sleep");
+        default_tags.add("Shopping");
+        default_tags.add("Study");
+        default_tags.add("Work");
+        default_tags.add("Games");
+        default_tags.add("Exercise");
+        List<Entry> entries = getEntries(fileName, context);
+        for (Entry e: entries) {
+            for (String tag: e.getTags()) {
+                result.add(tag);
+            }
+        }
+
+        for (String tag: default_tags) {
+            result.add(tag);
+        }
+        return result;
+    }
+
+    /**
+     * Get all of the tags that are currently used in the fileName
+     * @param fileName file to get all tags from
+     * @return A Set of strings representing all tags in the data
+     */
+    public static Set<String> getAllUsedTags(String fileName, Context context) {
+        Set<String> result = new HashSet<>();
+        List<Entry> entries = getEntries(fileName, context);
+        for (Entry e: entries) {
+            for (String tag: e.getTags()) {
+                result.add(tag);
             }
         }
         return result;

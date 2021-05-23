@@ -15,6 +15,11 @@
 	<item
 		android:id="@+id/action_avg"
 		android:orderInCategory="100"
-		android:title="AVG rating"
+		android:title="AVG Rating"
+		app:showAsAction="never" />
+	<item
+		android:id="@+id/action_tag"
+		android:orderInCategory="100"
+		android:title="Tag Rating"
 		app:showAsAction="never" />
 </menu>

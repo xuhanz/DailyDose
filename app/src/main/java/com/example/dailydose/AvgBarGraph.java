@@ -49,7 +49,7 @@ public class AvgBarGraph extends AppCompatActivity {
         // get the Entries currently in the database
         List<Entry> result = JsonUtils.getEntries("TestFile.json", getApplicationContext());
 
-        // If the database file hasnt been created yet, create it, and make the entry list empty
+        // If the database file hasn't been created yet, create it, and make the entry list empty
         if (result == null) {
             result = JsonUtils.createDataFile(this, "TestFile.json");
         }
@@ -141,6 +141,13 @@ public class AvgBarGraph extends AppCompatActivity {
             // change to the rating analysis screen
             Context context = AvgBarGraph.this;
             Class destinationActivity = AvgBarGraph.class;
+            Intent mainIntent = new Intent(context, destinationActivity);
+            startActivity(mainIntent);
+            return true;
+        } else if (id == R.id.action_tag){
+            // Switch to the Tag analysis graph screen
+            Context context = AvgBarGraph.this;
+            Class destinationActivity = TagAnalysisView.class;
             Intent mainIntent = new Intent(context, destinationActivity);
             startActivity(mainIntent);
             return true;

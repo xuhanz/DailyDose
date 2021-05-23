@@ -94,7 +94,7 @@ public class TagInterface extends AppCompatActivity {
 
         // generating chips
         ChipGroup tags = findViewById(R.id.chipGroup);
-        Set<String> tagList = JsonUtils.getAllTags("TestFile.json", this);
+        Set<String> tagList = JsonUtils.getAllCustomTags("TestFile.json", this);
         for (String tag : tagList) {
             Chip newTag = (Chip) getLayoutInflater().inflate(R.layout.chip_layout, tags, false);
             newTag.setText(tag);

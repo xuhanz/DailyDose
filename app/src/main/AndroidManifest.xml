@@ -34,6 +34,9 @@
         <activity
             android:name=".AvgBarGraph"
             android:theme="@style/Theme.DailyDose.NoActionBar"></activity>
+        <activity
+            android:name=".TagAnalysisView"
+            android:theme="@style/Theme.DailyDose.NoActionBar"></activity>
     </application>
 
 </manifest>
