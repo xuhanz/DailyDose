@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
 		if(getIntent().hasExtra("rating")) {
 			SeekBar slider = findViewById(R.id.seekBar);
 			slider.setProgress((int)getIntent().getDoubleExtra("rating", 1));
+			TextView progress = findViewById(R.id.textView3);
+			progress.setText("" + (int)getIntent().getDoubleExtra("rating", 1));
 			EditText entry_text = findViewById(R.id.entry_text);
 			entry_text.setText(getIntent().getStringExtra("text"));
 			id = getIntent().getIntExtra("id", 0);
