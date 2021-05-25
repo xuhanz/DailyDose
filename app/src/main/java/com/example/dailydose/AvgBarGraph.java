@@ -49,15 +49,10 @@ public class AvgBarGraph extends AppCompatActivity {
 
         //Get the anyChartView and Progress bar from the xml file
         AnyChartView anyChartView = findViewById(R.id.any_chart_avg);
+        APIlib.getInstance().setActiveAnyChartView(anyChartView);
         anyChartView.setProgressBar(findViewById(R.id.progress_bar));
-        AnyChartView anyChartView_top = findViewById(R.id.any_chart_avg_top);
-        anyChartView_top.setProgressBar(findViewById(R.id.progress_bar_top));
-        AnyChartView anyChartView_low = findViewById(R.id.any_chart_avg_low);
-        anyChartView_low.setProgressBar(findViewById(R.id.progress_bar_low));
 
         Cartesian cartesian = AnyChart.column();
-        Cartesian cartesian_top = AnyChart.column();
-        Cartesian cartesian_low = AnyChart.column();
 
         // get the Entries currently in the database
         List<Entry> result = JsonUtils.getEntries("TestFile.json", getApplicationContext());
@@ -83,8 +78,8 @@ public class AvgBarGraph extends AppCompatActivity {
         {
             @Override
             public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {
-                int valueComparison = o1.getValue().compareTo(o2.getValue());
-                return valueComparison == 0 ? o1.getKey().compareTo(o2.getKey()) : valueComparison;
+                int valueComparison = o2.getValue().compareTo(o1.getValue());
+                return valueComparison == 0 ? o2.getKey().compareTo(o1.getKey()) : valueComparison;
             }
         });
 
@@ -92,11 +87,10 @@ public class AvgBarGraph extends AppCompatActivity {
         {
             @Override
             public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {
-                int valueComparison = o2.getValue().compareTo(o1.getValue());
-                return valueComparison == 0 ? o2.getKey().compareTo(o1.getKey()) : valueComparison;
+                int valueComparison = o1.getValue().compareTo(o2.getValue());
+                return valueComparison == 0 ? o1.getKey().compareTo(o2.getKey()) : valueComparison;
             }
         });
-
 
         // sort the entries by value
         for(Map.Entry<String,Double> e: avgRating.entrySet()) {
@@ -142,8 +136,13 @@ public class AvgBarGraph extends AppCompatActivity {
 
         anyChartView.setChart(cartesian);
 
+        AnyChartView anyChartView_top = findViewById(R.id.any_chart_avg_top);
+        APIlib.getInstance().setActiveAnyChartView(anyChartView_top);
+        anyChartView_top.setProgressBar(findViewById(R.id.progress_bar_top));
+        Cartesian cartesian_top = AnyChart.column();
+
         // Set up the average ratings for top rating tags
-        Column column_top = cartesian.column(data_top);
+        Column column_top = cartesian_top.column(data_top);
 
         column_top.tooltip()
                 .titleFormat("{%X}")
@@ -168,8 +167,13 @@ public class AvgBarGraph extends AppCompatActivity {
 
         anyChartView_top.setChart(cartesian_top);
 
+        AnyChartView anyChartView_low = findViewById(R.id.any_chart_avg_low);
+        APIlib.getInstance().setActiveAnyChartView(anyChartView_low);
+        anyChartView_low.setProgressBar(findViewById(R.id.progress_bar_low));
+        Cartesian cartesian_low = AnyChart.column();
+
         // Set up the average ratings for low rating tags
-        Column column_low = cartesian.column(data_low);
+        Column column_low = cartesian_low.column(data_low);
 
         column_low.tooltip()
                 .titleFormat("{%X}")

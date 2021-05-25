@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FCF8DF"
+    android:visibility="visible"
     tools:context=".AvgBarGraph">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,19 +56,21 @@
 
                 <com.anychart.AnyChartView
                     android:id="@+id/any_chart_avg"
-                    android:layout_width="wrap_content"
+                    android:layout_width="400dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="80dp"
-                    android:layout_marginBottom="78dp" />
+                    android:layout_marginBottom="78dp"
+                    android:visibility="visible">
 
-                <ProgressBar
-                    android:id="@+id/progress_bar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </com.anychart.AnyChartView>
 
                 <com.anychart.AnyChartView
                     android:id="@+id/any_chart_avg_top"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="80dp"
                     android:layout_marginBottom="78dp" />
@@ -79,7 +82,7 @@
 
                 <com.anychart.AnyChartView
                     android:id="@+id/any_chart_avg_low"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="80dp"
                     android:layout_marginBottom="78dp" />
@@ -92,7 +95,6 @@
             </LinearLayout>
 
         </HorizontalScrollView>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
