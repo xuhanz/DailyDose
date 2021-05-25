@@ -310,7 +310,7 @@ public class TagAnalysisView extends AppCompatActivity{
         } else if (id == R.id.action_avg){
             // change to the rating analysis screen
             Context context = TagAnalysisView.this;
-            Class destinationActivity = TagAnalysisView.class;
+            Class destinationActivity = AvgBarGraph.class;
             Intent mainIntent = new Intent(context, destinationActivity);
             startActivity(mainIntent);
             return true;
