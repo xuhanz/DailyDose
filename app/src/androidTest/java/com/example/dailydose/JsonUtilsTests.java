@@ -66,7 +66,7 @@ public class JsonUtilsTests {
 		entries.add(entry2);
 		JsonUtils.writeEntries(entries, testFile, context);
 
-		Set<String> result = JsonUtils.getAllTags(testFile, context);
+		Set<String> result = JsonUtils.getAllPossibleTags(testFile, context);
 		assertTrue(result.isEmpty());
 	}
 
