@@ -110,8 +110,10 @@ public class JsonUtils {
         default_tags.add("Work");
         default_tags.add("Games");
         default_tags.add("Exercise");
-        createDataFile(context, fileName);
         List<Entry> entries = getEntries(fileName, context);
+        if (entries == null) {
+            entries = createDataFile(context, fileName);
+        }
         for (Entry e: entries) {
             for (String tag: e.getTags()) {
                 if (!default_tags.contains(tag)) {
