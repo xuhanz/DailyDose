@@ -19,14 +19,13 @@ We did not encounter any issues this week. <br>
 ## Member Reports:
 #### Matt:
 1. Plans and goals last week:<br>
-Help iron out bugs in preparation for full release<br>
-Begin working on user and developer documentation<br>
-2. Current progress and issues:<br>
-User and developer documentation completed for now<br>
-Helped re-implement tests for JSON utility methods by making them integrated tests rather than unit tests<br>
-3. Plans and goals for next week:<br>
 Help peer review other group’s projects<br>
 Continue working towards full release<br>
+2. Current progress and issues:<br>
+Peer review complete; still waiting on feedback from other's reviews of our project<br>
+3. Plans and goals for next week:<br>
+Incorporate peer review feedback into full release<br>
+Diagnose and debug any other buggy behavior<br>
 
 #### Sherry:
 1. Plans and goals last week:<br>
