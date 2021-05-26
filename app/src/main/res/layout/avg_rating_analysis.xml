@@ -65,7 +65,9 @@
                     <ProgressBar
                         android:id="@+id/progress_bar"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="180dp"
+                        android:paddingVertical="200dp" />
                 </com.anychart.AnyChartView>
 
                 <com.anychart.AnyChartView
@@ -73,24 +75,30 @@
                     android:layout_width="400dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="80dp"
-                    android:layout_marginBottom="78dp" />
+                    android:layout_marginBottom="78dp" >
 
-                <ProgressBar
-                    android:id="@+id/progress_bar_top"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <ProgressBar
+                        android:id="@+id/progress_bar_top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="180dp"
+                        android:paddingVertical="200dp" />
+                </com.anychart.AnyChartView>
 
                 <com.anychart.AnyChartView
                     android:id="@+id/any_chart_avg_low"
                     android:layout_width="400dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="80dp"
-                    android:layout_marginBottom="78dp" />
+                    android:layout_marginBottom="78dp" >
 
-                <ProgressBar
-                    android:id="@+id/progress_bar_low"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <ProgressBar
+                        android:id="@+id/progress_bar_low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="180dp"
+                        android:paddingVertical="200dp" />
+                </com.anychart.AnyChartView>
 
             </LinearLayout>
 
