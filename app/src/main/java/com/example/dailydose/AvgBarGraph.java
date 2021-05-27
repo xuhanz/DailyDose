@@ -3,12 +3,14 @@ package com.example.dailydose;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.anychart.APIlib;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
@@ -21,10 +23,15 @@ import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Dictionary;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 
 public class AvgBarGraph extends AppCompatActivity {
@@ -42,6 +49,7 @@ public class AvgBarGraph extends AppCompatActivity {
 
         //Get the anyChartView and Progress bar from the xml file
         AnyChartView anyChartView = findViewById(R.id.any_chart_avg);
+        APIlib.getInstance().setActiveAnyChartView(anyChartView);
         anyChartView.setProgressBar(findViewById(R.id.progress_bar));
 
         Cartesian cartesian = AnyChart.column();
@@ -60,12 +68,49 @@ public class AvgBarGraph extends AppCompatActivity {
         // Convert the tags and their average ratings to DataEntry objects and put them in
         // a list to be used to create the graph
         List<DataEntry> data = new ArrayList<>();
+        List<DataEntry> data_top = new ArrayList<>();
+        List<DataEntry> data_low = new ArrayList<>();
         for(Map.Entry<String,Double> e: avgRating.entrySet()) {
             data.add(new ValueDataEntry(e.getKey(), e.getValue()));
         }
 
+        TreeSet<Map.Entry<String, Double>> avgRatingTop = new TreeSet<>(new Comparator<Map.Entry<String, Double>>()
+        {
+            @Override
+            public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {
+                int valueComparison = o2.getValue().compareTo(o1.getValue());
+                return valueComparison == 0 ? o2.getKey().compareTo(o1.getKey()) : valueComparison;
+            }
+        });
 
-        // Set up the Graph
+        TreeSet<Map.Entry<String, Double>> avgRatingLow = new TreeSet<>(new Comparator<Map.Entry<String, Double>>()
+        {
+            @Override
+            public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {
+                int valueComparison = o1.getValue().compareTo(o2.getValue());
+                return valueComparison == 0 ? o1.getKey().compareTo(o2.getKey()) : valueComparison;
+            }
+        });
+
+        // sort the entries by value
+        for(Map.Entry<String,Double> e: avgRating.entrySet()) {
+            avgRatingTop.add(e);
+            avgRatingLow.add(e);
+        }
+        int i = 0;
+        Iterator<Map.Entry<String, Double>> itr_top = avgRatingTop.iterator();
+        Iterator<Map.Entry<String, Double>> itr_low = avgRatingLow.iterator();
+        // number of tags to display
+        while(itr_top.hasNext() && i < 3){
+            Map.Entry<String, Double> nextTop = itr_top.next();
+            data_top.add(new ValueDataEntry(nextTop.getKey(),nextTop.getValue()));
+            Map.Entry<String, Double> nextLow = itr_low.next();
+            data_low.add(new ValueDataEntry(nextLow.getKey(),nextLow.getValue()));
+            i ++;
+        }
+
+
+        // Set up the average ratings for all tags
         Column column = cartesian.column(data);
 
         column.tooltip()
@@ -90,6 +135,68 @@ public class AvgBarGraph extends AppCompatActivity {
         cartesian.yAxis(0).title("Rating");
 
         anyChartView.setChart(cartesian);
+
+        AnyChartView anyChartView_top = findViewById(R.id.any_chart_avg_top);
+        APIlib.getInstance().setActiveAnyChartView(anyChartView_top);
+        anyChartView_top.setProgressBar(findViewById(R.id.progress_bar_top));
+        Cartesian cartesian_top = AnyChart.column();
+
+        // Set up the average ratings for top rating tags
+        Column column_top = cartesian_top.column(data_top);
+
+        column_top.tooltip()
+                .titleFormat("{%X}")
+                .position(Position.CENTER_BOTTOM)
+                .anchor(Anchor.CENTER_BOTTOM)
+                .offsetX(0d)
+                .offsetY(5d)
+                .format("{%Value}{groupsSeparator: }");
+
+        cartesian_top.animation(true);
+        cartesian_top.title("Top rating tags");
+
+        cartesian_top.yScale().minimum(0d);
+
+        cartesian_top.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
+
+        cartesian_top.tooltip().positionMode(TooltipPositionMode.POINT);
+        cartesian_top.interactivity().hoverMode(HoverMode.BY_X);
+
+        cartesian_top.xAxis(0).title("Tag");
+        cartesian_top.yAxis(0).title("Rating");
+
+        anyChartView_top.setChart(cartesian_top);
+
+        AnyChartView anyChartView_low = findViewById(R.id.any_chart_avg_low);
+        APIlib.getInstance().setActiveAnyChartView(anyChartView_low);
+        anyChartView_low.setProgressBar(findViewById(R.id.progress_bar_low));
+        Cartesian cartesian_low = AnyChart.column();
+
+        // Set up the average ratings for low rating tags
+        Column column_low = cartesian_low.column(data_low);
+
+        column_low.tooltip()
+                .titleFormat("{%X}")
+                .position(Position.CENTER_BOTTOM)
+                .anchor(Anchor.CENTER_BOTTOM)
+                .offsetX(0d)
+                .offsetY(5d)
+                .format("{%Value}{groupsSeparator: }");
+
+        cartesian_low.animation(true);
+        cartesian_low.title("Lowest rating tags");
+
+        cartesian_low.yScale().minimum(0d);
+
+        cartesian_low.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
+
+        cartesian_low.tooltip().positionMode(TooltipPositionMode.POINT);
+        cartesian_low.interactivity().hoverMode(HoverMode.BY_X);
+
+        cartesian_low.xAxis(0).title("Tag");
+        cartesian_low.yAxis(0).title("Rating");
+
+        anyChartView_low.setChart(cartesian_low);
     }
 
     // Inflates options menu from menu_main xml file
