@@ -29,20 +29,19 @@ Diagnose and debug any other buggy behavior<br>
 
 #### Sherry:
 1. Plans and goals last week:<br>
-Implement the custom tags feature on tagging interface.<br>
-Add date feature (whether read from system or from user input) and refactor our json file and utility class to better prepare for the tag analysis page.<br>
-2. Current progress and issues:<br>
-Implement the majority of TagAnalysis View (java and xml file), which generates trends on the selected tag. <br>
-Handling calendar and utilizing packages from others is really a headache but luckily Tag Analysis has most of its functionality now.<br>
-Issues:<br>
-I’m not used to working with Github commit messages so I end up spending several hours working on the same thing as Hunter. I will read the whole commit message and check all the branches before working on my stuff.
-
-3. Plans and goals for next week:<br>
 Refactor the average graph analysis page to display top rating tags and lowest rating tags in two separate graphs. <br>
 Display the dates that the user has selected in the tag analysis view (instead of always displaying the date of “today”). <br>
 Work on TagAnalysis Page to check redundancy in code and behavior in edge cases.<br>
 Fix any issue that comes up. <br>
 Merge the tag analysis branch after get it fully tested. <br>
+
+2. Current progress and issues:<br>
+TagAnalysis Page implemented and merged to the main branch<br>
+Refactor the average graph analysis page<br>
+
+3. Plans and goals for next week:<br>
+Fix bugs as they come up<br>
+Improve the usability of the tag analysis page, currently the page is scrollable but that is not obvious to the user<br>
 
 #### Ester:
 1. Plans of last week:<br>
