@@ -2,16 +2,18 @@
 Obtaining the source code simply involves cloning the GitHub repository, which can be done by running `git clone https://github.com/xuhanz/DailyDose.git` in a command line.
 
 # Directory Layout
-Reports directory: For weekly progress reports<br>
-gradle/wrapper directory: Automatically generated gradle files<br>
-app directory: Source Code<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-> app/build.gradle - Gradle dependencies and configuration<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app/src directory: Source Code<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> app/src/test directory: JUnit tests (unit tests + Instrumentation tests) <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app/src/main directory: Source Code<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> app/src/main/assets directory: JSON data files<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app/src/main/res directory: App Resources (xml files, string/color constants, etc)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app/src/main/java directory: Java files (Backend utilities, App Activity files, Custom views)<br>
+* app: Source Code and Resources<br>
+	* src: Source Code<br>
+		* main: Source Code<br>
+			* assets: JSON data files<br>
+			* java: Java files (Backend utilities, App Activity files, Custom views)<br>
+			* res: App Resources (xml files, string/color constants, etc)<br>
+		* test: Unit tests <br>
+		* androidTest: Integration tests <br>
+	* build.gradle - Gradle dependencies and configuration<br>
+* gradle: Automatically generated gradle files<br>
+* Reports: Weekly progress reports<br>
+* DeveloperGuidelines.md: <br>
 
 # How to Build
 The process to build the app is more or less the same as the process to install and run it - Gradle, which is incorporated into the project in Android Studio, automates the build process with the press of a button; make alterations to the code as desired, then simply press the “Run” button and the code will be built and run on the Android emulator.
