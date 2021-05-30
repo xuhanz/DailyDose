@@ -13,7 +13,8 @@ Obtaining the source code simply involves cloning the GitHub repository, which c
 	* build.gradle - Gradle dependencies and configuration<br>
 * gradle: Automatically generated gradle files<br>
 * Reports: Weekly progress reports<br>
-* DeveloperGuidelines.md: <br>
+* DeveloperGuidelines.md: Guidelines for development of app<br>
+* UserManual.md: Information on app and instructions for usage<br>
 
 # How to Build
 The process to build the app is more or less the same as the process to install and run it - Gradle, which is incorporated into the project in Android Studio, automates the build process with the press of a button; make alterations to the code as desired, then simply press the “Run” button and the code will be built and run on the Android emulator.
