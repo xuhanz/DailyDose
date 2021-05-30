@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private int id = 0;
 	private String date;
+	private ArrayList<String> tags;
 	// Get reference to the continue button from xml
 	// Field that will store our buttons
 	//private final Button continue_button = (Button) findViewById(R.id.continue_button);
@@ -51,12 +52,14 @@ public class MainActivity extends AppCompatActivity {
 			entry_text.setText(getIntent().getStringExtra("text"));
 			id = getIntent().getIntExtra("id", 0);
 			date = getIntent().getStringExtra("date");
+			tags = getIntent().getStringArrayListExtra("tags");
 			// Else, denote with id 0 (which is impossible) to indicate this is new and
 			// needs an id assigned to it
 		} else {
 			id = 0;
 			SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 			date = df.format(new Date());
+			tags = new ArrayList<>();
 		}
 
 		// Continue button
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 				Editable entry_text = entry.getText();
 				tagIntent.putExtra("entry_text", entry_text.toString());
 				tagIntent.putExtra("id", id);
+				tagIntent.putStringArrayListExtra("tags", tags);
 
 				SeekBar slider = findViewById(R.id.seekBar);
 				int rating = slider.getProgress();

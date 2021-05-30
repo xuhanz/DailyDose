@@ -43,6 +43,7 @@ public class TagInterface extends AppCompatActivity {
         String entry_text = getIntent().getStringExtra("entry_text");
         int entry_rating = getIntent().getIntExtra("entry_rating", 0);
         int entry_id = getIntent().getIntExtra("id", 0);
+        List<String> existingTags = getIntent().getStringArrayListExtra("tags");
 
 
         String entry_date = getIntent().getStringExtra("entry_date");
@@ -100,6 +101,14 @@ public class TagInterface extends AppCompatActivity {
             newTag.setText(tag);
             newTag.setChipBackgroundColorResource(R.color.yellow_02);
             tags.addView(newTag);
+        }
+
+        // Check all the tags that were previously selected if editing an existing entry
+        for (int i = 0; i < tags.getChildCount();i++){
+            Chip chip = (Chip)tags.getChildAt(i);
+            if (existingTags.contains(chip.getText())){
+                chip.setChecked(true);
+            }
         }
 
     }
