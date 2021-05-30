@@ -29,3 +29,9 @@ To build a release, press the “Create a new release” button on GitHub with �
 
 # Reporting Bugs
 Bugs can be reported through this page https://github.com/xuhanz/DailyDose/issues. Please make sure you are working on the latest release prior to reporting a bug (to verify that it hasn’t already been fixed) and you have all the prerequisites installed. Then, make sure this bug is reproducible and provide clear documentation of what is happening as well as the steps to reproduce it. Here is a great resource for an example of how to write good bug reports! https://developer.mozilla.org/en-US/docs/Mozilla/QA/Bug_writing_guidelines 
+
+# Coding Guidelines:
+- Java Guidelines: https://google.github.io/styleguide/javaguide.html <br>
+- Android Development guidelines: https://source.android.com/setup/contribute/code-style <br>
+
+
