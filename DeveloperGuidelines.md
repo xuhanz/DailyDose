@@ -24,6 +24,11 @@ The process to build the app is more or less the same as the process to install 
 - Adding tests is fairly simple; the existing test files can be extended with new tests, but when adding new classes or functionality, it is preferable to create a new .java file for testing that feature.<br>
 - There have been difficulties getting our CI system to include an emulator for instrumentation tests (`/app/src/test/java/com/example/dailydose(androidTest)`). For now, these tests must be run manually from that folder with an emulator through Android Studio. These tests only pertain to that methods that have been implemented to interact directly with the database files, and only need to be run if/when those change or a new build is to be released.<br>
 
+# CI System
+- Our entire JUnit test suite will be run each time the CI system does a build to make sure we have not broken prior functionality. <br>
+- A CI build will be triggered by all changes in our code: pushes to our GitHub repository, a pull request, or when merging our branches. <br>
+- Here’s the link to our Travis CI: https://travis-ci.com/github/xuhanz/DailyDose <br>
+
 # Release Builds
 To build a release, press the “Create a new release” button on GitHub with “Target” set to be branch “main”. Update the “Tag version” section to be v0.0.[VERSION NUMBER] if it is a beta and not the final version (ie v0.0.7 for the 7th beta version, v0.1.2 for the 12th etc). Or set it to be v[VERSION NUMBER].0.0 for a final production release (ie v1.0.0 for the first production release, 15.0.0 for the 15th etc). When building a release, make sure the CI build checks pass on the main branch prior to making the release, and also run the Instrumentation tests on your emulator, even if you have not changed anything with the file system, just for a sanity check.
 
@@ -33,5 +38,6 @@ Bugs can be reported through this page https://github.com/xuhanz/DailyDose/issue
 # Coding Guidelines:
 - Java Guidelines: https://google.github.io/styleguide/javaguide.html <br>
 - Android Development guidelines: https://source.android.com/setup/contribute/code-style <br>
+
 
 
