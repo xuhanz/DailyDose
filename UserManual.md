@@ -28,7 +28,7 @@ Average rating of tags: Each bar represents the average rating of a particular t
 Rating trend over a period of time for selected tag (Work In Progress): Set the start and end date, select the tag to check the rating of, then tap "Go" to see average rating over time,<br>
 
 # Known Bugs
-- In the Average Tag Graph page, there is an extra toolbar that partially covers the menu button. <br>
+- Currently None <br>
 
 # Reporting Bugs
 Bugs can be reported through this page https://github.com/xuhanz/DailyDose/issues. Please make sure you are working on the latest release prior to reporting a bug (to verify that it hasn’t already been fixed) and you have all the prerequisites installed. Then, make sure this bug is reproducible and provide clear documentation of what is happening as well as the steps to reproduce it. Here is a great resource for an example of how to write good bug reports! https://developer.mozilla.org/en-US/docs/Mozilla/QA/Bug_writing_guidelines 
