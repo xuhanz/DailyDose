@@ -5,7 +5,7 @@ Daily Dose is a journaling app with an emphasis on ease of use and trend analysi
 1. Download Android Studio from https://developer.android.com/studio/<br>
 2. Clone this repository<br>
 3. Download Android 29 (File > Settings > Android SDK > check the box before Android 10.0(Q) API level 29)
-4. Open the AVD manager (Tools > AVD Manager), click on Create Virtual Device, and download the Pixel 3 emulator with API 29 or later<br>
+4. Open the AVD manager (Tools > AVD Manager), click on Create Virtual Device, and download the <b>Pixel 3 emulator</b> with <b>API 29</b> or later<br>
 5. Navigate to the "app" folder in the project file browser sidebar<br>
 6. Press the "Sync Project with Gradle Files" button (elephant icon on the top right)
 7. Select your emulator from the drop down list of emulators next to the "Run" button
