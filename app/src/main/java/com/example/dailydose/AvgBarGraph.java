@@ -125,6 +125,7 @@ public class AvgBarGraph extends AppCompatActivity {
         cartesian.title("Average Rating of Tags");
 
         cartesian.yScale().minimum(0d);
+        cartesian.yScale().maximum(10d);
 
         cartesian.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
 
@@ -156,6 +157,7 @@ public class AvgBarGraph extends AppCompatActivity {
         cartesian_top.title("Top rating tags");
 
         cartesian_top.yScale().minimum(0d);
+        cartesian_top.yScale().maximum(10d);
 
         cartesian_top.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
 
@@ -187,6 +189,7 @@ public class AvgBarGraph extends AppCompatActivity {
         cartesian_low.title("Lowest rating tags");
 
         cartesian_low.yScale().minimum(0d);
+        cartesian_low.yScale().maximum(10d);
 
         cartesian_low.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
 
