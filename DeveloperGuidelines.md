@@ -26,3 +26,6 @@ The process to build the app is more or less the same as the process to install 
 
 # Release Builds
 To build a release, press the “Create a new release” button on GitHub with “Target” set to be branch “main”. Update the “Tag version” section to be v0.0.[VERSION NUMBER] if it is a beta and not the final version (ie v0.0.7 for the 7th beta version, v0.1.2 for the 12th etc). Or set it to be v[VERSION NUMBER].0.0 for a final production release (ie v1.0.0 for the first production release, 15.0.0 for the 15th etc). When building a release, make sure the CI build checks pass on the main branch prior to making the release, and also run the Instrumentation tests on your emulator, even if you have not changed anything with the file system, just for a sanity check.
+
+# Reporting Bugs
+Bugs can be reported through this page https://github.com/xuhanz/DailyDose/issues. Please make sure you are working on the latest release prior to reporting a bug (to verify that it hasn’t already been fixed) and you have all the prerequisites installed. Then, make sure this bug is reproducible and provide clear documentation of what is happening as well as the steps to reproduce it. Here is a great resource for an example of how to write good bug reports! https://developer.mozilla.org/en-US/docs/Mozilla/QA/Bug_writing_guidelines 
