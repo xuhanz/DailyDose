@@ -11,7 +11,7 @@
 	<string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 	<string name="continue_button">CONTINUE</string>
 	<string name="editTextTextMultiLine">Type to start your diary…</string>
-	<string name="textView">Time to jot down an entry…</string>
+	<string name="textView">How are you feeling?</string>
 	<string name="discard_button">DISCARD</string>
     <string name="title_activity_entry_log">Entry_log</string>
     <!--
