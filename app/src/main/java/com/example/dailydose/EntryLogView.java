@@ -25,6 +25,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -146,6 +147,7 @@ public class EntryLogView extends ScrollView {
                     editIntent.putExtra("text", entry.getContent());
                     editIntent.putExtra("id", entry.getId());
                     editIntent.putExtra("date", entry.getDate());
+                    editIntent.putStringArrayListExtra("tags", (ArrayList<String>) entry.getTags());
                     context.startActivity(editIntent);
                 }
             });
