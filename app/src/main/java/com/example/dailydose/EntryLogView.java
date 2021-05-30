@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,39 +57,68 @@ public class EntryLogView extends ScrollView {
         entries.sort(new Comparator<Entry>() {
             @Override
             public int compare(Entry t1, Entry t2) {
-                return t1.getId() - t2.getId();
+                return t2.getId() - t1.getId();
             }
         });
         
         // Add each entry to the view
         for (int i = 0; i < entries.size(); i++) {
             Entry entry = entries.get(i);    // The Entry
+            Typeface typeface = getResources().getFont(R.font.handlee_regular);
             LinearLayout entryLayout = new LinearLayout(context);
             entryLayout.setOrientation(LinearLayout.VERTICAL);
             LinearLayout dateRating = new LinearLayout(context);
             // The rating
             TextView rating = new TextView(context);
-            rating.setTextColor(Color.parseColor("purple"));
+            rating.setTextColor(Color.parseColor("black"));
             rating.setTextSize(20);
-            rating.setText("" + entry.getRating());
+            Typeface typeface2 = getResources().getFont(R.font.lobster_regular);
+            rating.setTypeface(typeface2);
+            //rating.setTypeface(rating.getTypeface(), Typeface.BOLD);
+            rating.setText("          " + entry.getRating());
+
             // The date
             TextView date = new TextView(context);
-            date.setTextColor(Color.parseColor("purple"));
+            date.setTextColor(Color.parseColor("black"));
             date.setTextSize(20);
-            date.setText("          " + entry.getDate());
+            date.setTypeface(typeface);
+            date.setText("    " + entry.getDate());
             // Putting them together
-            dateRating.addView(rating);
+
             dateRating.addView(date);
+            dateRating.addView(rating);
             dateRating.setGravity(Gravity.LEFT);
 
             // The entry's text
             TextView content = new TextView(context);
             content.setText(entry.getContent());
             content.setTextSize(20);
+            content.setTextColor(Color.parseColor("black"));
+
+            content.setTypeface(typeface);
             content.setTextAlignment(TEXT_ALIGNMENT_CENTER);
+
+            // Tags
+            TextView tagList = new TextView(context);
+            tagList.setTextSize(15);
+            tagList.setTextColor(Color.parseColor("black"));
+            String tags = "(";
+            List<String> entryTags = entry.getTags();
+
+            for (int j = 0; j < entryTags.size()-1; j++) {
+                tags += entryTags.get(j) + ", ";
+            }
+            if (!entryTags.isEmpty()) {
+                tags += entryTags.get(entryTags.size()-1);
+            }
+            tags += ")";
+            tagList.setText(tags);
+            tagList.setTypeface(typeface);
+
             // Delete Button
             Button deleteButton = new Button(context);
             deleteButton.setText("DELETE");
+            deleteButton.setTypeface(typeface);
             deleteButton.setMinimumWidth(70);
 
             deleteButton.setOnClickListener(new OnClickListener() {
@@ -104,6 +134,7 @@ public class EntryLogView extends ScrollView {
             // Edit Button
             Button editButton = new Button(context);
             editButton.setText("EDIT");
+            editButton.setTypeface(typeface);
             editButton.setOnClickListener(new OnClickListener() {
                 // Set the edit button to send the current entry info back to the
                 // entry creation activity and switch to that view
@@ -123,8 +154,10 @@ public class EntryLogView extends ScrollView {
             //entryLayout.addView(rating);
             entryLayout.addView(dateRating);
             entryLayout.addView(content);
+            entryLayout.addView(tagList);
             entryLayout.addView(deleteButton);
             entryLayout.addView(editButton);
+
 
             // add the entry to the outer linear layout
             scrollView_container.addView(entryLayout);
