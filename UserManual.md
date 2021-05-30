@@ -2,7 +2,7 @@
 Daily Dose is a journaling app with an emphasis on ease of use and trend analysis. It pings the user a few times a day to check in with them and collect quick user-inputted data, most notably how they are feeling on a scale from 1-10 and what they are currently doing; this data is then compiled and visualized to show the user the trends of what affects their mood the most.
 
 # Installation & Running
-1. Download Android Studio fromo https://developer.android.com/studio/<br>
+1. Download Android Studio from https://developer.android.com/studio/<br>
 2. Clone this repository<br>
 3. Download Android 29 (File > Settings > Android SDK > check the box before Android 10.0(Q) API level 29)
 4. Open the AVD manager (Tools > AVD Manager), click on Create Virtual Device, and download the Pixel 3 emulator with API 29 or later<br>
