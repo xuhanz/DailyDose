@@ -150,6 +150,8 @@ public class TagAnalysisView extends AppCompatActivity{
         cartesian.title("Trend of " + tag);
 
         cartesian.yAxis(0).title("Rating");
+        cartesian.yScale().minimum(0d);
+        cartesian.yScale().maximum(10d);
         cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
 
         List<DataEntry> seriesData = new ArrayList<>();

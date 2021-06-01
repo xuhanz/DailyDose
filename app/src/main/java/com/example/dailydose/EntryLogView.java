@@ -18,9 +18,13 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.content.ContextCompat;
 
 //import com.anychart.core.annotations.Line;
 //import com.anychart.scales.Linear;
+
+import com.anychart.core.annotations.Line;
+import com.anychart.scales.Linear;
 
 import org.w3c.dom.Text;
 
@@ -120,8 +124,6 @@ public class EntryLogView extends ScrollView {
             Button deleteButton = new Button(context);
             deleteButton.setText("DELETE");
             deleteButton.setTypeface(typeface);
-            deleteButton.setMinimumWidth(70);
-
             deleteButton.setOnClickListener(new OnClickListener() {
                 // Set the delete button to remove this entry from the list and delete it from
                 // The database
@@ -153,13 +155,26 @@ public class EntryLogView extends ScrollView {
             });
 
             // add all of the entry components to the entry layout
-            //entryLayout.addView(rating);
             entryLayout.addView(dateRating);
             entryLayout.addView(content);
             entryLayout.addView(tagList);
-            entryLayout.addView(deleteButton);
-            entryLayout.addView(editButton);
 
+            LinearLayout buttons = new LinearLayout(context);
+            buttons.setOrientation(LinearLayout.HORIZONTAL);
+            buttons.setGravity(Gravity.CENTER);
+            buttons.addView(deleteButton);
+            buttons.addView(editButton);
+            entryLayout.addView(buttons);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) deleteButton.getLayoutParams();
+            params.width = 250;
+            params.height = 110;
+            params.gravity = Gravity.LEFT;
+            deleteButton.setLayoutParams(params);
+            LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) editButton.getLayoutParams();
+            params2.width = 250;
+            params2.height = 110;
+            params2.gravity = Gravity.RIGHT;
+            editButton.setLayoutParams(params2);
 
             // add the entry to the outer linear layout
             scrollView_container.addView(entryLayout);
